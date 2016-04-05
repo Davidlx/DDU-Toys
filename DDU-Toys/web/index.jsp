@@ -9,9 +9,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>DDU-Toys</title>
     </head>
+    <jsp:useBean id="cate"  class="Bean.Category"  scope="request"/>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Home Page</h1>
+        <p><jsp:getProperty name="cate" property="id" /></p>
+        <p><jsp:getProperty name="cate" property="name" /></p>
     </body>
 </html>
