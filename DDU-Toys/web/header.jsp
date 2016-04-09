@@ -1,21 +1,8 @@
-<%-- 
-    Document   : header
-    Created on : 2016-4-6, 4:54:20
-    Author     : David Liu
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <jsp:useBean id="allCategories" type="java.util.ArrayList" scope="session" />
-    <body>
-        <h1>Hello World!</h1>
-         <% for(int i = 0; i < allCategories.size(); i+=1) { %> 
-                <a href="${allCategories.get(i).getURL()}"><p>${allCategories.get(i).getCategoryName()}</p></a>
-        <% } %>
-    </body>
-</html>
+<!--this file is used to refer to the css and js files, so we use a single file to handle this-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css" />
+        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.css" />
+        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/ddu.css" />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+        <script src="${pageContext.request.contextPath}/js/jquery-2.2.3.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
