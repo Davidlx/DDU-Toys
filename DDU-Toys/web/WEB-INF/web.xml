@@ -14,7 +14,11 @@
     </servlet>
     <servlet>
         <servlet-name>indexServlet</servlet-name>
-        <servlet-class>servlet.indexServlet</servlet-class>
+        <servlet-class>Controllers.indexServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TestBeanCRUD</servlet-name>
+        <servlet-class>test.TestBeanCRUD</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
@@ -30,7 +34,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>indexServlet</servlet-name>
-        <url-pattern></url-pattern>
+        <url-pattern/>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TestBeanCRUD</servlet-name>
+        <url-pattern>/TestBeanCRUD</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

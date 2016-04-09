@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlet;
+package test;
 
-import Bean.Category;
+import Bean.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,9 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author David Liu
+ * @author Dennis T
  */
-public class indexServlet extends HttpServlet {
+public class TestBeanCRUD extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,16 +33,30 @@ public class indexServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         
-        Bean.Category tmp = new Bean.Category();
-        tmp.setId(1);
-        tmp.setName("Snake");
+        Category category = new Category();
         
-        request.setAttribute("cate", tmp);
+        // Insert new category:
+        category.setName("Pigs");
+        category.setId(200); //Id doesn't matter - the bean will get it's assigned id after insert
+        category.insert(); //Set break point after this and check that it has been created in the db
+        
+        // Update category:
+        category.setName("Birds");
+        category.update();
+        
+        // Delete category:
+        category.delete();
+        
+        // Get in id:
+        category.setId(1);
+        category.getOnId();
+        
+        request.setAttribute("cate", category);
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp"); 
-        dispatcher.forward(request, response);
+        dispatcher.forward(request, response);      
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -54,7 +71,13 @@ public class indexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TestBeanCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TestBeanCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -68,7 +91,13 @@ public class indexServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TestBeanCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TestBeanCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
