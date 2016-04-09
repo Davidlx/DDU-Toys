@@ -15,37 +15,9 @@
     <jsp:useBean id="cate"  class="Bean.Category"  scope="request"/>
     <body>
         <div class="contents">
-            <div class="nav">
-                <div class="centering">
-                    <ul id="navItems">
-
-                        <li>
-                            <div class="btn-group">
-                                <button type="button" class="btn navBtn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Categories <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                  <li><a href="#"><jsp:getProperty name="cate" property="name" /></a></li>
-                                  <li><a href="#">Another action</a></li>
-                                  <li><a href="#">Something else here</a></li>
-                                  <li><a href="#">Separated link</a></li>
-                                </ul>
-                              </div>
-                        </li>
-                        <li>Categories</li>
-                        <li>Categories</li>
-                        <li>Categories</li>
-                    </ul>
-
-                </div>
-                <div class="rightNav">
-                    <p><a class="btn navBtn" href="#" role="button">Login</a><a class="btn navBtn" href="#" role="button">Cart</a></p>
-                </div>
-            </div>
+            <%@ include file="nav.jsp" %>
             <div class="mainContent">
-                <div class="shopName">
-                    <img width="300px" src="http://cdn6.bigcommerce.com/s-p3ht1/images/stencil/original/capacity_bright_logo_1453415380__93451.png" />
-                </div>
+                <%@ include file="shopTitle.jsp" %>
                 <div class="featured">
                     <h1 class="homePageTitle">Featured Products</h1>
                         <div class="row">
@@ -130,46 +102,7 @@
                           </div>
                 </div>
             </div>
-            <div class="footer">
-                <table id="footerTable">
-                    <tbody valign="top">
-                        <tr>
-                            <td>
-                                <img width="150px" src="http://cdn6.bigcommerce.com/s-p3ht1/images/stencil/original/capacity_bright_logo_1453415380__93451.png" />
-                            </td>
-                            <td>
-                                <ul class="footerItems">
-                                    <li class="ulTitle">CATEGORY</li>
-                                    <li><jsp:getProperty name="cate" property="name" /></li>
-                                </ul>
-                            </td>
-
-                            <td>
-                                <ul class="footerItems">
-                                    <li class="ulTitle">PAGES</li>
-                                    <li>Shop</li>
-                                    <li>About Us</li>
-                                    <li>Contact Us</li>
-                                </ul>
-                            </td>
-
-                            <td>
-                                <ul class="footerItems">
-                                    <li class="ulTitle">PRODUCTS</li>
-                                    <li>Brand New</li>
-                                    <li>Second Hand</li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                <p id="copyRight">Copyright ©2016 DDU-Toys · All Rights Reserved</p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
+            <%@ include file="footer.jsp" %>
         </div>
     </body>
 </html>
