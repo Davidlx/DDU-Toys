@@ -18,7 +18,7 @@
             <%@ include file="nav.jsp" %>
             <div class="mainContent">
                 <%@ include file="shopTitle.jsp" %>
-                <div class="featured">
+                <div class="sections">
                     <h1 class="homePageTitle">Featured Products</h1>
                         <div class="row">
                             <div class="col-sm-6 col-md-3">
@@ -60,7 +60,7 @@
                           </div>
                 </div>
                 
-                <div class="sceondHand">
+                <div class="sections">
                     <h1 class="homePageTitle">Second Hand Products</h1>
                         <div class="row">
                             <div class="col-sm-6 col-md-3">
