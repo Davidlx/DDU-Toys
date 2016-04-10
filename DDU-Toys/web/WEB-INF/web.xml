@@ -20,6 +20,22 @@
         <servlet-name>TestBeanCRUD</servlet-name>
         <servlet-class>test.TestBeanCRUD</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>loginServlet</servlet-name>
+        <servlet-class>Controllers.loginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>itemDetailServlet</servlet-name>
+        <servlet-class>Controllers.itemDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>itemsServlet</servlet-name>
+        <servlet-class>Controllers.itemsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>userIndexServlet</servlet-name>
+        <servlet-class>Controllers.userIndexServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -39,6 +55,22 @@
     <servlet-mapping>
         <servlet-name>TestBeanCRUD</servlet-name>
         <url-pattern>/TestBeanCRUD</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loginServlet</servlet-name>
+        <url-pattern>/loginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>itemDetailServlet</servlet-name>
+        <url-pattern>/itemDetailServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>itemsServlet</servlet-name>
+        <url-pattern>/itemsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>userIndexServlet</servlet-name>
+        <url-pattern>/userIndexServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
