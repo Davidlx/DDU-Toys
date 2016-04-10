@@ -5,9 +5,9 @@
 
     For every page, I will spericify the data I need in the negining of the jsp file. You can commont out the one that I can use o indicate that you have completed your part
 --%>
-<%--<jsp:useBean id="userInfo"  class="Bean.***"  scope="session"/>--%>//Contains whether the user logged in, user name, how many items in the cart
-<%--<jsp:useBean id="featuredItem"  class="java.util.Arraylist"  scope="request/application"/>--%>//Contains an array list of the item object which contains the name, img link, description, price for the item
-<%--<jsp:useBean id="featuredUsedItem"  class="java.util.Arraylist"  scope="request/application"/>--%>//Contains an array list of the second handed item object which contains the name, img link, description, price for the item
+<%--<jsp:useBean id="userInfo"  class="Bean.***"  scope="session"/>Contains whether the user logged in, user name, how many items in the cart--%>
+<%--<jsp:useBean id="featuredItem"  class="java.util.Arraylist"  scope="request/application"/>Contains an array list of the item object which contains the name, img link, description, price for the item--%>
+<%--<jsp:useBean id="featuredUsedItem"  class="java.util.Arraylist"  scope="request/application"/>Contains an array list of the second handed item object which contains the name, img link, description, price for the item--%>
 <jsp:useBean id="cate"  class="Bean.Category"  scope="request"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
