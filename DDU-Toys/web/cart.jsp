@@ -1,7 +1,7 @@
 <%-- 
-    Document   : categoryItems
-    Created on : 2016-4-6, 5:05:17
-    Author     : David Liu
+    Document   : cart
+    Created on : 10 avr. 2016, 14:54:19
+    Author     : Ugo
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
+        <title>JSP Page</title>
     </head>
     <body>
         <h1>Hello World!</h1>
