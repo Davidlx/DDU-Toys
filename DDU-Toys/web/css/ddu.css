@@ -129,6 +129,23 @@ body{
     text-align: center;
 }
 
+/*Item Detail*/
+.itemName {
+    font-size: 20px;
+}
+.basicInformation, .CommentorInfo{
+    color:gray;
+}
+
+.CommentsTitle{
+    font-size: 20px;
+}
+
+.comments{
+    margin-top: 30px;
+}
+
+
 /*Common Properties*/
 .centering{
     text-align: center;
