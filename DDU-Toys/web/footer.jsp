@@ -8,7 +8,7 @@
                             <td>
                                 <ul class="footerItems">
                                     <li class="ulTitle">CATEGORY</li>
-                                    <li><jsp:getProperty name="cate" property="name" /></li>
+                                    <li><%--<jsp:getProperty name="cate" property="name" />--%></li>
                                 </ul>
                             </td>
 

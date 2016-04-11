@@ -62,11 +62,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>itemDetailServlet</servlet-name>
-        <url-pattern>/itemDetailServlet</url-pattern>
+        <url-pattern>/itemDetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>itemsServlet</servlet-name>
-        <url-pattern>/itemsServlet</url-pattern>
+        <url-pattern>/items</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>userIndexServlet</servlet-name>

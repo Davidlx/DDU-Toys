@@ -8,7 +8,8 @@
                                   Categories <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                  <li><a href="#"><jsp:getProperty name="cate" property="name" /></a></li>
+<!--                                  <li><a href="#"><%--<jsp:getProperty name="cate" property="name" />--%></a></li>-->
+
                                   <li><a href="#">Another action</a></li>
                                   <li><a href="#">Something else here</a></li>
                                   <li><a href="#">Separated link</a></li>
