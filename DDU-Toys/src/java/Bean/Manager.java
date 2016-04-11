@@ -13,32 +13,44 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.function.Supplier;
 import java.util.logging.Logger;
-
 /**
  *
- * @author Dennis Trinh
+ * @author Dennis T
  */
-public class Category {
-    private int id = 0;
-    private String name;
+public class Manager {
+    private int id;
+    private String username;
+    private String password;
+    private String email;
     
-    public Category(){
-    }
+    public Manager(){};
     
     public int getId(){
-        return id;
+        return this.id;
     }
-    
-    public String getName(){
-        return name;
-    }
-    
-    public void setId (int id){
+    public void setId(int id){
         this.id = id;
     }
     
-    public void setName(String name){
-        this.name = name;
+    public String getUsername(){
+        return this.username;
+    }
+    public void setUsername(String username){
+        this.username = username;
+    }
+    
+    public String getPassword(){
+        return this.password;
+    }
+    public void setPassword(String password){
+        this.password = password;
+    }
+    
+    public String getEmail(){
+        return this.email;
+    }
+    public void setEmail(String email){
+        this.email = email;
     }
     
     public void insert() throws ClassNotFoundException, SQLException{
@@ -46,8 +58,10 @@ public class Category {
             Globals.openConn();
             
             // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("INSERT INTO [Category] ([CategoryName]) VALUES (?)");
-            pstmt.setString(1, name);
+            PreparedStatement pstmt = Globals.con.prepareStatement("INSERT INTO [Manager] ([Username], [Password], [Email]) VALUES (?, ?, ?)");
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            pstmt.setString(3, email);
             
             // execute the SQL statement
             pstmt.executeUpdate();
@@ -89,9 +103,11 @@ public class Category {
             Globals.openConn();
             
             // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("UPDATE [Category] SET [CategoryName] = ? WHERE [CategoryID] = ?");
-            pstmt.setString(1, name);
-            pstmt.setString(2, Integer.toString(id));
+            PreparedStatement pstmt = Globals.con.prepareStatement("UPDATE [Manager] SET [Username] = ?, [Password] = ?, [Email] = ? WHERE [Mid] = ?");
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            pstmt.setString(3, email);
+            pstmt.setString(4, Integer.toString(id));
                         
             // execute the SQL statement
             pstmt.executeUpdate();
@@ -117,7 +133,7 @@ public class Category {
             Globals.openConn();
             
             // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("DELETE FROM [Category] WHERE [CategoryID] = ?");
+            PreparedStatement pstmt = Globals.con.prepareStatement("DELETE FROM [Manager] WHERE [Mid] = ?");
             pstmt.setString(1, Integer.toString(id));
                         
             // execute the SQL statement
@@ -151,7 +167,7 @@ public class Category {
             
             // Create SQL statement and execute	
             Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            ResultSet rs = stmt.executeQuery("SELECT * FROM [Category] WHERE [CategoryId] = " + Integer.toString(id));
+            ResultSet rs = stmt.executeQuery("SELECT * FROM [Manager] WHERE [Mid] = " + Integer.toString(id));
             
             int numRow = 0;
             if(rs != null && rs.last() != false) {
@@ -161,7 +177,9 @@ public class Category {
                 
             if(numRow == 1) {
                 while(rs != null && rs.next() != false) {
-                    name = rs.getString("CategoryName");
+                    username = rs.getString("Username");
+                    password = rs.getString("Password");
+                    email = rs.getString("Email");
                 }
             }
                                   

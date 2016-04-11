@@ -6,39 +6,46 @@
 package Bean;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.function.Supplier;
 import java.util.logging.Logger;
-
 /**
  *
- * @author Dennis Trinh
+ * @author Dennis T
  */
-public class Category {
-    private int id = 0;
-    private String name;
+public class CustomerOrder {
+    private int id;
+    private Timestamp orderTime; //Can be used to get time and date
+    private int Cid;
     
-    public Category(){
-    }
+    public CustomerOrder(){};
     
     public int getId(){
-        return id;
+        return this.id;
     }
-    
-    public String getName(){
-        return name;
-    }
-    
-    public void setId (int id){
+    public void setId(int id){
         this.id = id;
     }
     
-    public void setName(String name){
-        this.name = name;
+    public Timestamp getOrderTime(){
+        return this.orderTime;
+    }
+    public void setOrderTime(Timestamp orderTime){
+        this.orderTime = orderTime;
+    }
+    
+    public int getCid(){
+        return this.Cid;
+    }
+    public void setCid(int cid){
+        this.Cid = cid;
     }
     
     public void insert() throws ClassNotFoundException, SQLException{
@@ -46,8 +53,9 @@ public class Category {
             Globals.openConn();
             
             // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("INSERT INTO [Category] ([CategoryName]) VALUES (?)");
-            pstmt.setString(1, name);
+            PreparedStatement pstmt = Globals.con.prepareStatement("INSERT INTO [CustomerOrder] ([OrderTime], [Cid]) VALUES (?, ?)");
+            pstmt.setTimestamp(1, orderTime);
+            pstmt.setString(2, Integer.toString(Cid));
             
             // execute the SQL statement
             pstmt.executeUpdate();
@@ -89,9 +97,10 @@ public class Category {
             Globals.openConn();
             
             // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("UPDATE [Category] SET [CategoryName] = ? WHERE [CategoryID] = ?");
-            pstmt.setString(1, name);
-            pstmt.setString(2, Integer.toString(id));
+            PreparedStatement pstmt = Globals.con.prepareStatement("UPDATE [CustomerOrder] SET [OrderTime] = ?, [Cid] = ? WHERE [Oid] = ?");
+            pstmt.setTimestamp(1, orderTime);
+            pstmt.setString(2, Integer.toString(Cid));
+            pstmt.setString(3, Integer.toString(id));
                         
             // execute the SQL statement
             pstmt.executeUpdate();
@@ -117,7 +126,7 @@ public class Category {
             Globals.openConn();
             
             // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("DELETE FROM [Category] WHERE [CategoryID] = ?");
+            PreparedStatement pstmt = Globals.con.prepareStatement("DELETE FROM [CustomerOrder] WHERE [Oid] = ?");
             pstmt.setString(1, Integer.toString(id));
                         
             // execute the SQL statement
@@ -151,7 +160,7 @@ public class Category {
             
             // Create SQL statement and execute	
             Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            ResultSet rs = stmt.executeQuery("SELECT * FROM [Category] WHERE [CategoryId] = " + Integer.toString(id));
+            ResultSet rs = stmt.executeQuery("SELECT * FROM [CustomerOrder] WHERE [Oid] = " + Integer.toString(id));
             
             int numRow = 0;
             if(rs != null && rs.last() != false) {
@@ -161,7 +170,8 @@ public class Category {
                 
             if(numRow == 1) {
                 while(rs != null && rs.next() != false) {
-                    name = rs.getString("CategoryName");
+                    orderTime = rs.getTimestamp("OrderTime");
+                    Cid = Integer.parseInt(rs.getString("Cid"));
                 }
             }
                                   

@@ -13,32 +13,71 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.function.Supplier;
 import java.util.logging.Logger;
-
 /**
  *
- * @author Dennis Trinh
+ * @author Dennis T
  */
-public class Category {
-    private int id = 0;
-    private String name;
+public class Stock {
+    private int id;
+    private int recycled;
+    private int amount;
+    private float price;
+    private String conDes;
+    private int Cid;
+    private int Tid;
     
-    public Category(){
-    }
+    public Stock(){};
     
     public int getId(){
-        return id;
+        return this.id;
     }
-    
-    public String getName(){
-        return name;
-    }
-    
-    public void setId (int id){
+    public void setId(int id){
         this.id = id;
     }
     
-    public void setName(String name){
-        this.name = name;
+    public int getRecycled(){
+        return this.recycled;
+    }
+    public void setRecycled(int recycled){
+        if(recycled > 1)
+            recycled = 1;
+        
+        this.recycled = recycled;
+    }
+    
+    public int getAmount(){
+        return this.amount;
+    }
+    public void setAmount(int amount){
+        this.amount = amount;
+    }
+    
+    public float getPrice(){
+        return this.price;
+    }
+    public void setPrice(float price){
+        this.price = price;
+    }
+    
+    public String getConDes(){
+        return this.conDes;
+    }
+    public void setConDes(String conDes){
+        this.conDes = conDes;
+    }
+    
+    public int getCid(){
+        return this.Cid;
+    }
+    public void setCid(int Cid){
+        this.Cid = Cid;
+    }
+    
+    public int getTid(){
+        return this.Tid;
+    }
+    public void setTid(int Tid){
+        this.Tid = Tid;
     }
     
     public void insert() throws ClassNotFoundException, SQLException{
@@ -46,8 +85,13 @@ public class Category {
             Globals.openConn();
             
             // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("INSERT INTO [Category] ([CategoryName]) VALUES (?)");
-            pstmt.setString(1, name);
+            PreparedStatement pstmt = Globals.con.prepareStatement("INSERT INTO [Stock] ([Recycle], [ConditionDescription], [Amount], [Price], [Cid], [Tid]) VALUES (?, ?, ?, ?, ?, ?)");
+            pstmt.setString(1, Integer.toString(recycled));
+            pstmt.setString(2, conDes);
+            pstmt.setString(3, Integer.toString(amount));
+            pstmt.setString(4, Float.toString(price));
+            pstmt.setString(5, Integer.toString(Cid));
+            pstmt.setString(6, Integer.toString(Tid));
             
             // execute the SQL statement
             pstmt.executeUpdate();
@@ -89,9 +133,14 @@ public class Category {
             Globals.openConn();
             
             // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("UPDATE [Category] SET [CategoryName] = ? WHERE [CategoryID] = ?");
-            pstmt.setString(1, name);
-            pstmt.setString(2, Integer.toString(id));
+            PreparedStatement pstmt = Globals.con.prepareStatement("UPDATE [Stock] SET [Recycle] = ?, [ConditionDescription] = ?, [Amount] = ?, [Price] = ?, [Cid] = ?, [Tid] = ? WHERE [Sid] = ?");
+            pstmt.setString(1, Integer.toString(recycled));
+            pstmt.setString(2, conDes);
+            pstmt.setString(3, Integer.toString(amount));
+            pstmt.setString(4, Float.toString(price));
+            pstmt.setString(5, Integer.toString(Cid));
+            pstmt.setString(6, Integer.toString(Tid));
+            pstmt.setString(7, Integer.toString(id));
                         
             // execute the SQL statement
             pstmt.executeUpdate();
@@ -117,7 +166,7 @@ public class Category {
             Globals.openConn();
             
             // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("DELETE FROM [Category] WHERE [CategoryID] = ?");
+            PreparedStatement pstmt = Globals.con.prepareStatement("DELETE FROM [Stock] WHERE [Sid] = ?");
             pstmt.setString(1, Integer.toString(id));
                         
             // execute the SQL statement
@@ -151,7 +200,7 @@ public class Category {
             
             // Create SQL statement and execute	
             Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            ResultSet rs = stmt.executeQuery("SELECT * FROM [Category] WHERE [CategoryId] = " + Integer.toString(id));
+            ResultSet rs = stmt.executeQuery("SELECT * FROM [Stock] WHERE [Sid] = " + Integer.toString(id));
             
             int numRow = 0;
             if(rs != null && rs.last() != false) {
@@ -161,7 +210,12 @@ public class Category {
                 
             if(numRow == 1) {
                 while(rs != null && rs.next() != false) {
-                    name = rs.getString("CategoryName");
+                    recycled = Integer.parseInt(rs.getString("Recycle"));
+                    conDes = rs.getString("ConditionDescription");
+                    amount = Integer.parseInt(rs.getString("Amount"));
+                    price = Float.parseFloat(rs.getString("Price"));
+                    Cid = Integer.parseInt(rs.getString("Cid"));
+                    Tid = Integer.parseInt(rs.getString("Tid"));
                 }
             }
                                   

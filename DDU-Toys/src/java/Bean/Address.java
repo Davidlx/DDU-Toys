@@ -16,29 +16,42 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Dennis Trinh
+ * @author Dennis T
  */
-public class Category {
-    private int id = 0;
-    private String name;
+public class Address {
+    private int id;
+    private String address;
+    private String phoneNo;
+    private int Cid;
     
-    public Category(){
-    }
+    public Address(){};
     
     public int getId(){
-        return id;
+        return this.id;
     }
-    
-    public String getName(){
-        return name;
-    }
-    
-    public void setId (int id){
+    public void setId(int id){
         this.id = id;
     }
     
-    public void setName(String name){
-        this.name = name;
+    public String getAddress(){
+        return this.address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
+    public String getPhoneNo(){
+        return this.phoneNo;
+    }
+    public void setPhoneNo(String phoneNo){
+        this.phoneNo = phoneNo;
+    }
+    
+    public int getCid(){
+        return this.Cid;
+    }
+    public void setCid(int cid){
+        this.Cid = cid;
     }
     
     public void insert() throws ClassNotFoundException, SQLException{
@@ -46,8 +59,10 @@ public class Category {
             Globals.openConn();
             
             // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("INSERT INTO [Category] ([CategoryName]) VALUES (?)");
-            pstmt.setString(1, name);
+            PreparedStatement pstmt = Globals.con.prepareStatement("INSERT INTO [Address] ([Address], [PhoneNo], [Cid]) VALUES (?, ?, ?)");
+            pstmt.setString(1, address);
+            pstmt.setString(2, phoneNo);
+            pstmt.setString(3, Integer.toString(Cid));
             
             // execute the SQL statement
             pstmt.executeUpdate();
@@ -89,9 +104,11 @@ public class Category {
             Globals.openConn();
             
             // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("UPDATE [Category] SET [CategoryName] = ? WHERE [CategoryID] = ?");
-            pstmt.setString(1, name);
-            pstmt.setString(2, Integer.toString(id));
+            PreparedStatement pstmt = Globals.con.prepareStatement("UPDATE [Address] SET [Address] = ?, [PhoneNo] = ?, [Cid] = ? WHERE [Aid] = ?");
+            pstmt.setString(1, address);
+            pstmt.setString(2, phoneNo);
+            pstmt.setString(3, Integer.toString(Cid));
+            pstmt.setString(4, Integer.toString(id));
                         
             // execute the SQL statement
             pstmt.executeUpdate();
@@ -117,7 +134,7 @@ public class Category {
             Globals.openConn();
             
             // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("DELETE FROM [Category] WHERE [CategoryID] = ?");
+            PreparedStatement pstmt = Globals.con.prepareStatement("DELETE FROM [Address] WHERE [Aid] = ?");
             pstmt.setString(1, Integer.toString(id));
                         
             // execute the SQL statement
@@ -151,7 +168,7 @@ public class Category {
             
             // Create SQL statement and execute	
             Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            ResultSet rs = stmt.executeQuery("SELECT * FROM [Category] WHERE [CategoryId] = " + Integer.toString(id));
+            ResultSet rs = stmt.executeQuery("SELECT * FROM [Address] WHERE [Aid] = " + Integer.toString(id));
             
             int numRow = 0;
             if(rs != null && rs.last() != false) {
@@ -161,7 +178,9 @@ public class Category {
                 
             if(numRow == 1) {
                 while(rs != null && rs.next() != false) {
-                    name = rs.getString("CategoryName");
+                    address = rs.getString("Address");
+                    phoneNo = rs.getString("PhoneNo");
+                    Cid = Integer.parseInt(rs.getString("Cid"));
                 }
             }
                                   
@@ -186,4 +205,5 @@ public class Category {
             Globals.closeConn();
         }     
     }
+    
 }

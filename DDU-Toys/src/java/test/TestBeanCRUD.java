@@ -9,8 +9,10 @@ import Bean.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -36,25 +38,41 @@ public class TestBeanCRUD extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         
-        Category category = new Category();
+        Toys testBean = new Toys();
         
-        // Insert new category:
-        category.setName("Pigs");
-        category.setId(200); //Id doesn't matter - the bean will get it's assigned id after insert
-        category.insert(); //Set break point after this and check that it has been created in the db
+//        Special case: CustomerOrder
+//        Date date = new Date();
+//        testBean.setOrderTime(new Timestamp(date.getTime()));
+//        testBean.setCid(1);
+//        Update:
+//        Date date2 = new Date();
+//        testBean.setCid(2);
+//        testBean.setOrderTime(new Timestamp(date2.getTime()));
         
-        // Update category:
-        category.setName("Birds");
-        category.update();
+        // Insert new bean:
+        testBean.setPrice(20);
+        testBean.setDes("Power Ranger");
+        testBean.setName("Green Ranger");
+        testBean.setAge(3);
+        testBean.setSex(1);
+        testBean.setPicUrl("http://vignette1.wikia.nocookie.net/powerrangers/images/f/f8/Mmpr-green.png");
+        testBean.setCategoryId(1);
+        testBean.setId(200); //Id doesn't matter - the bean will get it's assigned id after insert
+        testBean.insert(); //Set break point after this and check that it has been created in the db
         
-        // Delete category:
-        category.delete();
+        // Update bean:
+        testBean.setPrice(10);
+        testBean.setCategoryId(2);
+        testBean.update();
+        
+        // Delete bean:
+        testBean.delete();
         
         // Get in id:
-        category.setId(1);
-        category.getOnId();
+        testBean.setId(1);
+        testBean.getOnId();
         
-        request.setAttribute("cate", category);
+        request.setAttribute("cate", testBean);
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp"); 
         dispatcher.forward(request, response);      
     }
