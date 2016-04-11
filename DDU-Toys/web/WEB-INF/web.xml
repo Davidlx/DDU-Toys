@@ -36,6 +36,10 @@
         <servlet-name>userIndexServlet</servlet-name>
         <servlet-class>Controllers.userIndexServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>navServlet</servlet-name>
+        <servlet-class>Controllers.navServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>userIndexServlet</servlet-name>
         <url-pattern>/userIndexServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>navServlet</servlet-name>
+        <url-pattern>/navServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

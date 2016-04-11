@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Ugo
  */
-public class itemsServlet extends HttpServlet {
+public class itemsServlet extends navServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,7 +31,7 @@ public class itemsServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+        request=super.retrieveCate(request);
         RequestDispatcher dispatcher = request.getRequestDispatcher("items.jsp"); 
         dispatcher.forward(request, response);
     }

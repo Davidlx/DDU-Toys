@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Ugo
  */
-public class loginServlet extends HttpServlet {
+public class loginServlet extends navServlet{
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,6 +31,7 @@ public class loginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request=super.retrieveCate(request);
         RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp"); 
         dispatcher.forward(request, response);
     }
