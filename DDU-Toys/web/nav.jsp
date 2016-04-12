@@ -1,7 +1,7 @@
             <div class="nav">
                 <div class="centering">
                     <ul id="navItems">
-
+                        <li>Home Page</li>
                         <li>
                             <div class="btn-group">
                                 <button type="button" class="btn navBtn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
