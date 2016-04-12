@@ -35,12 +35,7 @@ public class indexServlet extends basicServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        Bean.Category tmp = new Bean.Category();
-        tmp.setId(2);
-        tmp.getOnId();
-        
-        request.setAttribute("cate", tmp);
+        request=super.retrieveCate(request);
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp"); 
         dispatcher.forward(request, response);
     }
