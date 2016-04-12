@@ -38,7 +38,7 @@ public class TestBeanCRUD extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         
-        Toys testBean = new Toys();
+        Comment testBean = new Comment();
         
 //        Special case: CustomerOrder
 //        Date date = new Date();
@@ -50,19 +50,16 @@ public class TestBeanCRUD extends HttpServlet {
 //        testBean.setOrderTime(new Timestamp(date2.getTime()));
         
         // Insert new bean:
-        testBean.setPrice(20);
-        testBean.setDes("Power Ranger");
-        testBean.setName("Green Ranger");
-        testBean.setAge(3);
-        testBean.setSex(1);
-        testBean.setPicUrl("http://vignette1.wikia.nocookie.net/powerrangers/images/f/f8/Mmpr-green.png");
-        testBean.setCategoryId(1);
+        Date date = new Date();
+        testBean.setPostTime(new Timestamp(date.getTime()));
+        testBean.setComment("Best toy ever!");
+        testBean.setSid(1);
+        testBean.setCid(1);
         testBean.setId(200); //Id doesn't matter - the bean will get it's assigned id after insert
         testBean.insert(); //Set break point after this and check that it has been created in the db
         
         // Update bean:
-        testBean.setPrice(10);
-        testBean.setCategoryId(2);
+        testBean.setPostTime(new Timestamp(date.getTime()));
         testBean.update();
         
         // Delete bean:
