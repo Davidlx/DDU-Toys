@@ -122,6 +122,11 @@ body{
     margin:0; /* 将默认的外边距去掉 */
     text-align: left;
 }
+.footerItems li,
+.footerItems a{
+    color:white;
+    text-decoration: none;
+}
 
 #copyRight{
     padding-top: 50px;
@@ -185,6 +190,20 @@ body{
 }
 .cartSummary h1{
     font-size: 18px;
+}
+
+/*Users*/
+.userSection{
+    padding-bottom: 50px;
+}
+
+.userMainContent{
+    margin-right: 10%
+}
+.userMainContent h1{
+    font-size: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(213,213,213);
 }
 
 /*Common Properties*/
