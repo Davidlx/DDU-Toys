@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Ugo
  */
-public class itemsServlet extends navServlet {
+public class itemsServlet extends basicServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Ugo
  */
-public class navServlet extends HttpServlet {
+public class basicServlet extends HttpServlet {
 
     
     protected HttpServletRequest retrieveCate(HttpServletRequest request) throws ServletException, IOException {

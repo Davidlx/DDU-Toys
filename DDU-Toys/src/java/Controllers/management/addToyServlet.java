@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controllers;
+package Controllers.management;
 
-import Bean.Category;
-import Bean.Globals;
+import Controllers.basicServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -14,14 +13,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
-import java.util.function.Supplier;
 
 /**
  *
- * @author David Liu
+ * @author Ugo
  */
-public class indexServlet extends basicServlet {
+public class addToyServlet extends basicServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,15 +30,10 @@ public class indexServlet extends basicServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        Bean.Category tmp = new Bean.Category();
-        tmp.setId(2);
-        tmp.getOnId();
-        
-        request.setAttribute("cate", tmp);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp"); 
+        request=super.retrieveCate(request);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("management/addToy.jsp"); 
         dispatcher.forward(request, response);
     }
 
@@ -57,13 +49,7 @@ public class indexServlet extends basicServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException e) {
-        Globals.beanLog.info((Supplier<String>) e);
-        } catch (SQLException e) {
-            Globals.beanLog.info((Supplier<String>) e);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -77,13 +63,7 @@ public class indexServlet extends basicServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException e) {
-        Globals.beanLog.info((Supplier<String>) e);
-        } catch (SQLException e) {
-            Globals.beanLog.info((Supplier<String>) e);
-        }
+        processRequest(request, response);
     }
 
     /**
