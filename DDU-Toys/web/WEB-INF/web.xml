@@ -38,7 +38,7 @@
     </servlet>
     <servlet>
         <servlet-name>navServlet</servlet-name>
-        <servlet-class>Controllers.navServlet</servlet-class>
+        <servlet-class>Controllers.basicServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
@@ -62,7 +62,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
-        <url-pattern>/loginServlet</url-pattern>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>itemDetailServlet</servlet-name>

@@ -21,7 +21,7 @@ import java.util.function.Supplier;
  *
  * @author David Liu
  */
-public class indexServlet extends navServlet {
+public class indexServlet extends basicServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

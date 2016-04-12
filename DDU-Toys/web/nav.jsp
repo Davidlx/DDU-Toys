@@ -23,6 +23,6 @@
 
                 </div>
                 <div class="rightNav">
-                    <p><a class="btn navBtn" href="DDU-Toys/loginServlet" role="button">Login</a><a class="btn navBtn" href="#" role="button">Cart</a></p>
+                    <p><a class="btn navBtn" href="DDU-Toys/login" role="button">Login</a><a class="btn navBtn" href="#" role="button">Cart</a></p>
                 </div>
             </div>
