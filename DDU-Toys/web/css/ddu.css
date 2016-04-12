@@ -145,6 +145,18 @@ body{
     margin-top: 30px;
 }
 
+/*Login Page*/
+.loginSection{
+    margin-top: 80px;
+    padding-left: 20%;
+    border-right: gray 1px solid;
+    margin-bottom: 80px;
+}
+.loginSection h1{
+    font-size: 30px;
+    padding-bottom: 20px;
+}
+
 
 /*Common Properties*/
 .centering{
