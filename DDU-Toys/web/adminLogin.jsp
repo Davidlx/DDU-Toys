@@ -37,7 +37,6 @@
                              <button class="btn btn-default" style="margin-top:130px">User Login</button>
                         </div>
                      </div>
-                <a href="" style="text-align: center; color: gray"><p>Admin User</p></a>
             </div>
             <%@ include file="footer.jsp" %>
         </div>
