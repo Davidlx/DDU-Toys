@@ -44,6 +44,7 @@
                              <button class="btn btn-default">Create Account</button>
                         </div>
                      </div>
+                <a href="" style="text-align: center; color: gray"><p>Admin User</p></a>
             </div>
             <%@ include file="footer.jsp" %>
         </div>

@@ -16,9 +16,8 @@
                                 </ul>
                               </div>
                         </li>
-                        <li>Categories</li>
-                        <li>Categories</li>
-                        <li>Categories</li>
+                        <li>Brand New</li>
+                        <li>Second Hand Product</li>
                     </ul>
 
                 </div>
