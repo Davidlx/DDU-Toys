@@ -76,6 +76,10 @@
         <servlet-name>newSaleServlet</servlet-name>
         <servlet-class>Controllers.user.newSaleServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cartServlet</servlet-name>
+        <servlet-class>Controllers.cartServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -147,6 +151,10 @@
     <servlet-mapping>
         <servlet-name>newSaleServlet</servlet-name>
         <url-pattern>/user/newSale</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cartServlet</servlet-name>
+        <url-pattern>/cart</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
