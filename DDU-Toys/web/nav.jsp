@@ -18,6 +18,21 @@
                         </li>
                         <li>Brand New</li>
                         <li>Second Hand Product</li>
+                        <li>
+                            <div class="btn-group">
+                                <button type="button" class="btn navBtn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Ages <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+<!--                                  <li><a href="#"><%--<jsp:getProperty name="cate" property="name" />--%></a></li>-->
+
+                                  <li><a href="#">0 ~ 3</a></li>
+                                  <li><a href="#">4 ~ 7</a></li>
+                                  <li><a href="#">7 ~ 9</a></li>
+                                  <li><a href="#">10 ~ 12</a></li>
+                                </ul>
+                              </div>
+                        </li>
                     </ul>
 
                 </div>

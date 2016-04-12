@@ -1,5 +1,5 @@
 <%-- 
-    Document   : login
+    Document   : register
     Created on : 2016-4-9, 22:13:24
     Author     : David Liu
 --%>
@@ -18,7 +18,7 @@
                 <%@ include file="shopTitle.jsp" %>
                 <div class="row">
                         <div class="col-md-6 loginSection">
-                            <h1>Admin Log in</h1>
+                            <h1>Log in</h1>
                             <form>
                                 <div class="form-group">
                                   <label for="exampleInputEmail1">Email address</label>
@@ -32,9 +32,16 @@
                               </form>
                         </div>
                         <div class="col-md-6">
-                            <h1 style="font-size: 30px; padding-bottom:20px;margin-top: 80px;">Notice</h2>
-                            <P>This page is for admin user only, please go back to the user login page</P>
-                             <button class="btn btn-default" style="padding-top:150px">User Login</button>
+                            <h1 style="font-size: 30px; padding-bottom:20px;margin-top: 80px;">New Customer</h2>
+                            <P>Create an account with us and you'll be able to:</P>
+                            <ul style="margin-bottom: 30px;">
+                                <li>Check out faster</li>
+                                <li>Save multiple shipping addresses</li>
+                                <li>Access your order history</li>
+                                <li>Track new orders</li>
+                                <li>Save items to your wish list</li>
+                            </ul>
+                             <button class="btn btn-default">Create Account</button>
                         </div>
                      </div>
                 <a href="" style="text-align: center; color: gray"><p>Admin User</p></a>
