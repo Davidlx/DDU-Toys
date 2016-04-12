@@ -24,6 +24,15 @@
                     <div class="col-md-10">
                         <div class="userMainContent">
                             <h1>Orders</h1>
+                            <div class="orderItem">
+                                <div class="orderBasicInfo">
+                                    <p>Purchase Time & Order ID</p>
+                                </div>
+                                <div class="row">
+
+                                </div>
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
