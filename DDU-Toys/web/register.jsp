@@ -16,35 +16,25 @@
             <%@ include file="nav.jsp" %>
             <div class="mainContent">
                 <%@ include file="shopTitle.jsp" %>
-                <div class="row">
-                        <div class="col-md-6 loginSection">
-                            <h1>Log in</h1>
-                            <form>
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Email address</label>
-                                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                                </div>
-                                <div class="form-group">
-                                  <label for="exampleInputPassword1">Password</label>
-                                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                </div>
-                                <button type="submit" class="btn btn-default">Submit</button>
-                              </form>
+                <div class="register">
+                    <h1>New Customer</h1>
+                    <form>
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">User Name</label>
+                          <input type="text" class="form-control" id="username" placeholder="User Name">
                         </div>
-                        <div class="col-md-6">
-                            <h1 style="font-size: 30px; padding-bottom:20px;margin-top: 80px;">New Customer</h2>
-                            <P>Create an account with us and you'll be able to:</P>
-                            <ul style="margin-bottom: 30px;">
-                                <li>Check out faster</li>
-                                <li>Save multiple shipping addresses</li>
-                                <li>Access your order history</li>
-                                <li>Track new orders</li>
-                                <li>Save items to your wish list</li>
-                            </ul>
-                             <button class="btn btn-default">Create Account</button>
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Email address</label>
+                          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
                         </div>
-                     </div>
-                <a href="" style="text-align: center; color: gray"><p>Admin User</p></a>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Password</label>
+                          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                      </form>
+                </div>
+                <a href="login" style="text-align: center; color: gray"><p>Already have an account? Login here.</p></a>
             </div>
             <%@ include file="footer.jsp" %>
         </div>

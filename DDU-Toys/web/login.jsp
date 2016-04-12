@@ -32,9 +32,9 @@
                               </form>
                         </div>
                         <div class="col-md-6">
-                            <h1 style="font-size: 30px; padding-bottom:20px;margin-top: 80px;">New Customer</h2>
+                            <h1 style="font-size: 30px; padding-bottom:20px;margin-top: 100px;">New Customer</h2>
                             <P>Create an account with us and you'll be able to:</P>
-                            <ul style="margin-bottom: 30px;">
+                            <ul style="margin-bottom: 20px;">
                                 <li>Check out faster</li>
                                 <li>Save multiple shipping addresses</li>
                                 <li>Access your order history</li>

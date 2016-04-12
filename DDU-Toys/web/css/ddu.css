@@ -157,6 +157,17 @@ body{
     padding-bottom: 20px;
 }
 
+/*register*/
+.register{
+    padding-left: 25%;
+    padding-right: 25%;
+    padding-top: 50px;
+    padding-bottom:50px;
+}
+
+.register h1{
+    font-size: 25px;
+}
 
 /*Common Properties*/
 .centering{
