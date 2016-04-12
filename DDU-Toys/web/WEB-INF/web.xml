@@ -34,7 +34,7 @@
     </servlet>
     <servlet>
         <servlet-name>userIndexServlet</servlet-name>
-        <servlet-class>Controllers.userIndexServlet</servlet-class>
+        <servlet-class>Controllers.user.userIndexServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>navServlet</servlet-name>
@@ -51,6 +51,30 @@
     <servlet>
         <servlet-name>registerServlet</servlet-name>
         <servlet-class>Controllers.registerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>pendingSalesServlet</servlet-name>
+        <servlet-class>Controllers.management.pendingSalesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>commentsServlet</servlet-name>
+        <servlet-class>Controllers.management.commentsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addToyServlet</servlet-name>
+        <servlet-class>Controllers.management.addToyServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addStockServlet</servlet-name>
+        <servlet-class>Controllers.management.addStockServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>salesServlet</servlet-name>
+        <servlet-class>Controllers.user.salesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>newSaleServlet</servlet-name>
+        <servlet-class>Controllers.user.newSaleServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
@@ -99,6 +123,30 @@
     <servlet-mapping>
         <servlet-name>registerServlet</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>pendingSalesServlet</servlet-name>
+        <url-pattern>/admin/pendingSales</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>commentsServlet</servlet-name>
+        <url-pattern>/admin/comments</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addToyServlet</servlet-name>
+        <url-pattern>/admin/addToy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addStockServlet</servlet-name>
+        <url-pattern>/admin/addStock</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>salesServlet</servlet-name>
+        <url-pattern>/user/sales</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>newSaleServlet</servlet-name>
+        <url-pattern>/user/newSale</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
