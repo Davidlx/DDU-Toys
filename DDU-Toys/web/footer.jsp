@@ -8,7 +8,9 @@
                             <td>
                                 <ul class="footerItems">
                                     <li class="ulTitle">CATEGORY</li>
-                                    <li><%--<jsp:getProperty name="cate" property="name" />--%></li>
+                                    <c:forEach items="${cate}" var="category">
+                                        <li><a href="item?category=1">${category.name}</a></li>
+                                    </c:forEach>
                                 </ul>
                             </td>
 
