@@ -45,7 +45,7 @@ public class basicServlet extends HttpServlet {
             rs.beforeFirst();
         }
         
-        if(numRow < 0) {
+        if(numRow > 0) {
             while(rs != null && rs.next() != false) {
                 Bean.Category cat = new Bean.Category();
                 cat.setId(Integer.parseInt(rs.getString("CategoryId")));
@@ -62,5 +62,6 @@ public class basicServlet extends HttpServlet {
         
         return result;
     }
-
+    
+    
 }
