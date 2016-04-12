@@ -12,22 +12,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.function.Supplier;
 import java.util.logging.Logger;
-
 /**
  *
  * @author Dennis T
  */
-public class Toys {
+public class TempToy {
     private int id;
     private String name;
     private String des;
+    private String conDes;
     private int sex;
     private int age;
     private float price;
+    private float orgPrice;
+    private int amount;
     private String picUrl;
+    private int Cid;
     private int categoryId;
     
-    public Toys(){};
+    public TempToy(){};
     
     public int getId(){
         return this.id;
@@ -50,11 +53,18 @@ public class Toys {
         this.des = des;
     }
     
+    public String getConDes(){
+        return this.conDes;
+    }
+    public void setConDes(String conDes){
+        this.conDes = conDes;
+    }
+    
     public int getSex(){
         return this.sex;
     }
     public void setSex(int sex){
-        // Need some kind of validation
+        // Needs some kind of validation
         this.sex = sex;
     }
     
@@ -72,11 +82,32 @@ public class Toys {
         this.price = price;
     }
     
+    public float getOrgPrice(){
+        return this.orgPrice;
+    }
+    public void setOrgPrice(float orgPrice){
+        this.orgPrice = orgPrice;
+    }
+    
+    public int getAmount(){
+        return this.amount;
+    }
+    public void setAmount(int amount){
+        this.amount = amount;
+    }
+    
     public String getPicUrl(){
         return this.picUrl;
     }
     public void setPicUrl(String picUrl){
         this.picUrl = picUrl;
+    }
+    
+    public int getCid(){
+        return this.Cid;
+    }
+    public void setCid(int Cid){
+        this.Cid = Cid;
     }
     
     public int getCategoryId(){
@@ -85,20 +116,23 @@ public class Toys {
     public void setCategoryId(int catId){
         this.categoryId = catId;
     }
-    
+
     public void insert() throws ClassNotFoundException, SQLException{
     try {
             Globals.openConn();
             
             // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("INSERT INTO [Toys] ([Name], [Description], [Sex], [Age], [Price], [PicUrl], [CategoryId]) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            pstmt.setString(1, name);
+            PreparedStatement pstmt = Globals.con.prepareStatement("INSERT INTO [TempToys] ([Price], [Description], [ConditionDescription], [OrgPrice], [Amount], [Name], [Age], [Sex], [Cid], [CategoryId]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            pstmt.setString(1, Float.toString(price));
             pstmt.setString(2, des);
-            pstmt.setString(3, Integer.toString(sex));
-            pstmt.setString(4, Integer.toString(age));
-            pstmt.setString(5, Float.toString(price));
-            pstmt.setString(6, picUrl);
-            pstmt.setString(7, Integer.toString(categoryId));
+            pstmt.setString(3, conDes);
+            pstmt.setString(4, Float.toString(orgPrice));
+            pstmt.setString(5, Integer.toString(amount));
+            pstmt.setString(6, name);
+            pstmt.setString(7, Integer.toString(age));
+            pstmt.setString(8, Integer.toString(sex));
+            pstmt.setString(9, Integer.toString(Cid));
+            pstmt.setString(10, Integer.toString(categoryId));
             
             // execute the SQL statement
             pstmt.executeUpdate();
@@ -140,15 +174,18 @@ public class Toys {
             Globals.openConn();
             
             // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("UPDATE [Toys] SET [Name] = ?, [Description] = ?, [Sex] = ?, [Age] = ?, [Price] = ?, [PicUrl] = ?, [CategoryId] = ? WHERE [Tid] = ?");
-            pstmt.setString(1, name);
+            PreparedStatement pstmt = Globals.con.prepareStatement("UPDATE [TempToys] SET [Price] = ?, [Description] = ?, [ConditionDescription] = ?, [OrgPrice] = ?, [Amount] = ?, [Name] = ?, [Age] = ?, [Sex] = ?, [Cid] = ?, [CategoryId] = ? WHERE [TTid] = ?");
+            pstmt.setString(1, Float.toString(price));
             pstmt.setString(2, des);
-            pstmt.setString(3, Integer.toString(sex));
-            pstmt.setString(4, Integer.toString(age));
-            pstmt.setString(5, Float.toString(price));
-            pstmt.setString(6, picUrl);
-            pstmt.setString(7, Integer.toString(categoryId));
-            pstmt.setString(8, Integer.toString(id));
+            pstmt.setString(3, conDes);
+            pstmt.setString(4, Float.toString(orgPrice));
+            pstmt.setString(5, Integer.toString(amount));
+            pstmt.setString(6, name);
+            pstmt.setString(7, Integer.toString(age));
+            pstmt.setString(8, Integer.toString(sex));
+            pstmt.setString(9, Integer.toString(Cid));
+            pstmt.setString(10, Integer.toString(categoryId));
+            pstmt.setString(11, Integer.toString(id));
                         
             // execute the SQL statement
             pstmt.executeUpdate();
@@ -174,7 +211,7 @@ public class Toys {
             Globals.openConn();
             
             // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("DELETE FROM [Toys] WHERE [Tid] = ?");
+            PreparedStatement pstmt = Globals.con.prepareStatement("DELETE FROM [TempToys] WHERE [TTid] = ?");
             pstmt.setString(1, Integer.toString(id));
                         
             // execute the SQL statement
@@ -208,7 +245,7 @@ public class Toys {
             
             // Create SQL statement and execute	
             Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            ResultSet rs = stmt.executeQuery("SELECT * FROM [Toys] WHERE [Tid] = " + Integer.toString(id));
+            ResultSet rs = stmt.executeQuery("SELECT * FROM [TempToys] WHERE [TTid] = " + Integer.toString(id));
             
             int numRow = 0;
             if(rs != null && rs.last() != false) {
@@ -218,12 +255,15 @@ public class Toys {
                 
             if(numRow == 1) {
                 while(rs != null && rs.next() != false) {
-                    name = rs.getString("Name");
-                    des = rs.getString("Description");
                     price = Float.parseFloat(rs.getString("Price"));
+                    des = rs.getString("Description");
+                    conDes = rs.getString("ConditionDescription");
+                    orgPrice = Float.parseFloat(rs.getString("OrgPrice"));
+                    amount = Integer.parseInt(rs.getString("Amount"));
+                    name = rs.getString("Name");
                     age = Integer.parseInt(rs.getString("Age"));
                     sex = Integer.parseInt(rs.getString("Sex"));
-                    picUrl = rs.getString("PicUrl");
+                    Cid = Integer.parseInt(rs.getString("Cid"));
                     categoryId = Integer.parseInt(rs.getString("CategoryId"));
                 }
             }
@@ -249,5 +289,4 @@ public class Toys {
             Globals.closeConn();
         }     
     }
-    
 }
