@@ -5,9 +5,13 @@
  */
 package Controllers;
 
+import Bean.Globals;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -35,9 +39,52 @@ public class loginServlet extends basicServlet{
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveCate(request);
+        if(checkUser(request)){
+            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp"); 
+            dispatcher.forward(request, response);
+        }
+        else{
+            
         RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp"); 
         dispatcher.forward(request, response);
+        }
     }
+    
+    private boolean checkUser(HttpServletRequest request)
+    throws ServletException, IOException {
+        try {
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+
+            if (email != null && !email.equalsIgnoreCase("") &&
+                password != null && !password.equalsIgnoreCase("")) {
+
+               // Setup connection to db
+                Globals.openConn();
+                Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                PreparedStatement pstmt = Globals.con.prepareStatement("SELECT * FROM [Customer] WHERE Email=? AND Password=?");
+                pstmt.setString(1, email);
+                pstmt.setString(2, password);
+
+                // execute the SQL statement
+                int rows = pstmt.executeUpdate();
+
+                if (rows > 0) {
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+           
+        } catch (ClassNotFoundException e) {
+        } catch (SQLException e) {
+        }
+        return false;
+    }
+
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
