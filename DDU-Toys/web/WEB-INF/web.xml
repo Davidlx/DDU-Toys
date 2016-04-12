@@ -40,6 +40,14 @@
         <servlet-name>navServlet</servlet-name>
         <servlet-class>Controllers.basicServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>adminLoginServlet</servlet-name>
+        <servlet-class>Controllers.adminLoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>adminIndexServlet</servlet-name>
+        <servlet-class>Controllers.management.adminIndexServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -74,11 +82,15 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>userIndexServlet</servlet-name>
-        <url-pattern>/userIndexServlet</url-pattern>
+        <url-pattern>/user/index</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>navServlet</servlet-name>
-        <url-pattern>/navServlet</url-pattern>
+        <servlet-name>adminLoginServlet</servlet-name>
+        <url-pattern>/adminLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminIndexServlet</servlet-name>
+        <url-pattern>/admin/index</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
