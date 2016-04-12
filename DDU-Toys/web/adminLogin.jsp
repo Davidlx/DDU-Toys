@@ -34,7 +34,7 @@
                         <div class="col-md-6">
                             <h1 style="font-size: 30px; padding-bottom:20px;margin-top: 80px;">Notice</h2>
                             <P>This page is for admin user only, please go back to the user login page</P>
-                             <button class="btn btn-default" style="margin-top:130px">User Login</button>
+                            <a href="login"<button class="btn btn-default" style="margin-top:130px">User Login</button></a>
                         </div>
                      </div>
             </div>
