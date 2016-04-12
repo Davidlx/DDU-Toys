@@ -48,6 +48,10 @@
         <servlet-name>adminIndexServlet</servlet-name>
         <servlet-class>Controllers.management.adminIndexServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>registerServlet</servlet-name>
+        <servlet-class>Controllers.registerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -91,6 +95,10 @@
     <servlet-mapping>
         <servlet-name>adminIndexServlet</servlet-name>
         <url-pattern>/admin/index</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>registerServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

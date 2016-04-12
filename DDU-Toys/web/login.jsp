@@ -41,7 +41,7 @@
                                 <li>Track new orders</li>
                                 <li>Save items to your wish list</li>
                             </ul>
-                             <button class="btn btn-default">Create Account</button>
+                            <a href="register"><button class="btn btn-default">Create Account</button></a>
                         </div>
                      </div>
                 <a href="adminLogin" style="text-align: center; color: gray"><p>Admin User</p></a>
