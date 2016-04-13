@@ -35,7 +35,7 @@
                                     </div>
                                      <div class="col-md-6">
                                         <h1 class="itemName" style="border:none;padding-top: 20; margin-top: 0px;">Snacks</h1>
-                                        <p class="basicInformation">Category · Sex · Age</p>
+                                        <p class="basicInformation">Category · Sex · Age · Brand New / Second Hand</p>
                                         <p>description</p>
                                     </div>
                                      <div class="col-md-2">1</div>
