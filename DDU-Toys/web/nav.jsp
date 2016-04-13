@@ -37,6 +37,6 @@
 
                 </div>
                 <div class="rightNav">
-                    <p><a class="btn navBtn" href="login" role="button">Login</a><a class="btn navBtn" href="#" role="button">Cart</a></p>
+                    <p><a class="btn navBtn" href="${pageContext.request.contextPath}/login" role="button">Login</a><a class="btn navBtn" href="#" role="button">Cart</a></p>
                 </div>
             </div>

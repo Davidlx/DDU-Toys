@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import Bean.Customer;
 import Bean.Globals;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,18 +41,10 @@ public class loginServlet extends basicServlet{
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveCate(request);
-        if(checkUser(request)){
-            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp"); 
-            dispatcher.forward(request, response);
-        }
-        else{
-            
-        RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp"); 
-        dispatcher.forward(request, response);
-        }
+        checkUser(request,response);
     }
     
-    private boolean checkUser(HttpServletRequest request)
+    private void checkUser(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         try {
             String email = request.getParameter("email");
@@ -58,29 +52,53 @@ public class loginServlet extends basicServlet{
 
             if (email != null && !email.equalsIgnoreCase("") &&
                 password != null && !password.equalsIgnoreCase("")) {
-
-               // Setup connection to db
+                // Setup connection to db
                 Globals.openConn();
                 Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                PreparedStatement pstmt = Globals.con.prepareStatement("SELECT * FROM [Customer] WHERE Email=? AND Password=?");
-                pstmt.setString(1, email);
-                pstmt.setString(2, password);
-
-                // execute the SQL statement
-                int rows = pstmt.executeUpdate();
-
-                if (rows > 0) {
-                    return true;
+                ResultSet rs = stmt.executeQuery("SELECT * FROM [Customer] WHERE [Email] = '"+email+"' AND [Password] = '"+password+"'");
+                
+                int numRow = 0;
+                if(rs != null && rs.last() != false) {
+                    numRow = rs.getRow();
+                    rs.beforeFirst();
                 }
+                
+                if(numRow == 1) {
+                    //bean creation
+                    Customer cust = new Customer();
+                    cust.setEmail(email);
+                    cust.setPassword(password);
+                    while(rs != null && rs.next() != false) {
+                        cust.setId(rs.getInt(1));
+                        cust.setUsername(rs.getString(2));
+                    }
+                    HttpSession session = request.getSession();
+                    session.setAttribute("customer", cust);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("register"); 
+                    dispatcher.forward(request, response);
+                }
+                //user doesn't exist
                 else{
-                    return false;
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("login"); 
+                    dispatcher.forward(request, response);
                 }
+                                  
+                // close connections and statements
+                if(rs != null) {
+                    rs.close();
+                }
+                Globals.closeConn();
+            }
+            else{
+                RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp"); 
+                dispatcher.forward(request, response);
             }
            
         } catch (ClassNotFoundException e) {
+            Globals.beanLog.info(e.toString());
         } catch (SQLException e) {
+            Globals.beanLog.info(e.toString());
         }
-        return false;
     }
 
     
