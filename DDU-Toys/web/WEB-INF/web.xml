@@ -114,11 +114,6 @@
         <url-pattern>/items</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>userIndexServlet</servlet-name>
-        <url-pattern>/user/index</url-pattern>
-        <url-pattern>/user/</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>adminLoginServlet</servlet-name>
         <url-pattern>/adminLogin</url-pattern>
     </servlet-mapping>
@@ -145,6 +140,11 @@
     <servlet-mapping>
         <servlet-name>addStockServlet</servlet-name>
         <url-pattern>/admin/addStock</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>userIndexServlet</servlet-name>
+        <url-pattern>/user/index</url-pattern>
+        <url-pattern>/user/</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>salesServlet</servlet-name>
