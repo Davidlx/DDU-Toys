@@ -1,4 +1,4 @@
-             <jsp:useBean id="cate"  class="java.util.ArrayList"  scope="request"/>   
+             <jsp:useBean id="cate"  class="java.util.ArrayList"  scope="application"/>   
              <jsp:useBean id="isLoggedIn"  type="java.lang.Boolean"  scope="session"/>
              <jsp:useBean id="customer"  class="Bean.Customer"  scope="session"/>
             <div class="nav">
