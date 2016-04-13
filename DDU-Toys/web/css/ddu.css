@@ -244,3 +244,11 @@ body{
 .marginTop{
     margin-top: 10px;
 }
+
+.marginBottom{
+    margin-bottom: 30px;
+}
+
+.marginLeft{
+    margin-left: 20px;
+}
