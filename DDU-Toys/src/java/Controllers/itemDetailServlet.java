@@ -5,7 +5,7 @@
  */
 package Controllers;
 
-import Bean.SpecificBean.FeaturedUsedItem;
+import Bean.SpecificBean.FirstHandItem;
 import Bean.SpecificBean.SecondHandItem;
 import Bean.Stock;
 import java.io.IOException;
@@ -50,7 +50,7 @@ public class itemDetailServlet extends basicServlet {
             request.setAttribute("item", item);
         }
         else{
-            FeaturedUsedItem item = new FeaturedUsedItem();
+            FirstHandItem item = new FirstHandItem();
             item.setUsedItem(stock);
             isRecycled=false;
             request.setAttribute("item", item);
