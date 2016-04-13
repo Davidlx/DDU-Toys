@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controllers.management;
+package Controllers.admin;
 
 import Controllers.basicServlet;
 import java.io.IOException;
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Ugo
  */
-public class adminIndexServlet extends basicServlet {
+public class addToyServlet extends basicServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,10 +33,10 @@ public class adminIndexServlet extends basicServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException, ClassNotFoundException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveCate(request);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("management/index.jsp"); 
+        RequestDispatcher dispatcher = request.getRequestDispatcher("management/addToy.jsp"); 
         dispatcher.forward(request, response);
     }
 
@@ -54,10 +54,10 @@ public class adminIndexServlet extends basicServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(adminIndexServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(adminIndexServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(addToyServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(addToyServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -74,10 +74,10 @@ public class adminIndexServlet extends basicServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(adminIndexServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(adminIndexServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(addToyServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(addToyServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
