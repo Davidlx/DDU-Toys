@@ -1,4 +1,4 @@
-                     
+             <jsp:useBean id="cate"  class="java.util.ArrayList"  scope="request"/>           
             <div class="nav">
                 <div class="centering">
                     <ul id="navItems">
