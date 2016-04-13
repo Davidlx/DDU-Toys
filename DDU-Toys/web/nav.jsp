@@ -12,14 +12,14 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <c:forEach items="${cate}" var="category">
-                                        <li><a href="#">${category.name}</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/items?type=0&subtype=${category.id}">${category.name}</a></li>
                                     </c:forEach>
 <!--                                  <li><a href="#"><%--<jsp:getProperty name="cate" property="name" />--%></a></li>-->
                                 </ul>
                               </div>
                         </li>
-                        <li>Brand New</li>
-                        <li>Second Hand Product</li>
+                        <li><a href="${pageContext.request.contextPath}/items?type=1" style="color:white; text-decoration: none">Brand New</a></li>
+                        <li><a href="${pageContext.request.contextPath}/items?type=2"  style="color:white; text-decoration: none">Second Hand Product</a></li>
                         <li>
                             <div class="btn-group">
                                 <button type="button" class="btn navBtn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -28,10 +28,11 @@
                                 <ul class="dropdown-menu">
 <!--                                  <li><a href="#"><%--<jsp:getProperty name="cate" property="name" />--%></a></li>-->
 
-                                  <li><a href="#">0 ~ 3</a></li>
-                                  <li><a href="#">4 ~ 7</a></li>
-                                  <li><a href="#">7 ~ 9</a></li>
-                                  <li><a href="#">10 ~ 12</a></li>
+                                  <li><a href="${pageContext.request.contextPath}/items?type=3&subtype1=0&&subtype2=3">0 ~ 3</a></li>
+                                  <li><a href="${pageContext.request.contextPath}/items?type=3&subtype1=4&&subtype2=6">4 ~ 6</a></li>
+                                  <li><a href="${pageContext.request.contextPath}/items?type=3&subtype1=7&&subtype2=9">7 ~ 9</a></li>
+                                  <li><a href="${pageContext.request.contextPath}/items?type=3&subtype1=10&&subtype2=12">10 ~ 12</a></li>
+                                  <li><a href="${pageContext.request.contextPath}/items?type=3&subtype1=12&&subtype2=100">12+</a></li>
                                 </ul>
                               </div>
                         </li>
