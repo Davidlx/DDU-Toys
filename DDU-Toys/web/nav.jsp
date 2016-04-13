@@ -44,7 +44,7 @@
                             <a class="btn navBtn" href="${pageContext.request.contextPath}/user/" role="button"><c:out value="${customer.username}"/></a>
                         </c:if>
                         <c:if test="${!isLoggedIn}">
-                            <a class="btn navBtn" href="${pageContext.request.contextPath}/login" role="button">Login</a>
+                            <a class="btn navBtn" href="${pageContext.request.contextPath}/login?from=${pageContext.request.requestURI}" role="button">Login</a>
                         </c:if>
                         
                         <a class="btn navBtn" href="#" role="button">Cart</a>
