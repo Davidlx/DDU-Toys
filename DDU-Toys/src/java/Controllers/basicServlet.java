@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -24,10 +25,23 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class basicServlet extends HttpServlet {
 
-    
+       
     protected HttpServletRequest retrieveCate(HttpServletRequest request) throws ServletException, IOException, ClassNotFoundException, SQLException {
         ArrayList<Bean.Category> allCategories = getAllCategories();
         request.setAttribute("cate", allCategories);
+        return request;
+    }
+    
+    protected HttpServletRequest retrieveUserSession(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Boolean isLoggedIn = (Boolean) session.getAttribute("isLoggedIn");
+        if(isLoggedIn) {
+            Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
+            if(customer == null) {
+                Boolean notLoggedIn = false;
+                session.setAttribute("isLoggedIn", notLoggedIn);
+            }
+        }
         return request;
     }
     
