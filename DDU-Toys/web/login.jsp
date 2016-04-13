@@ -28,6 +28,7 @@
                                   <label for="exampleInputPassword1">Password</label>
                                   <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
                                 </div>
+                                <input type="hidden" name="from" value="${param.from}">
                                 <button type="submit" class="btn btn-default">Submit</button>
                               </form>
                         </div>

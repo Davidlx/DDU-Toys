@@ -36,7 +36,7 @@ public class addToyServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("management/addToy.jsp"); 
+        RequestDispatcher dispatcher = request.getRequestDispatcher("addToy.jsp"); 
         dispatcher.forward(request, response);
     }
 

@@ -5,8 +5,7 @@
 --%>
 
                         <ul class="nav nav-pills nav-stacked" style="background-color: white;">
-                            <li role="presentation"><a href="#">Orders</a></li>
-                            <li role="presentation"><a href="#">Sales</a></li>
-                            <li role="presentation"><a href="#">New Sales</a></li>
-                            <li role="presentation"><a href="#">Addresses</a></li>
+                            <li role="presentation"><a href="${pageContext.request.contextPath}/user">Orders</a></li>
+                            <li role="presentation"><a href="${pageContext.request.contextPath}/user/sales">Sales</a></li>
+                            <li role="presentation"><a href="${pageContext.request.contextPath}/user/newSale">New Sales</a></li>
                         </ul>

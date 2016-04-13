@@ -36,7 +36,7 @@ public class addStockServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("management/addStock.jsp"); 
+        RequestDispatcher dispatcher = request.getRequestDispatcher("addStock.jsp"); 
         dispatcher.forward(request, response);
     }
 
