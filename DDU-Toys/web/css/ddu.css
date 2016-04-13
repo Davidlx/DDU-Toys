@@ -15,6 +15,7 @@ body{
 
 .contents{
     max-width: 1440px;
+    min-width: 1080px;
     margin:auto;
     background-color: white;
 }
@@ -204,6 +205,16 @@ body{
     font-size: 25px;
     padding-bottom: 10px;
     border-bottom: 1px solid rgb(213,213,213);
+    margin-bottom: 0;
+}
+
+/*User Order*/
+.orderItem{
+    border: 1px solid  rgb(230,230,230);
+}
+
+.orderBasicInfo{
+    background-color: rgb(230,230,230);
 }
 
 /*Common Properties*/

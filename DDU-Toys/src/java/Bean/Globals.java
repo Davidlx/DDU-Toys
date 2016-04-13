@@ -7,7 +7,9 @@ package Bean;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Logger;
 
 /**
@@ -29,5 +31,20 @@ public class Globals {
         if(con != null) {
             con.close();
         }
+    }
+    public static int getNumOfToysRows() throws ClassNotFoundException, SQLException
+    {
+        // Input has to be same name as in db
+        openConn();
+        Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM [Toys]");
+        
+        int numRow = 0;
+        if(rs != null) {
+            rs.last();
+            numRow = rs.getRow();
+        }
+        
+        return numRow;    
     }
 }
