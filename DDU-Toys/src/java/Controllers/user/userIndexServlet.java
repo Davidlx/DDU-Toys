@@ -36,7 +36,7 @@ public class userIndexServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveCate(request);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("user/userIndex.jsp"); 
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/userIndex"); 
         dispatcher.forward(request, response);
     }
 
