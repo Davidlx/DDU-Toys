@@ -35,10 +35,10 @@ public class SecondHandItem {
     public void setUsedItem(Bean.Stock stock) throws SQLException{
         usedItem = stock;
         toyInfo = new Bean.Toy();
-        toyInfo.setId(usedItem.getId());
+        toyInfo.setId(usedItem.getTid());
         toyInfo.getOnId();
         customerInfo = new Customer();
-        customerInfo.setId(usedItem.getId());
+        customerInfo.setId(usedItem.getCid());
         customerInfo.getOnId();
     }
     

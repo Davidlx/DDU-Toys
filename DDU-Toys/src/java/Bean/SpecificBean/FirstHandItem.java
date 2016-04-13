@@ -33,7 +33,7 @@ public class FirstHandItem {
     public void setUsedItem(Bean.Stock stock) throws SQLException{
         firstHandItem = stock;
         toyInfo = new Bean.Toy();
-        toyInfo.setId(firstHandItem.getId());
+        toyInfo.setId(firstHandItem.getTid());
         toyInfo.getOnId();
     }
     
