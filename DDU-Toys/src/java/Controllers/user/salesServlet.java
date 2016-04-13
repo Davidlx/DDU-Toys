@@ -36,7 +36,7 @@ public class salesServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveCate(request);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("user/sales.jsp"); 
+        RequestDispatcher dispatcher = request.getRequestDispatcher("sales.jsp"); 
         dispatcher.forward(request, response);
     }
 
