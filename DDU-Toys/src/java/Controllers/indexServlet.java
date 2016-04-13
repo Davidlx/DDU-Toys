@@ -47,7 +47,7 @@ public class indexServlet extends basicServlet {
         request.setAttribute("featuredItem", featuredToys);
         
         // Add used featured items
-        ArrayList<Bean.SpecificBean.FirstHandItem> featuredUsedItems = getFeaturedRecycledItems(4);
+        ArrayList<Bean.SpecificBean.SecondHandItem> featuredUsedItems = getFeaturedRecycledItems(4);
         request.setAttribute("featuredUsedItem", featuredUsedItems);
         
         
@@ -90,9 +90,8 @@ public class indexServlet extends basicServlet {
                     item.setConDes(rs.getString("ConditionDescription"));
                     item.setAmount(Integer.parseInt(rs.getString("Amount")));
                     item.setPrice(Float.parseFloat(rs.getString("Price")));
-                    item.setCid(Integer.parseInt(rs.getString("Cid")));
+                    item.setCid(Globals.tryParse(rs.getString("Cid")));
                     item.setTid(Integer.parseInt(rs.getString("Tid")));
-                    
                     Bean.SpecificBean.FirstHandItem featuredUsedItem = new Bean.SpecificBean.FirstHandItem();
                     featuredUsedItem.setUsedItem(item);
                     result.add(featuredUsedItem);
@@ -110,8 +109,8 @@ public class indexServlet extends basicServlet {
         return result;
     }
         
-    private ArrayList<Bean.SpecificBean.FirstHandItem> getFeaturedRecycledItems(int amount) throws ClassNotFoundException, SQLException{
-        ArrayList<Bean.SpecificBean.FirstHandItem> result = new ArrayList<Bean.SpecificBean.FirstHandItem>();
+    private ArrayList<Bean.SpecificBean.SecondHandItem> getFeaturedRecycledItems(int amount) throws ClassNotFoundException, SQLException{
+        ArrayList<Bean.SpecificBean.SecondHandItem> result = new ArrayList<Bean.SpecificBean.SecondHandItem>();
         
         // Setup connection to db
         Globals.openConn();
@@ -147,7 +146,7 @@ public class indexServlet extends basicServlet {
                     item.setCid(Integer.parseInt(rs.getString("Cid")));
                     item.setTid(Integer.parseInt(rs.getString("Tid")));
                     
-                    Bean.SpecificBean.FirstHandItem featuredUsedItem = new Bean.SpecificBean.FirstHandItem();
+                    Bean.SpecificBean.SecondHandItem featuredUsedItem = new Bean.SpecificBean.SecondHandItem();
                     featuredUsedItem.setUsedItem(item);
                     result.add(featuredUsedItem);
                 }

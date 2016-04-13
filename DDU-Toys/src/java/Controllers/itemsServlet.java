@@ -41,60 +41,60 @@ public class itemsServlet extends basicServlet {
         response.setContentType("text/html;charset=UTF-8");
         request = super.retrieveBasicAttributes(request);
         
-        int choice = (Integer) request.getAttribute("type");
-        
-        switch(choice) {
-            case 1:
-                
-        }        
+//        int choice = (Integer) request.getAttribute("type");
+//        
+//        switch(choice) {
+//            case 1:
+//                
+//        }        
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("items.jsp"); 
         dispatcher.forward(request, response);
     }
     
     // <editor-fold defaultstate="collapsed" desc="Get Items Methods">
-    
-    private ArrayList<Bean.Toy> getAllFirstHandToys(int amount) throws ClassNotFoundException, SQLException{
-        ArrayList<Bean.Toy> result = new ArrayList<Bean.Toy>();
-        
-        // Setup connection to db
-        Globals.openConn();
-        Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        ResultSet rs = stmt.executeQuery("SELECT toys.* \n" +
-                                            "FROM [Stock] as stock\n" +
-                                            "INNER JOIN [Toys] as toys\n" +
-                                            "ON stock.Tid = toys.Tid\n" +
-                                            "WHERE stock.Recycle = 0");
-        
-        int numRow = 0;
-        if(rs != null && rs.last() != false) {
-            numRow = rs.getRow();
-            rs.beforeFirst();
-        }
-        
-        if(numRow > 0) {
-            while(rs != null && rs.next() != false) {
-                    Bean.Toy toy = new Bean.Toy();
-                    toy.setId(Integer.parseInt(rs.getString("Tid")));
-                    toy.setName(rs.getString("Name"));
-                    toy.setDes(rs.getString("Description"));
-                    toy.setPrice(Float.parseFloat(rs.getString("Price")));
-                    toy.setAge(Integer.parseInt(rs.getString("Age")));
-                    toy.setSex(Integer.parseInt(rs.getString("Sex")));
-                    toy.setPicUrl(rs.getString("PicUrl"));
-                    toy.setCategoryId(Integer.parseInt(rs.getString("CategoryId")));
-                    result.add(toy);
-            }
-        }
-        
-        if(rs != null){
-            rs.close();
-        }
-            
-        Globals.closeConn();
-        
-        return result;
-    }
+//    
+//    private ArrayList<Bean.Toy> getAllFirstHandToys(int amount) throws ClassNotFoundException, SQLException{
+//        ArrayList<Bean.Toy> result = new ArrayList<Bean.Toy>();
+//        
+//        // Setup connection to db
+//        Globals.openConn();
+//        Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+//        ResultSet rs = stmt.executeQuery("SELECT toys.* \n" +
+//                                            "FROM [Stock] as stock\n" +
+//                                            "INNER JOIN [Toys] as toys\n" +
+//                                            "ON stock.Tid = toys.Tid\n" +
+//                                            "WHERE stock.Recycle = 0");
+//        
+//        int numRow = 0;
+//        if(rs != null && rs.last() != false) {
+//            numRow = rs.getRow();
+//            rs.beforeFirst();
+//        }
+//        
+//        if(numRow > 0) {
+//            while(rs != null && rs.next() != false) {
+//                    Bean.Toy toy = new Bean.Toy();
+//                    toy.setId(Integer.parseInt(rs.getString("Tid")));
+//                    toy.setName(rs.getString("Name"));
+//                    toy.setDes(rs.getString("Description"));
+//                    toy.setPrice(Float.parseFloat(rs.getString("Price")));
+//                    toy.setAge(Integer.parseInt(rs.getString("Age")));
+//                    toy.setSex(Integer.parseInt(rs.getString("Sex")));
+//                    toy.setPicUrl(rs.getString("PicUrl"));
+//                    toy.setCategoryId(Integer.parseInt(rs.getString("CategoryId")));
+//                    result.add(toy);
+//            }
+//        }
+//        
+//        if(rs != null){
+//            rs.close();
+//        }
+//            
+//        Globals.closeConn();
+//        
+//        return result;
+//    }
     
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
