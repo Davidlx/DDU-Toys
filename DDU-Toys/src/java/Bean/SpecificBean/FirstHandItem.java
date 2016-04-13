@@ -16,24 +16,24 @@ import java.util.logging.Logger;
  *
  * @author Dennis T
  */
-public class FeaturedUsedItem {
-    private Bean.Stock usedItem;
+public class FirstHandItem {
+    private Bean.Stock firstHandItem;
     private Bean.Toy toyInfo;
     
-    public FeaturedUsedItem(){};
+    public FirstHandItem(){};
     
     public Bean.Toy getToyInfo(){
         return this.toyInfo;
     }
     
-    public Bean.Stock getUsedItem(){
-        return this.usedItem;
+    public Bean.Stock getFirstHandItem(){
+        return this.firstHandItem;
     }
     // Also sets ToyInfo
     public void setUsedItem(Bean.Stock stock) throws SQLException{
-        usedItem = stock;
+        firstHandItem = stock;
         toyInfo = new Bean.Toy();
-        toyInfo.setId(usedItem.getId());
+        toyInfo.setId(firstHandItem.getId());
         toyInfo.getOnId();
     }
     

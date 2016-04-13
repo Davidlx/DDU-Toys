@@ -43,11 +43,11 @@ public class indexServlet extends basicServlet {
         request = super.retrieveBasicAttributes(request);
         
         // Add featured toys to request
-        ArrayList<Bean.Toy> featuredToys = getFeaturedToys(4);
+        ArrayList<Bean.SpecificBean.FirstHandItem> featuredToys = getFeaturedToys(4);
         request.setAttribute("featuredItem", featuredToys);
         
         // Add used featured items
-        ArrayList<Bean.SpecificBean.FeaturedUsedItem> featuredUsedItems = getFeaturedRecycledItems(4);
+        ArrayList<Bean.SpecificBean.FirstHandItem> featuredUsedItems = getFeaturedRecycledItems(4);
         request.setAttribute("featuredUsedItem", featuredUsedItems);
         
         
@@ -56,13 +56,13 @@ public class indexServlet extends basicServlet {
     }
     
     // <editor-fold defaultstate="collapsed" desc="DB Methods">
-    private ArrayList<Bean.Toy> getFeaturedToys(int amount) throws ClassNotFoundException, SQLException{
-        ArrayList<Bean.Toy> result = new ArrayList<Bean.Toy>();
+    private ArrayList<Bean.SpecificBean.FirstHandItem> getFeaturedToys(int amount) throws ClassNotFoundException, SQLException{
+        ArrayList<Bean.SpecificBean.FirstHandItem> result = new ArrayList<Bean.SpecificBean.FirstHandItem>();
         
         // Setup connection to db
         Globals.openConn();
         Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        ResultSet rs = stmt.executeQuery("SELECT * FROM [Toys]");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM [Stock] WHERE Recycle = 0");
         
         int numRow = 0;
         if(rs != null && rs.last() != false) {
@@ -84,16 +84,18 @@ public class indexServlet extends basicServlet {
         if(numRow > 0) {
             while(rs != null && rs.next() != false) {
                 if(numbers.contains(i)) {
-                    Bean.Toy featured = new Bean.Toy();
-                    featured.setId(Integer.parseInt(rs.getString("Tid")));
-                    featured.setName(rs.getString("Name"));
-                    featured.setDes(rs.getString("Description"));
-                    featured.setPrice(Float.parseFloat(rs.getString("Price")));
-                    featured.setAge(Integer.parseInt(rs.getString("Age")));
-                    featured.setSex(Integer.parseInt(rs.getString("Sex")));
-                    featured.setPicUrl(rs.getString("PicUrl"));
-                    featured.setCategoryId(Integer.parseInt(rs.getString("CategoryId")));
-                    result.add(featured);
+                    Bean.Stock item = new Bean.Stock();
+                    item.setId(Integer.parseInt(rs.getString("Sid")));
+                    item.setRecycled(Integer.parseInt(rs.getString("Recycle")));
+                    item.setConDes(rs.getString("ConditionDescription"));
+                    item.setAmount(Integer.parseInt(rs.getString("Amount")));
+                    item.setPrice(Float.parseFloat(rs.getString("Price")));
+                    item.setCid(Integer.parseInt(rs.getString("Cid")));
+                    item.setTid(Integer.parseInt(rs.getString("Tid")));
+                    
+                    Bean.SpecificBean.FirstHandItem featuredUsedItem = new Bean.SpecificBean.FirstHandItem();
+                    featuredUsedItem.setUsedItem(item);
+                    result.add(featuredUsedItem);
                 }
                 i++;
             }
@@ -108,8 +110,8 @@ public class indexServlet extends basicServlet {
         return result;
     }
         
-    private ArrayList<Bean.SpecificBean.FeaturedUsedItem> getFeaturedRecycledItems(int amount) throws ClassNotFoundException, SQLException{
-        ArrayList<Bean.SpecificBean.FeaturedUsedItem> result = new ArrayList<Bean.SpecificBean.FeaturedUsedItem>();
+    private ArrayList<Bean.SpecificBean.FirstHandItem> getFeaturedRecycledItems(int amount) throws ClassNotFoundException, SQLException{
+        ArrayList<Bean.SpecificBean.FirstHandItem> result = new ArrayList<Bean.SpecificBean.FirstHandItem>();
         
         // Setup connection to db
         Globals.openConn();
@@ -145,7 +147,7 @@ public class indexServlet extends basicServlet {
                     item.setCid(Integer.parseInt(rs.getString("Cid")));
                     item.setTid(Integer.parseInt(rs.getString("Tid")));
                     
-                    Bean.SpecificBean.FeaturedUsedItem featuredUsedItem = new Bean.SpecificBean.FeaturedUsedItem();
+                    Bean.SpecificBean.FirstHandItem featuredUsedItem = new Bean.SpecificBean.FirstHandItem();
                     featuredUsedItem.setUsedItem(item);
                     result.add(featuredUsedItem);
                 }
