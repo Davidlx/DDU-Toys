@@ -240,3 +240,7 @@ body{
 .centering{
     text-align: center;
 }
+
+.marginTop{
+    margin-top: 10px;
+}

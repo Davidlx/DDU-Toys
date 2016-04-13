@@ -22,6 +22,7 @@ public class Customer {
     private String username;
     private String password;
     private String email;
+//    private Boolean isLoggedIn;
     
     public Customer(){};
     
@@ -52,6 +53,14 @@ public class Customer {
     public void setEmail(String email){
         this.email = email;
     }
+    
+//    public Boolean getIsLoggedIn() {
+//        return this.isLoggedIn;
+//    }
+//    public void setIsLoggedIn(Boolean loggedIn) {
+//        this.isLoggedIn = loggedIn;
+//    }
+    
     
     public void insert() throws ClassNotFoundException, SQLException{
     try {

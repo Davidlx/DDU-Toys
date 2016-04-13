@@ -26,6 +26,7 @@ public class Toy {
     private float price;
     private String picUrl;
     private int categoryId;
+    private String categoryName;
     
     public Toy(){};
     
@@ -82,8 +83,23 @@ public class Toy {
     public int getCategoryId(){
         return this.categoryId;
     }
-    public void setCategoryId(int catId){
+    public void setCategoryId(int catId) throws SQLException{
         this.categoryId = catId;
+        setCategoryName();
+    }
+    
+    public String getCategoryName(){
+        return this.categoryName;
+    }
+    private void setCategoryName() throws SQLException{
+        if(categoryId != 0) {
+            Category cat = new Category();
+            cat.setId(categoryId);
+            cat.getOnId();
+            this.categoryName = cat.getName();
+        } else {
+            this.categoryName = "Unknown";
+        }        
     }
     
     public void insert() throws ClassNotFoundException, SQLException{
@@ -224,7 +240,7 @@ public class Toy {
                     age = Integer.parseInt(rs.getString("Age"));
                     sex = Integer.parseInt(rs.getString("Sex"));
                     picUrl = rs.getString("PicUrl");
-                    categoryId = Integer.parseInt(rs.getString("CategoryId"));
+                    setCategoryId(Integer.parseInt(rs.getString("CategoryId")));
                 }
             }
                                   
