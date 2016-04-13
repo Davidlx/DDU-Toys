@@ -75,8 +75,9 @@ public class loginServlet extends basicServlet{
                     HttpSession session = request.getSession();
                     session.setAttribute("customer", cust);
                     session.setAttribute("isLoggedIn",true);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("index"); 
-                    dispatcher.forward(request, response);
+                    String uri = request.getParameter("from");
+                    //removes the .jsp
+                    response.sendRedirect(uri.substring(0, uri.length()-4));
                 }
                 //user doesn't exist
                 else{
