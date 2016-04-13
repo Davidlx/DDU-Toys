@@ -35,7 +35,7 @@ public class adminIndexServlet extends basicServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        request=super.retrieveCate(request);
+        request=super.retrieveBasicAttributes(request);
         RequestDispatcher dispatcher = request.getRequestDispatcher("management/index.jsp"); 
         dispatcher.forward(request, response);
     }

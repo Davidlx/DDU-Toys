@@ -40,8 +40,7 @@ public class indexServlet extends basicServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        request=super.retrieveCate(request);
-        request = super.retrieveUserSession(request);
+        request = super.retrieveBasicAttributes(request);
         
         // Add featured toys to request
         ArrayList<Bean.Toy> featuredToys = getFeaturedToys(4);

@@ -34,7 +34,7 @@ public class cartServlet extends basicServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        request=super.retrieveCate(request);
+        request=super.retrieveBasicAttributes(request);
         RequestDispatcher dispatcher = request.getRequestDispatcher("cart.jsp"); 
         dispatcher.forward(request, response);
     }
