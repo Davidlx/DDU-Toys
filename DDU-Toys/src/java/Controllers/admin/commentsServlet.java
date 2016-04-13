@@ -36,7 +36,7 @@ public class commentsServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("management/comments.jsp"); 
+        RequestDispatcher dispatcher = request.getRequestDispatcher("comments.jsp"); 
         dispatcher.forward(request, response);
     }
 
