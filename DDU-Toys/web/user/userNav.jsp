@@ -8,5 +8,4 @@
                             <li role="presentation"><a href="${pageContext.request.contextPath}/user">Orders</a></li>
                             <li role="presentation"><a href="${pageContext.request.contextPath}/user/sales">Sales</a></li>
                             <li role="presentation"><a href="${pageContext.request.contextPath}/user/newSale">New Sales</a></li>
-                            <li role="presentation"><a href="${pageContext.request.contextPath}/user/address">Addresses</a></li>
                         </ul>
