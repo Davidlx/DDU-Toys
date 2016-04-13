@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,9 +33,19 @@ public class basicServlet extends HttpServlet {
     }
        
     private HttpServletRequest retrieveCate(HttpServletRequest request) throws ServletException, IOException, ClassNotFoundException, SQLException {
-        ArrayList<Bean.Category> allCategories = getAllCategories();
-        request.setAttribute("cate", allCategories);
-        return request;
+        ServletContext context = request.getServletContext();
+        try {
+                ArrayList<Bean.Category> allCategories = (ArrayList<Bean.Category>) context.getAttribute("cate");
+                if(allCategories == null){
+                    throw new NullPointerException();
+                }
+                return request;
+        } catch (NullPointerException e) {
+                ArrayList<Bean.Category> allCategories = getAllCategories();
+                context.setAttribute("cate", allCategories);
+                return request;
+        }         
+
     }
     
     private HttpServletRequest retrieveUserSession(HttpServletRequest request) {
