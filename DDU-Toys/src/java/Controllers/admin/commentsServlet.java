@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controllers.management;
+package Controllers.admin;
 
 import Controllers.basicServlet;
 import java.io.IOException;
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Ugo
  */
-public class addToyServlet extends basicServlet {
+public class commentsServlet extends basicServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,7 +36,7 @@ public class addToyServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveCate(request);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("management/addToy.jsp"); 
+        RequestDispatcher dispatcher = request.getRequestDispatcher("management/comments.jsp"); 
         dispatcher.forward(request, response);
     }
 
@@ -55,9 +55,9 @@ public class addToyServlet extends basicServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(addToyServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(commentsServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(addToyServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(commentsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -75,9 +75,9 @@ public class addToyServlet extends basicServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(addToyServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(commentsServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(addToyServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(commentsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

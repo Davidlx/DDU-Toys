@@ -46,7 +46,7 @@
     </servlet>
     <servlet>
         <servlet-name>adminIndexServlet</servlet-name>
-        <servlet-class>Controllers.management.adminIndexServlet</servlet-class>
+        <servlet-class>Controllers.admin.adminIndexServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>registerServlet</servlet-name>
@@ -54,19 +54,19 @@
     </servlet>
     <servlet>
         <servlet-name>pendingSalesServlet</servlet-name>
-        <servlet-class>Controllers.management.pendingSalesServlet</servlet-class>
+        <servlet-class>Controllers.admin.pendingSalesServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>commentsServlet</servlet-name>
-        <servlet-class>Controllers.management.commentsServlet</servlet-class>
+        <servlet-class>Controllers.admin.commentsServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>addToyServlet</servlet-name>
-        <servlet-class>Controllers.management.addToyServlet</servlet-class>
+        <servlet-class>Controllers.admin.addToyServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>addStockServlet</servlet-name>
-        <servlet-class>Controllers.management.addStockServlet</servlet-class>
+        <servlet-class>Controllers.admin.addStockServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>salesServlet</servlet-name>
