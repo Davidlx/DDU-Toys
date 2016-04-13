@@ -24,25 +24,36 @@ import javax.servlet.http.HttpSession;
  * @author Ugo
  */
 public class basicServlet extends HttpServlet {
-
+    
+    protected HttpServletRequest retrieveBasicAttributes(HttpServletRequest request) throws ServletException, IOException, ClassNotFoundException, SQLException {
+        request = retrieveCate(request);
+        request = retrieveUserSession(request);
+        return request;
+    }
        
-    protected HttpServletRequest retrieveCate(HttpServletRequest request) throws ServletException, IOException, ClassNotFoundException, SQLException {
+    private HttpServletRequest retrieveCate(HttpServletRequest request) throws ServletException, IOException, ClassNotFoundException, SQLException {
         ArrayList<Bean.Category> allCategories = getAllCategories();
         request.setAttribute("cate", allCategories);
         return request;
     }
     
-    protected HttpServletRequest retrieveUserSession(HttpServletRequest request) {
+    private HttpServletRequest retrieveUserSession(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        Boolean isLoggedIn = (Boolean) session.getAttribute("isLoggedIn");
-        if(isLoggedIn) {
-            Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
-            if(customer == null) {
-                Boolean notLoggedIn = false;
-                session.setAttribute("isLoggedIn", notLoggedIn);
+        try {
+            Boolean isLoggedIn = (Boolean) session.getAttribute("isLoggedIn");
+            if(isLoggedIn) {
+                Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
+                if(customer == null) {
+                    Boolean notLoggedIn = false;
+                    session.setAttribute("isLoggedIn", notLoggedIn);
+                }
             }
-        }
-        return request;
+            return request;
+        } catch (NullPointerException e) {
+            Boolean notLoggedIn = false;
+            session.setAttribute("isLoggedIn", notLoggedIn);
+            return request;
+        } 
     }
     
     private ArrayList<Bean.Category> getAllCategories() throws ClassNotFoundException, SQLException{

@@ -22,7 +22,7 @@ public class Customer {
     private String username;
     private String password;
     private String email;
-    private Boolean isLoggedIn;
+//    private Boolean isLoggedIn;
     
     public Customer(){};
     
@@ -54,12 +54,12 @@ public class Customer {
         this.email = email;
     }
     
-    public Boolean getIsLoggedIn() {
-        return this.isLoggedIn;
-    }
-    public void setIsLoggedIn(Boolean loggedIn) {
-        this.isLoggedIn = loggedIn;
-    }
+//    public Boolean getIsLoggedIn() {
+//        return this.isLoggedIn;
+//    }
+//    public void setIsLoggedIn(Boolean loggedIn) {
+//        this.isLoggedIn = loggedIn;
+//    }
     
     
     public void insert() throws ClassNotFoundException, SQLException{
