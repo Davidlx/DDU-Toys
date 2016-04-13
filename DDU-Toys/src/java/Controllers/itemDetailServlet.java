@@ -5,6 +5,9 @@
  */
 package Controllers;
 
+import Bean.SpecificBean.FeaturedUsedItem;
+import Bean.SpecificBean.SecondHandItem;
+import Bean.Stock;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -35,10 +38,24 @@ public class itemDetailServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
-        
-        
-        
-        
+        int stockId = Integer.parseInt(request.getParameter("stockId"));
+        Stock stock = new Stock();
+        stock.setId(stockId);
+        stock.getOnId();
+        Boolean isRecycled;
+        if(stock.getRecycled()==1){
+            SecondHandItem item = new SecondHandItem();
+            item.setUsedItem(stock);
+            isRecycled=true;
+            request.setAttribute("item", item);
+        }
+        else{
+            FeaturedUsedItem item = new FeaturedUsedItem();
+            item.setUsedItem(stock);
+            isRecycled=false;
+            request.setAttribute("item", item);
+        }
+        request.setAttribute("isRecycled", isRecycled);
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("itemDetail.jsp"); 
         dispatcher.forward(request, response);
