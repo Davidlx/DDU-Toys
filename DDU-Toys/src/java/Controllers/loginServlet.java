@@ -74,6 +74,7 @@ public class loginServlet extends basicServlet{
                     }
                     HttpSession session = request.getSession();
                     session.setAttribute("customer", cust);
+                    session.setAttribute("isLoggedIn",true);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("register"); 
                     dispatcher.forward(request, response);
                 }
