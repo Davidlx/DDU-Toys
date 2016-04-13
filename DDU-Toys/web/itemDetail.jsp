@@ -6,7 +6,7 @@
 --%>
 <%--<jsp:useBean id="userInfo"  class="Bean.***"  scope="session"/>Contains whether the user logged in, user name, how many items in the cart--%>
 <%--<jsp:useBean id="item"  class="Bean.**"  scope="request"/>Contains an array list of the item object which contains the name, img link, description, price for the item, remember to have a int in her eto spercify the number of items--%>
-<%--<jsp:useBean id="comments"  class="java.util.ArrayList"  scope="request"/> List of comments--%>
+<%--<jsp:useBean id="comments"  class="java.util.ArrayList"  scope="request"/> arrayList of comments--%>
 <%--<jsp:useBean id="items"  class="java.util.ArrayList"  scope="request"/> List of similar items--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
