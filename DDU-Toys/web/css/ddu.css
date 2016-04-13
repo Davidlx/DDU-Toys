@@ -15,6 +15,7 @@ body{
 
 .contents{
     max-width: 1440px;
+    min-width: 1080px;
     margin:auto;
     background-color: white;
 }
@@ -213,7 +214,26 @@ body{
 }
 
 .orderBasicInfo{
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-bottom: 8px;
     background-color: rgb(230,230,230);
+}
+
+.orderSummary{
+    padding-left: 70%;
+    padding-bottom: 30px;
+    margin-right:10px;
+}
+
+.orderSummary h1{
+    font-size: 20px;
+}
+
+.borderBottom{
+    margin-left: 10px;
+    margin-right: 10px;
+    border-bottom: 1px solid rgb(213,213,213);
 }
 
 /*Common Properties*/
