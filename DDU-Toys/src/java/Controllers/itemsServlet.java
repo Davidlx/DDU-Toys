@@ -41,13 +41,15 @@ public class itemsServlet extends basicServlet {
         response.setContentType("text/html;charset=UTF-8");
         request = super.retrieveBasicAttributes(request);
         
-       
+        Boolean firstHand = true;
         int choice = Integer.parseInt(request.getParameter("type"));
         
         switch(choice) {
             case 0:
                 // Define Scope
                 request.setAttribute("scope",request.getParameter("categoryname"));
+                request.setAttribute("firstHand",firstHand);
+                
                 // Set Items
                 ArrayList<Bean.SpecificBean.FirstHandItem> categoryItems = getCategoryFirstHandItems(Integer.parseInt(request.getParameter("subtype")));
                 request.setAttribute("items", categoryItems);
@@ -55,6 +57,9 @@ public class itemsServlet extends basicServlet {
             case 1:
                 // Define Scope
                 request.setAttribute("scope","Second Hand Products");
+                firstHand = false;
+                request.setAttribute("firstHand",firstHand);
+                
                 // Set Items
                 ArrayList<Bean.SpecificBean.SecondHandItem> secondHandItems = getSecondHandItems();
                 request.setAttribute("items", secondHandItems);
@@ -68,6 +73,7 @@ public class itemsServlet extends basicServlet {
                 } else {
                     request.setAttribute("scope","Toys for age 12+");
                 }
+                request.setAttribute("firstHand",firstHand);
                 
                 // Set items         
                 ArrayList<Bean.SpecificBean.FirstHandItem> ageItems = getAgeFirstHandItems(lower,upper);
