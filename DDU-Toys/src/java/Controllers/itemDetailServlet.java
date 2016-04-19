@@ -5,12 +5,18 @@
  */
 package Controllers;
 
+import Bean.Comment;
+import Bean.Customer;
+import Bean.Globals;
 import Bean.SpecificBean.FirstHandItem;
 import Bean.SpecificBean.SecondHandItem;
 import Bean.Stock;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -18,6 +24,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -43,12 +50,14 @@ public class itemDetailServlet extends basicServlet {
         stock.setId(stockId);
         stock.getOnId();
         Boolean isRecycled;
+        //if recycled, create a second hand bean
         if(stock.getRecycled()==1){
             SecondHandItem item = new SecondHandItem();
             item.setUsedItem(stock);
             isRecycled=true;
             request.setAttribute("item", item);
         }
+        //if not then create a first hand bean
         else{
             FirstHandItem item = new FirstHandItem();
             item.setItem(stock);
@@ -56,6 +65,57 @@ public class itemDetailServlet extends basicServlet {
             request.setAttribute("item", item);
         }
         request.setAttribute("isRecycled", isRecycled);
+        
+        //comments part
+        ArrayList<Comment> list=new ArrayList<Comment>();
+        try{
+            Globals.openConn();
+            Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            //retreive all comments which are not replies
+            ResultSet rs = stmt.executeQuery("SELECT * FROM [Comment] WHERE [Sid] = '"+stockId+"' AND [ReplyId] = 0");
+            int numRow = 0;
+            if(rs != null && rs.last() != false) {
+                numRow = rs.getRow();
+                rs.beforeFirst();
+            }
+            if(numRow !=0) {
+                while(rs != null && rs.next() != false) {
+                    //create the comment bean
+                    Comment comment = new Comment();
+                    comment.setId(rs.getInt(1));
+                    comment.getOnId();
+                    //check if this comment has a reply
+                    Statement stmt2 = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                    ResultSet rs2 = stmt.executeQuery("SELECT * FROM [Comment] WHERE [ReplyId] = '"+rs.getInt(1)+"'");
+                    int numRow2 = 0;
+                    if(rs2 != null && rs2.last() != false) {
+                        numRow2 = rs2.getRow();
+                        rs2.beforeFirst();
+                    }
+                    //if it has a reply we set it in the bean
+                    if(numRow2 ==1) {
+                        while(rs != null && rs.next() != false) {
+                            comment.setReplyComment(rs2.getInt(1));
+                        }
+                    }
+                    list.add(comment);
+                    if(rs2 != null) {
+                        rs2.close();
+                    }
+                }
+            }
+            if(rs != null) {
+                rs.close();
+            }
+            Globals.closeConn();
+        }
+        catch (ClassNotFoundException e) {
+            Globals.beanLog.info(e.toString());
+        } catch (SQLException e) {
+            Globals.beanLog.info(e.toString());
+        }
+        
+        request.setAttribute("listComments", list);
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("itemDetail.jsp"); 
         dispatcher.forward(request, response);
