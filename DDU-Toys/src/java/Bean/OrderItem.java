@@ -23,8 +23,8 @@ public class OrderItem {
     private int amount;
     private float price;
     private String description;
-    private int Oid;
-    private int Tid;
+    private int oid;
+    private int tid;
     
     public OrderItem(){};
     
@@ -67,17 +67,17 @@ public class OrderItem {
     }
     
     public int getOid(){
-        return this.Oid;
+        return this.oid;
     }
     public void setOid(int Oid){
-        this.Oid = Oid;
+        this.oid = Oid;
     }
     
     public int getTid(){
-        return this.Tid;
+        return this.tid;
     }
     public void setTid(int Tid){
-        this.Tid = Tid;
+        this.tid = Tid;
     }
     
     public void insert() throws ClassNotFoundException, SQLException{
@@ -90,8 +90,8 @@ public class OrderItem {
             pstmt.setString(2, Integer.toString(amount));
             pstmt.setString(3, Float.toString(price));
             pstmt.setString(4, description);
-            pstmt.setString(5, Integer.toString(Oid));
-            pstmt.setString(6, Integer.toString(Tid));
+            pstmt.setString(5, Integer.toString(oid));
+            pstmt.setString(6, Integer.toString(tid));
             
             // execute the SQL statement
             pstmt.executeUpdate();
@@ -138,8 +138,8 @@ public class OrderItem {
             pstmt.setString(2, Integer.toString(amount));
             pstmt.setString(3, Float.toString(price));
             pstmt.setString(4, description);
-            pstmt.setString(5, Integer.toString(Oid));
-            pstmt.setString(6, Integer.toString(Tid));
+            pstmt.setString(5, Integer.toString(oid));
+            pstmt.setString(6, Integer.toString(tid));
             pstmt.setString(7, Integer.toString(id));
                         
             // execute the SQL statement
@@ -214,8 +214,8 @@ public class OrderItem {
                     amount = Integer.parseInt(rs.getString("Amount"));
                     price = Float.parseFloat(rs.getString("Price"));
                     description = rs.getString("Description");
-                    Oid = Integer.parseInt(rs.getString("Oid"));
-                    Tid = Integer.parseInt(rs.getString("Tid"));
+                    oid = Integer.parseInt(rs.getString("Oid"));
+                    tid = Integer.parseInt(rs.getString("Tid"));
                 }
             }
                                   
