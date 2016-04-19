@@ -89,6 +89,11 @@ public class itemDetailServlet extends basicServlet {
                     Comment comment = new Comment();
                     comment.setId(rs.getInt(1));
                     comment.getOnId();
+                    //retreive informations about the customer who leaves the comment
+                    Customer c=new Customer();
+                    c.setId(comment.getCid());
+                    c.getOnId();
+                    comment.setCustomerUsername(c.getUsername());
                     //check if this comment has a reply
                     Statement stmt2 = con2.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                     ResultSet rs2 = stmt2.executeQuery("SELECT * FROM [Comment] WHERE [ReplyId] = '"+rs.getInt(1)+"'");
