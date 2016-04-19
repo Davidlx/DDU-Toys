@@ -27,6 +27,7 @@ public class Comment {
     private int mid;
     private int replyId;
     private ReplyComment reply;
+    private String username;
     
     
     public Comment(){};
@@ -249,5 +250,9 @@ public class Comment {
         reply = new ReplyComment();
         reply.setId(idd);
         reply.getOnId();
+    }
+
+    public void setCustomerUsername(String username) {
+        this.username=username;
     }
 }

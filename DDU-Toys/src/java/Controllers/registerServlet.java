@@ -6,9 +6,12 @@
 package Controllers;
 
 import Bean.Customer;
+import Bean.Globals;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -37,9 +40,68 @@ public class registerServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
+        addUser(request,response);
         RequestDispatcher dispatcher = request.getRequestDispatcher("register"); 
         dispatcher.forward(request, response);
+    }
+    private void addUser(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        try {
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+
+            if (email != null && !email.equalsIgnoreCase("") &&
+                password != null && !password.equalsIgnoreCase("")) {
+                // Setup connection to db
+                Globals.openConn();
+                Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                ResultSet rs = stmt.executeQuery("SELECT * FROM [Customer] WHERE [Email] = '"+email+"' AND [Password] = '"+password+"'");
+                
+                int numRow = 0;
+                if(rs != null && rs.last() != false) {
+                    numRow = rs.getRow();
+                    rs.beforeFirst();
+                }
+                
+                if(numRow == 1) {
+                    //bean creation
+                    Customer cust = new Customer();
+                    while(rs != null && rs.next() != false) {
+                        cust.setId(rs.getInt(1));
+                        cust.getOnId();
+                    }
+                    HttpSession session = request.getSession();
+                    session.setAttribute("customer", cust);
+                    session.setAttribute("isLoggedIn",true);
+                    String uri = request.getParameter("from");
+                    //removes the .jsp
+                    if(uri.toLowerCase().contains(".jsp"))
+                        uri=uri.substring(0, uri.length()-4);
+                    response.sendRedirect(uri);
+                }
+                //user doesn't exist
+                else{
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp"); 
+                    dispatcher.forward(request, response);
+                }
+                                  
+                // close connections and statements
+                if(rs != null) {
+                    rs.close();
+                }
+                Globals.closeConn();
+            }
+            else{
+                RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp"); 
+                dispatcher.forward(request, response);
+            }
+           
+        } catch (ClassNotFoundException e) {
+            Globals.beanLog.info(e.toString());
+        } catch (SQLException e) {
+            Globals.beanLog.info(e.toString());
         }
+    }
     
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
