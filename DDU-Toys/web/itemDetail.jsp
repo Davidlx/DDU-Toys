@@ -70,7 +70,7 @@
                                             </c:if> · ${itemFirst.toyInfo.age} </p>
                                 <p class="description"> ${itemFirst.toyInfo.des}</p>
                                 <p> ${itemFirst.firstHandItem.amount} in Stock  · $ ${itemFirst.firstHandItem.price}</p>
-                                <a href="cart?sid=${itemSecond.firstHandItem.id}&recycle=0"><button type="button" class="btn btn-primary btn-lg">Add to Cart</button></a>
+                                <a href="cart?sid=${itemFirst.firstHandItem.id}&recycle=0"><button type="button" class="btn btn-primary btn-lg">Add to Cart</button></a>
                             </div>
                          </div>
                     </c:if>
