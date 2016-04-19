@@ -74,6 +74,10 @@ public class Comment {
         this.Mid = mid;
     }
     
+    public String getUsername(){
+        return this.username;
+    }
+    
     public int getReplyId(){
         return this.ReplyId;
     }
