@@ -1,6 +1,6 @@
 <%-- 
-    Document   : addStock
-    Created on : 2016-4-9, 22:18:10
+    Document   : editStock
+    Created on : 2016-4-19, 10:10:02
     Author     : David Liu
 --%>
 
