@@ -51,7 +51,7 @@ public class itemDetailServlet extends basicServlet {
         }
         else{
             FirstHandItem item = new FirstHandItem();
-            item.setUsedItem(stock);
+            item.setItem(stock);
             isRecycled=false;
             request.setAttribute("item", item);
         }

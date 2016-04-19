@@ -93,7 +93,7 @@ public class indexServlet extends basicServlet {
                     item.setCid(Globals.tryParse(rs.getString("Cid")));
                     item.setTid(Integer.parseInt(rs.getString("Tid")));
                     Bean.SpecificBean.FirstHandItem featuredUsedItem = new Bean.SpecificBean.FirstHandItem();
-                    featuredUsedItem.setUsedItem(item);
+                    featuredUsedItem.setItem(item);
                     result.add(featuredUsedItem);
                 }
                 i++;

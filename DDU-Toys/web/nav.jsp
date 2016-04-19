@@ -12,7 +12,7 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <c:forEach items="${cate}" var="category">
-                                        <li><a href="${pageContext.request.contextPath}/items?type=0&subtype=${category.id}">${category.name}</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/items?type=0&subtype=${category.id}&categoryname=${category.name}">${category.name}</a></li>
                                     </c:forEach>
 <!--                                  <li><a href="#"><%--<jsp:getProperty name="cate" property="name" />--%></a></li>-->
                                 </ul>
@@ -31,7 +31,7 @@
                                   <li><a href="${pageContext.request.contextPath}/items?type=2&subtype1=4&&subtype2=6">4 ~ 6</a></li>
                                   <li><a href="${pageContext.request.contextPath}/items?type=2&subtype1=7&&subtype2=9">7 ~ 9</a></li>
                                   <li><a href="${pageContext.request.contextPath}/items?type=2&subtype1=10&&subtype2=12">10 ~ 12</a></li>
-                                  <li><a href="${pageContext.request.contextPath}/items?type=2&subtype1=12&&subtype2=100">12+</a></li>
+                                  <li><a href="${pageContext.request.contextPath}/items?type=2&subtype1=13&&subtype2=100">12+</a></li>
                                 </ul>
                               </div>
                         </li>
