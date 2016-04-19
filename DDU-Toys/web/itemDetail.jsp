@@ -26,10 +26,10 @@
                     <h1 class="homePageTitle">Item Details</h1>
                     
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <img data-src="holder.js/100%x200" alt="100%x200" style="width: 100%; display: block;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTkyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDE5MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MjAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTUzZmEzNDU4YzAgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNTNmYTM0NThjMCI+PHJlY3Qgd2lkdGg9IjE5MiIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI3MC4wNTQ2ODc1IiB5PSIxMDQuNSI+MTkyeDIwMDwvdGV4dD48L2c+PC9nPjwvc3ZnPg==" data-holder-rendered="true">
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <p class="itemName">Item Name</p>
                             <p class="basicInformation">Category · Sex · Age</p>
                             <p class="description"> Description</p>
@@ -44,6 +44,21 @@
                             <p class="commentContent">Comments</p>
                             <p class="CommentorInfo">Commentor · Comment Time</p>
                         </div>
+                        <c:if test="${isLoggedIn}">
+                            <p class="CommentsTitle" style="border-top:1px solid rgb(213,213,213)">New Comment</p>
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                  <div class="col-sm-12">
+                                    <textarea class="form-control" rows="2"></textarea>
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-default">Submit Comments</button>
+                                  </div>
+                                </div>
+                              </form>
+                        </c:if>
                     </div>
                     
                     <h1 class="homePageTitle" style="padding-top:50px">Similar Items</h1>
