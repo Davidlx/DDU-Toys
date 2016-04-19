@@ -29,7 +29,6 @@ public class Comment {
     private ReplyComment reply;
     private String username;
     
-    
     public Comment(){};
     
     public int getId(){
@@ -72,6 +71,10 @@ public class Comment {
     }
     public void setMid(int mid){
         this.mid = mid;
+    }
+    
+    public String getUsername(){
+        return this.username;
     }
     
     public int getReplyId(){

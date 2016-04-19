@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 public class CustomerOrder {
     private int id;
     private Timestamp orderTime; //Can be used to get time and date
-    private int Cid;
+    private int cid;
     
     public CustomerOrder(){};
     
@@ -42,10 +42,10 @@ public class CustomerOrder {
     }
     
     public int getCid(){
-        return this.Cid;
+        return this.cid;
     }
     public void setCid(int cid){
-        this.Cid = cid;
+        this.cid = cid;
     }
     
     public void insert() throws ClassNotFoundException, SQLException{
@@ -55,7 +55,7 @@ public class CustomerOrder {
             // Create a preparedstatement to set the SQL statement	
             PreparedStatement pstmt = Globals.con.prepareStatement("INSERT INTO [CustomerOrder] ([OrderTime], [Cid]) VALUES (?, ?)");
             pstmt.setTimestamp(1, orderTime);
-            pstmt.setString(2, Integer.toString(Cid));
+            pstmt.setString(2, Integer.toString(cid));
             
             // execute the SQL statement
             pstmt.executeUpdate();
@@ -99,7 +99,7 @@ public class CustomerOrder {
             // Create a preparedstatement to set the SQL statement	
             PreparedStatement pstmt = Globals.con.prepareStatement("UPDATE [CustomerOrder] SET [OrderTime] = ?, [Cid] = ? WHERE [Oid] = ?");
             pstmt.setTimestamp(1, orderTime);
-            pstmt.setString(2, Integer.toString(Cid));
+            pstmt.setString(2, Integer.toString(cid));
             pstmt.setString(3, Integer.toString(id));
                         
             // execute the SQL statement
@@ -171,7 +171,7 @@ public class CustomerOrder {
             if(numRow == 1) {
                 while(rs != null && rs.next() != false) {
                     orderTime = rs.getTimestamp("OrderTime");
-                    Cid = Integer.parseInt(rs.getString("Cid"));
+                    cid = Integer.parseInt(rs.getString("Cid"));
                 }
             }
                                   
