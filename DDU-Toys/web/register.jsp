@@ -18,19 +18,20 @@
                 <%@ include file="shopTitle.jsp" %>
                 <div class="register">
                     <h1>New Customer</h1>
-                    <form>
+                    <form method="POST" action="${pageContext.request.contextPath}/register">
                         <div class="form-group">
                           <label for="exampleInputEmail1">User Name</label>
-                          <input type="text" class="form-control" id="username" placeholder="User Name">
+                          <input type="text" class="form-control" id="username" name="username" placeholder="User Name">
                         </div>
                         <div class="form-group">
                           <label for="exampleInputEmail1">Email address</label>
-                          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                          <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="Email">
                         </div>
                         <div class="form-group">
                           <label for="exampleInputPassword1">Password</label>
-                          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                          <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
                         </div>
+                        <input type="hidden" name="from" value="${param.from}">
                         <button type="submit" class="btn btn-default">Submit</button>
                       </form>
                 </div>
