@@ -22,6 +22,7 @@ public class Customer {
     private String username;
     private String password;
     private String email;
+    private boolean isAdmin=false;
 //    private Boolean isLoggedIn;
     
     public Customer(){};
@@ -31,6 +32,10 @@ public class Customer {
     }
     public void setId(int id){
         this.id = id;
+    }
+    
+    public void setIsAdmin(boolean b){
+        this.isAdmin=b;
     }
     
     public String getUsername(){

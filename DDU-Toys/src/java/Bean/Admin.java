@@ -17,13 +17,13 @@ import java.util.logging.Logger;
  *
  * @author Dennis T
  */
-public class Manager {
+public class Admin {
     private int id;
     private String username;
     private String password;
     private String email;
     
-    public Manager(){};
+    public Admin(){};
     
     public int getId(){
         return this.id;

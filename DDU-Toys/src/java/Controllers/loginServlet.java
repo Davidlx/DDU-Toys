@@ -66,18 +66,18 @@ public class loginServlet extends basicServlet{
                 if(numRow == 1) {
                     //bean creation
                     Customer cust = new Customer();
-                    cust.setEmail(email);
-                    cust.setPassword(password);
                     while(rs != null && rs.next() != false) {
                         cust.setId(rs.getInt(1));
-                        cust.setUsername(rs.getString(2));
+                        cust.getOnId();
                     }
                     HttpSession session = request.getSession();
                     session.setAttribute("customer", cust);
                     session.setAttribute("isLoggedIn",true);
                     String uri = request.getParameter("from");
                     //removes the .jsp
-                    response.sendRedirect(uri.substring(0, uri.length()-4));
+                    if(uri.toLowerCase().contains(".jsp"))
+                        uri=uri.substring(0, uri.length()-4);
+                    response.sendRedirect(uri);
                 }
                 //user doesn't exist
                 else{
