@@ -41,8 +41,7 @@ public class adminLoginServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("adminLogin.jsp"); 
-        dispatcher.forward(request, response);
+        checkAdmin(request,response);
     }
     
     private void checkAdmin(HttpServletRequest request, HttpServletResponse response)
@@ -66,21 +65,26 @@ public class adminLoginServlet extends basicServlet {
                 
                 if(numRow == 1) {
                     //bean creation
-                    Admin admin = new Admin();
+                    Customer admin = new Customer();
                     while(rs != null && rs.next() != false) {
                         admin.setId(rs.getInt(1));
-                        admin.getOnId();
+                        admin.setIsAdmin(true);
+                        admin.setUsername(rs.getString(2));
+                        admin.setPassword(password);
+                        admin.setEmail(email);
                     }
                     HttpSession session = request.getSession();
-                    session.setAttribute("admin", admin);
+                    session.setAttribute("customer", admin);
                     session.setAttribute("isLoggedIn",true);
                     String uri = request.getParameter("from");
                     //removes the .jsp
-                    response.sendRedirect(uri.substring(0, uri.length()-4));
+                    if(uri.toLowerCase().contains(".jsp"))
+                        uri=uri.substring(0, uri.length()-4);
+                    response.sendRedirect(uri);
                 }
                 //user doesn't exist
                 else{
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp"); 
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("adminLogin.jsp"); 
                     dispatcher.forward(request, response);
                 }
                                   
@@ -91,7 +95,7 @@ public class adminLoginServlet extends basicServlet {
                 Globals.closeConn();
             }
             else{
-                RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp"); 
+                RequestDispatcher dispatcher = request.getRequestDispatcher("adminLogin.jsp"); 
                 dispatcher.forward(request, response);
             }
            
