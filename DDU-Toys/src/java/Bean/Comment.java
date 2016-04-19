@@ -241,9 +241,9 @@ public class Comment {
         }     
     }
 
-    public void setReplyComment(int id) throws SQLException {
+    public void setReplyComment(int idd) throws SQLException {
         reply = new ReplyComment();
-        reply.setId(id);
+        reply.setId(idd);
         reply.getOnId();
     }
 }

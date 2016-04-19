@@ -29,7 +29,7 @@ public class ReplyComment {
         this.id=id;
     }
 
-     public void getOnId() throws SQLException {
+    public void getOnId() throws SQLException {
     try {
             
             if(id == 0) {
