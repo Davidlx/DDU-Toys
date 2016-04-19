@@ -155,6 +155,10 @@ body{
     margin-top: 30px;
 }
 
+.replyComment{
+    padding-left: 20px;
+}
+
 /*Login Page*/
 .loginSection{
     margin-top: 80px;

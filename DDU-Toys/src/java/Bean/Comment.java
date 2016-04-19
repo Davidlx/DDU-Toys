@@ -22,10 +22,10 @@ public class Comment {
     private int id;
     private Timestamp postTime;
     private String comment;
-    private int Sid;
-    private int Cid;
-    private int Mid;
-    private int ReplyId;
+    private int sid;
+    private int cid;
+    private int mid;
+    private int replyId;
     private ReplyComment reply;
     private String username;
     
@@ -54,24 +54,24 @@ public class Comment {
     }
     
     public int getSid(){
-        return this.Sid;
+        return this.sid;
     }
     public void setSid(int sid){
-        this.Sid = sid;
+        this.sid = sid;
     }
     
     public int getCid(){
-        return this.Cid;
+        return this.cid;
     }
     public void setCid(int cid){
-        this.Cid = cid;
+        this.cid = cid;
     }
     
     public int getMid(){
-        return this.Mid;
+        return this.mid;
     }
     public void setMid(int mid){
-        this.Mid = mid;
+        this.mid = mid;
     }
     
     public String getUsername(){
@@ -79,10 +79,14 @@ public class Comment {
     }
     
     public int getReplyId(){
-        return this.ReplyId;
+        return this.replyId;
     }
     public void setReplyId(int replyId){
-        this.ReplyId = replyId;
+        this.replyId = replyId;
+    }
+    
+    public ReplyComment getReply(){
+        return this.reply;
     }
     
     public void insert() throws ClassNotFoundException, SQLException{
@@ -93,10 +97,10 @@ public class Comment {
             PreparedStatement pstmt = Globals.con.prepareStatement("INSERT INTO [Comment] ([PostTime], [Comment], [Sid], [Cid], [Mid], [ReplyId]) VALUES (?, ?, ?, ?, ?, ?)");
             pstmt.setTimestamp(1, postTime);
             pstmt.setString(2, comment);
-            pstmt.setString(3, Integer.toString(Sid));
-            pstmt.setString(4, Integer.toString(Cid));
-            pstmt.setString(5, Integer.toString(Mid));
-            pstmt.setString(6, Integer.toString(ReplyId));
+            pstmt.setString(3, Integer.toString(sid));
+            pstmt.setString(4, Integer.toString(sid));
+            pstmt.setString(5, Integer.toString(mid));
+            pstmt.setString(6, Integer.toString(replyId));
             
             // execute the SQL statement
             pstmt.executeUpdate();
@@ -141,10 +145,10 @@ public class Comment {
             PreparedStatement pstmt = Globals.con.prepareStatement("UPDATE [Comment] SET [PostTime] = ?, [Comment] = ?, [Sid] = ?, [Cid] = ?, [Mid] = ?, [ReplyId] = ? WHERE [CommentId] = ?");
             pstmt.setTimestamp(1, postTime);
             pstmt.setString(2, comment);
-            pstmt.setString(3, Integer.toString(Sid));
-            pstmt.setString(4, Integer.toString(Cid));
-            pstmt.setString(5, Integer.toString(Mid));
-            pstmt.setString(6, Integer.toString(ReplyId));
+            pstmt.setString(3, Integer.toString(sid));
+            pstmt.setString(4, Integer.toString(cid));
+            pstmt.setString(5, Integer.toString(mid));
+            pstmt.setString(6, Integer.toString(replyId));
             pstmt.setString(7, Integer.toString(id));
                         
             // execute the SQL statement
@@ -217,10 +221,10 @@ public class Comment {
                 while(rs != null && rs.next() != false) {
                     postTime = rs.getTimestamp("PostTime");
                     comment = rs.getString("Comment");
-                    Sid = Integer.parseInt(rs.getString("Sid"));
-                    Cid = Integer.parseInt(rs.getString("Cid"));
-                    Mid = Integer.parseInt(rs.getString("Mid"));
-                    ReplyId = Integer.parseInt(rs.getString("ReplyId"));
+                    sid = Integer.parseInt(rs.getString("Sid"));
+                    cid = Integer.parseInt(rs.getString("Cid"));
+                    mid = Integer.parseInt(rs.getString("Mid"));
+                    replyId = Integer.parseInt(rs.getString("ReplyId"));
                 }
             }
                                   
