@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-md-10">
                         <div class="userMainContent">
-                            <h1>Toys</h1>
+                            <h1>Stocks for "Toy Name"</h1>
                             <div class="ToyItem">
                                 <div class="row borderBottom" style="margin-top:10px;">
                                     <div class="col-md-2">
@@ -34,14 +34,35 @@
                                         <p class="basicInformation">Category · Sex · Age</p>
                                         <p>description</p>
                                     </div>
-                                     <div class="col-md-2">price</div>
-                                     <div class="col-md-2 itemPrice" style="font-size: 15px">
-                                         <a href="toyStock?tid="><p>View Stocks</p></a>
-                                         <a href="editToy?tid="><p>Edit this Toy</p></a>
-                                         <a href="deleteToy?tid="><p>Delete this Toy</p></a>
-                                     </div>
+                                     <div class="col-md-4">price</div>
                                 </div>
                             </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <td>ID</td>
+                                        <td>Type</td>
+                                        <td>Condition Description</td>
+                                        <td>Amount</td>
+                                        <td>Price</td>
+                                        <td>Seller</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>Type</td>
+                                    <td>Condition Description</td>
+                                    <td>Amount</td>
+                                    <td>Price</td>
+                                    <td>Seller</td>
+                                    <td><a href="comments?stockId="><p>View Comments</p></a></td>
+                                    <td><a href="editStock?stockId="><p>Edit Comments</p></a></td>
+                                    <td><a href="deleteStock?stockId="><p>Delete Comments</p></a></td>
+                                </tr>
+                            </table>
                             
                         </div>
                     </div>

@@ -30,7 +30,7 @@ public class FirstHandItem {
         return this.firstHandItem;
     }
     // Also sets ToyInfo
-    public void setUsedItem(Bean.Stock stock) throws SQLException{
+    public void setItem(Bean.Stock stock) throws SQLException{
         firstHandItem = stock;
         toyInfo = new Bean.Toy();
         toyInfo.setId(firstHandItem.getTid());

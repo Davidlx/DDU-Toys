@@ -60,7 +60,7 @@ public class itemDetailServlet extends basicServlet {
         //if not then create a first hand bean
         else{
             FirstHandItem item = new FirstHandItem();
-            item.setUsedItem(stock);
+            item.setItem(stock);
             isRecycled=false;
             request.setAttribute("item", item);
         }
