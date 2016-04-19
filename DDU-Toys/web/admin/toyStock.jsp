@@ -64,6 +64,29 @@
                                 </tr>
                             </table>
                             
+                             <h1>New Stock</h1>
+                            <div class="newToy">
+                                 <form>
+                                    
+                                    <div class="form-group">
+                                      <label for="exampleInputPassword1">Condition Description</label>
+                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Condition Description">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                      <label for="exampleInputPassword1">Current Price</label>
+                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Current Price">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                      <label for="exampleInputPassword1">Amont of Toys</label>
+                                      <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Amont of Toys">
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-default">Submit</button>
+                                  </form>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
