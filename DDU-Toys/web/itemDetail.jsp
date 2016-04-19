@@ -34,7 +34,7 @@
                             <p class="basicInformation">Category · Sex · Age</p>
                             <p class="description"> Description</p>
                             <p>number selector &&& Price</p>
-                            <button type="button" class="btn btn-primary btn-lg">Add to Cart</button>
+                            <a href="cart?sid=&recycle="><button type="button" class="btn btn-primary btn-lg">Add to Cart</button></a>
                         </div>
                      </div>
                     
