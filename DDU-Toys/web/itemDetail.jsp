@@ -44,7 +44,7 @@
                                             </c:if> · ${itemSecond.toyInfo.age} · Sold by ${itemSecond.customerInfo.username}</p>
                                 <p class="description"> ${itemSecond.toyInfo.des}</p>
                                 <p> ${itemSecond.usedItem.amount} in Stock  · $ ${itemSecond.usedItem.price}</p>
-                                <a href="cart?sid=${itemSecond.usedItem.id}&recycle=1"><button type="button" class="btn btn-primary btn-lg">Add to Cart</button></a>
+                                <a href="cart?sid=${itemSecond.usedItem.id}&recycle=1&action=1"><button type="button" class="btn btn-primary btn-lg">Add to Cart</button></a>
                             </div>
                          </div>
                     </c:if>
@@ -70,7 +70,7 @@
                                             </c:if> · ${itemFirst.toyInfo.age} </p>
                                 <p class="description"> ${itemFirst.toyInfo.des}</p>
                                 <p> ${itemFirst.firstHandItem.amount} in Stock  · $ ${itemFirst.firstHandItem.price}</p>
-                                <a href="cart?sid=${itemFirst.firstHandItem.id}&recycle=0"><button type="button" class="btn btn-primary btn-lg">Add to Cart</button></a>
+                                <a href="cart?sid=${itemFirst.firstHandItem.id}&recycle=0&action=1"><button type="button" class="btn btn-primary btn-lg">Add to Cart</button></a>
                             </div>
                          </div>
                     </c:if>
@@ -84,11 +84,11 @@
                             
                              <div class="comment">
                                 <p class="commentContent">${com.comment}</p>
-                                <p class="CommentorInfo">${com.cid} · ${com.postTime}</p>
+                                <p class="CommentorInfo">${com.username} · ${com.postTime}</p>
                                 <c:if test="${(com.reply!=null)}">
                                     <div class="replyComment">
                                         <p class="commentContent">${com.reply.comment}</p>
-                                        <p class="CommentorInfo">${com.reply.mid} · ${com.reply.postTime}</p>
+                                        <p class="CommentorInfo">${com.reply.username} · ${com.reply.postTime}</p>
                                     </div>
                                 </c:if>
                             </div>

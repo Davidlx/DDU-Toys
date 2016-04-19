@@ -34,6 +34,10 @@ public class Customer {
         this.id = id;
     }
     
+    public boolean getIsAdmin(){
+        return this.isAdmin;
+    }
+    
     public void setIsAdmin(boolean b){
         this.isAdmin=b;
     }
