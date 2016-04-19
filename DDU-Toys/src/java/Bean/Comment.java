@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Bean;
+import Bean.SpecificBean.ReplyComment;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -25,6 +26,8 @@ public class Comment {
     private int Cid;
     private int Mid;
     private int ReplyId;
+    private ReplyComment reply;
+    
     
     public Comment(){};
     
@@ -236,5 +239,11 @@ public class Comment {
         } finally {
             Globals.closeConn();
         }     
+    }
+
+    public void setReplyComment(int id) throws SQLException {
+        reply = new ReplyComment();
+        reply.setId(id);
+        reply.getOnId();
     }
 }
