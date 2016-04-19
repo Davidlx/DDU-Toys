@@ -41,7 +41,12 @@
                 <div class="rightNav">
                     <p>
                         <c:if test="${isLoggedIn}">
+                            <c:if test="${!customer.isAdmin}">
                             <a class="btn navBtn" href="${pageContext.request.contextPath}/user/" role="button"><c:out value="${customer.username}"/></a>
+                            </c:if>
+                            <c:if test="${customer.isAdmin}">
+                            <a class="btn navBtn" href="${pageContext.request.contextPath}/admin/" role="button"><c:out value="${customer.username}"/></a>
+                            </c:if>
                         </c:if>
                         <c:if test="${!isLoggedIn}">
                             <a class="btn navBtn" href="${pageContext.request.contextPath}/login?from=${pageContext.request.requestURI}" role="button">Login</a>

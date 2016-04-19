@@ -84,11 +84,11 @@
                             
                              <div class="comment">
                                 <p class="commentContent">${com.comment}</p>
-                                <p class="CommentorInfo">${com.cid} · ${com.postTime}</p>
+                                <p class="CommentorInfo">${com.username} · ${com.postTime}</p>
                                 <c:if test="${(com.reply!=null)}">
                                     <div class="replyComment">
                                         <p class="commentContent">${com.reply.comment}</p>
-                                        <p class="CommentorInfo">${com.reply.mid} · ${com.reply.postTime}</p>
+                                        <p class="CommentorInfo">${com.reply.username} · ${com.reply.postTime}</p>
                                     </div>
                                 </c:if>
                             </div>
