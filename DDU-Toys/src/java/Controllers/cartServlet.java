@@ -41,22 +41,70 @@ public class cartServlet extends basicServlet {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
         
+        HttpSession session = request.getSession();
+        Boolean isFirstHandCartEmpty = isFirstHandCartEmpty(session);
+        Boolean isSecondHandCartEmpty = isSecondHandCartEmpty(session);
         
+        int action = Integer.parseInt(request.getParameter("action"));
         
-        Boolean isCartEmpty = true;
-        int sid = Integer.parseInt(request.getParameter("sid"));
-        
-//        int sid = 1;
-//        int recycle = 0;
+        // action = 0: Just pressed the navigation cart button
+        if(action != 0) {    
 
-        if(sid != 0) {
-            isCartEmpty = false;
-            request.setAttribute("isCartEmpty",isCartEmpty);
-            HttpSession session = request.getSession();
-            int recycle = Integer.parseInt(request.getParameter("recycle"));
-            try {
+            int sid = Integer.parseInt(request.getParameter("sid"));
+                
+            // Add to cart
+            if(action == 1) {
+                int recycle = Integer.parseInt(request.getParameter("recycle"));
                 if(recycle == 0) {
-                    
+                    isFirstHandCartEmpty = false;
+                    AddToFirstHandItemCart(session, sid, response);
+                } else {
+                    isSecondHandCartEmpty = false;
+                    AddToSecondHandItemCart(session, sid, response);
+                }
+            }
+            
+            // Delete
+            if(action == 2){
+                
+            }
+        }        
+        // Set attributes
+        session.setAttribute("isFirstHandCartEmpty", isFirstHandCartEmpty);
+        session.setAttribute("isSecondHandCartEmpty", isSecondHandCartEmpty);
+        
+        RequestDispatcher dispatcher = request.getRequestDispatcher("cart.jsp"); 
+        dispatcher.forward(request, response);
+    }
+    
+    private Boolean isFirstHandCartEmpty(HttpSession session) {
+       try {
+            Boolean isEmpty = (Boolean) session.getAttribute("isFirstHandCartEmpty");
+            if(isEmpty == null){
+                throw new NullPointerException();
+            }
+            return isEmpty;
+           
+       } catch(NullPointerException e) {
+           return true;
+       }
+    }
+    
+    private Boolean isSecondHandCartEmpty(HttpSession session) {
+       try {
+            Boolean isEmpty = (Boolean) session.getAttribute("isSecondHandCartEmpty");
+            if(isEmpty == null){
+                throw new NullPointerException();
+            }
+            return isEmpty;
+           
+       } catch(NullPointerException e) {
+           return true;
+       }
+    }
+    
+    private void AddToFirstHandItemCart(HttpSession session, int sid, HttpServletResponse response) throws ClassNotFoundException, SQLException, IOException{
+            try {
                     // Get the session FirstHandList and check if null
                     ArrayList<Bean.SpecificBean.FirstHandCartItem> firstHandList = (ArrayList<Bean.SpecificBean.FirstHandCartItem>) session.getAttribute("firstHandCartList");
                     if(firstHandList == null) {
@@ -94,9 +142,16 @@ public class cartServlet extends basicServlet {
                     
                     //Set attribute
                     session.setAttribute("firstHandCartList", firstHandList);
-                    
-                } else {
-                    // Get the session FirstHandList and check if null
+            } catch (NullPointerException e) {
+                    ArrayList<Bean.SpecificBean.FirstHandCartItem> firstHandList = new ArrayList<Bean.SpecificBean.FirstHandCartItem>();
+                    firstHandList = updateFirthHandCartList(firstHandList,sid);
+                    session.setAttribute("firstHandCartList", firstHandList);
+            }
+        
+    }
+    
+    private void AddToSecondHandItemCart(HttpSession session, int sid, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException{
+            try {                // Get the session FirstHandList and check if null
                     ArrayList<Bean.SpecificBean.SecondHandCartItem> secondHandList = (ArrayList<Bean.SpecificBean.SecondHandCartItem>) session.getAttribute("secondHandCartList");
                     if(secondHandList == null) {
                         throw new NullPointerException();
@@ -133,25 +188,11 @@ public class cartServlet extends basicServlet {
                     
                     //Set attribute
                     session.setAttribute("secondHandCartList", secondHandList);
-                }
-            } catch(NullPointerException e) {
-                if(recycle == 0) {
-                    ArrayList<Bean.SpecificBean.FirstHandCartItem> firstHandList = new ArrayList<Bean.SpecificBean.FirstHandCartItem>();
-                    firstHandList = updateFirthHandCartList(firstHandList,sid);
-                    session.setAttribute("firstHandCartList", firstHandList);
-                } else {
+            } catch (NullPointerException e) {
                     ArrayList<Bean.SpecificBean.SecondHandCartItem> secondHandList = new ArrayList<Bean.SpecificBean.SecondHandCartItem>();
                     secondHandList = updateSecondHandCartList(secondHandList,sid);
                     session.setAttribute("secondHandCartList", secondHandList);
-                }
-            } 
-            
-        } else {
-            request.setAttribute("isCartEmpty",isCartEmpty);
-        }
-        
-        RequestDispatcher dispatcher = request.getRequestDispatcher("cart.jsp"); 
-        dispatcher.forward(request, response);
+            }
     }
     
     private ArrayList<Bean.SpecificBean.FirstHandCartItem> updateFirthHandCartList(ArrayList<Bean.SpecificBean.FirstHandCartItem> cartList, int sid) throws ClassNotFoundException, SQLException {
