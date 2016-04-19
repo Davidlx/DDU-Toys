@@ -5,6 +5,7 @@
  */
 package Bean.SpecificBean;
 
+import Bean.Admin;
 import Bean.Globals;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,6 +22,8 @@ public class ReplyComment {
     private String comment;
     private int sid;
     private int mid;
+    private String username;
+    
     
     public ReplyComment(){}
     
@@ -32,8 +35,16 @@ public class ReplyComment {
         return this.postTime;
     }
     
+    public String getUsername(){
+        return username;
+    }
+    
     public int getMid(){
         return this.mid;
+    }
+    
+    public int getSid(){
+        return this.sid;
     }
     
     public void setId(int id){
@@ -79,6 +90,10 @@ public class ReplyComment {
             }
             
             Globals.closeConn();
+            Admin admin = new Admin();
+            admin.setId(mid);
+            admin.getOnId();
+            this.username=admin.getUsername();
             
         } catch (IllegalArgumentException e) {
             Globals.beanLog.info(e.toString());

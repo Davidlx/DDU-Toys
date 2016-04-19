@@ -29,7 +29,6 @@ public class Comment {
     private ReplyComment reply;
     private String username;
     
-    
     public Comment(){};
     
     public int getId(){
