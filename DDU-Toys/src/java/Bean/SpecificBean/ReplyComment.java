@@ -19,11 +19,22 @@ public class ReplyComment {
     private int id;
     private Timestamp postTime;
     private String comment;
-    private int Sid;
-    private int Mid;
+    private int sid;
+    private int mid;
     
     public ReplyComment(){}
     
+    public String getComment(){
+        return this.comment;
+    }
+    
+    public Timestamp getPostTime(){
+        return this.postTime;
+    }
+    
+    public int getMid(){
+        return this.mid;
+    }
     
     public void setId(int id){
         this.id=id;
@@ -53,8 +64,8 @@ public class ReplyComment {
                 while(rs != null && rs.next() != false) {
                     postTime = rs.getTimestamp("PostTime");
                     comment = rs.getString("Comment");
-                    Sid = Integer.parseInt(rs.getString("Sid"));
-                    Mid = Integer.parseInt(rs.getString("Mid"));
+                    sid = Integer.parseInt(rs.getString("sid"));
+                    mid = Integer.parseInt(rs.getString("mid"));
                 }
             }
                                   
