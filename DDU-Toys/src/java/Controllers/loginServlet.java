@@ -66,11 +66,9 @@ public class loginServlet extends basicServlet{
                 if(numRow == 1) {
                     //bean creation
                     Customer cust = new Customer();
-                    cust.setEmail(email);
-                    cust.setPassword(password);
                     while(rs != null && rs.next() != false) {
                         cust.setId(rs.getInt(1));
-                        cust.setUsername(rs.getString(2));
+                        cust.getOnId();
                     }
                     HttpSession session = request.getSession();
                     session.setAttribute("customer", cust);
