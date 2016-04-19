@@ -43,6 +43,10 @@
                                 </div>
                             </div>
                             
+                            <h1>New Toys</h1>
+                            <div class="newToy">
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
