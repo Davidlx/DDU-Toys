@@ -63,6 +63,11 @@
                                     </div>
                                     
                                     <div class="form-group">
+                                      <label for="exampleInputEmail1">Picture Url</label>
+                                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Picture Url">
+                                    </div>
+                                    
+                                    <div class="form-group">
                                       <label for="exampleInputPassword1">Sex</label>
                                       <select class="form-control">
                                         <option value = "0">Female</option>

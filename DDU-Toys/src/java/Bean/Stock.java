@@ -214,7 +214,8 @@ public class Stock {
                     conDes = rs.getString("ConditionDescription");
                     amount = Integer.parseInt(rs.getString("Amount"));
                     price = Float.parseFloat(rs.getString("Price"));
-                    Cid = Integer.parseInt(rs.getString("Cid"));
+                    if(rs.getString("Cid")!=null)
+                        Cid = Integer.parseInt(rs.getString("Cid"));
                     Tid = Integer.parseInt(rs.getString("Tid"));
                 }
             }

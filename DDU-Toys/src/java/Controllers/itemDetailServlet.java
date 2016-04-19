@@ -13,6 +13,8 @@ import Bean.SpecificBean.SecondHandItem;
 import Bean.Stock;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -55,14 +57,14 @@ public class itemDetailServlet extends basicServlet {
             SecondHandItem item = new SecondHandItem();
             item.setUsedItem(stock);
             isRecycled=true;
-            request.setAttribute("item", item);
+            request.setAttribute("itemSecond", item);
         }
         //if not then create a first hand bean
         else{
             FirstHandItem item = new FirstHandItem();
             item.setItem(stock);
             isRecycled=false;
-            request.setAttribute("item", item);
+            request.setAttribute("itemFirst", item);
         }
         request.setAttribute("isRecycled", isRecycled);
         
@@ -72,21 +74,24 @@ public class itemDetailServlet extends basicServlet {
             Globals.openConn();
             Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             //retreive all comments which are not replies
-            ResultSet rs = stmt.executeQuery("SELECT * FROM [Comment] WHERE [Sid] = '"+stockId+"' AND [ReplyId] = 0");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM [Comment] WHERE [Sid] = "+stockId+" AND [ReplyId] = 0");
             int numRow = 0;
             if(rs != null && rs.last() != false) {
                 numRow = rs.getRow();
                 rs.beforeFirst();
             }
             if(numRow !=0) {
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                Connection con2 = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad072_db", "aiad072", "aiad072");
+
                 while(rs != null && rs.next() != false) {
                     //create the comment bean
                     Comment comment = new Comment();
                     comment.setId(rs.getInt(1));
                     comment.getOnId();
                     //check if this comment has a reply
-                    Statement stmt2 = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                    ResultSet rs2 = stmt.executeQuery("SELECT * FROM [Comment] WHERE [ReplyId] = '"+rs.getInt(1)+"'");
+                    Statement stmt2 = con2.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                    ResultSet rs2 = stmt2.executeQuery("SELECT * FROM [Comment] WHERE [ReplyId] = '"+rs.getInt(1)+"'");
                     int numRow2 = 0;
                     if(rs2 != null && rs2.last() != false) {
                         numRow2 = rs2.getRow();
@@ -94,7 +99,7 @@ public class itemDetailServlet extends basicServlet {
                     }
                     //if it has a reply we set it in the bean
                     if(numRow2 ==1) {
-                        while(rs != null && rs.next() != false) {
+                        while(rs2 != null && rs2.next() != false) {
                             comment.setReplyComment(rs2.getInt(1));
                         }
                     }
@@ -103,6 +108,7 @@ public class itemDetailServlet extends basicServlet {
                         rs2.close();
                     }
                 }
+                con2.close();
             }
             if(rs != null) {
                 rs.close();
