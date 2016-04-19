@@ -5,8 +5,8 @@
     Funtion    : Presnet the information of a spercific Item
 --%>
 <%--<jsp:useBean id="userInfo"  class="Bean.***"  scope="session"/>Contains whether the user logged in, user name, how many items in the cart--%>
-<%--<jsp:useBean id="item"  class="Bean.**"  scope="request"/>Contains an array list of the item object which contains the name, img link, description, price for the item, remember to have a int in her eto spercify the number of items--%>
-<%--<jsp:useBean id="comments"  class="java.util.ArrayList"  scope="request"/> arrayList of comments--%>
+<jsp:useBean id="isRecycled"  type="java.lang.Boolean"  scope="request"/>
+<jsp:useBean id="comments"  class="java.util.ArrayList"  scope="request"/>
 <%--<jsp:useBean id="items"  class="java.util.ArrayList"  scope="request"/> List of similar items--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -23,20 +23,60 @@
                 <%@ include file="shopTitle.jsp" %>
                 <div class="sections">
                     
-                    <h1 class="homePageTitle">Item Details</h1>
+                    <c:if test="${isRecycled}">
+                        <jsp:useBean id="itemSecond" class="Bean.SpecificBean.SecondHandItem"  scope="request"/>
+                        <h1 class="homePageTitle">${itemSecond.toyInfo.name}</h1>
                     
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img data-src="holder.js/100%x200" alt="100%x200" style="width: 100%; display: block;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTkyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDE5MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MjAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTUzZmEzNDU4YzAgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNTNmYTM0NThjMCI+PHJlY3Qgd2lkdGg9IjE5MiIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI3MC4wNTQ2ODc1IiB5PSIxMDQuNSI+MTkyeDIwMDwvdGV4dD48L2c+PC9nPjwvc3ZnPg==" data-holder-rendered="true">
-                        </div>
-                        <div class="col-md-8">
-                            <p class="itemName">Item Name</p>
-                            <p class="basicInformation">Category · Sex · Age</p>
-                            <p class="description"> Description</p>
-                            <p>number selector &&& Price</p>
-                            <a href="cart?sid=&recycle="><button type="button" class="btn btn-primary btn-lg">Add to Cart</button></a>
-                        </div>
-                     </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img data-src="holder.js/100%x200" alt="100%x200" style="width: 100%; height:400px; display: block;" src="${itemSecond.toyInfo.picUrl}"/>
+                            </div>
+                            <div class="col-md-9">
+                                <p class="itemName">${itemSecond.toyInfo.name}</p>
+                                <p class="basicInformation">${itemSecond.toyInfo.categoryName} · <c:if test="${(itemSecond.toyInfo.sex ==0)}">
+                                                Female
+                                            </c:if>
+                                            <c:if test="${(itemSecond.toyInfo.sex ==1)}">
+                                                Male
+                                            </c:if>
+                                            <c:if test="${(itemSecond.toyInfo.sex ==2)}">
+                                                Unisex
+                                            </c:if> · ${itemSecond.toyInfo.age} · Sold by ${itemSecond.customerInfo.username}</p>
+                                <p class="description"> ${itemSecond.toyInfo.des}</p>
+                                <p> ${itemSecond.usedItem.amount} in Stock  · $ ${itemSecond.usedItem.price}</p>
+                                <a href="cart?sid=${itemSecond.usedItem.id}&recycle=1"><button type="button" class="btn btn-primary btn-lg">Add to Cart</button></a>
+                            </div>
+                         </div>
+                    </c:if>
+
+                    <c:if test="${!isRecycled}">
+                        <jsp:useBean id="itemFirst" class="Bean.SpecificBean.FirstHandItem"  scope="request"/>
+                       <h1 class="homePageTitle">${itemFirst.toyInfo.name}</h1>
+                    
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img data-src="holder.js/100%x200" alt="100%x200" style="width: 100%; height:400px; display: block;" src="${itemFirst.toyInfo.picUrl}"/>
+                            </div>
+                            <div class="col-md-9">
+                                <p class="itemName">${itemFirst.toyInfo.name}</p>
+                                <p class="basicInformation">${itemFirst.toyInfo.categoryName} · <c:if test="${(itemFirst.toyInfo.sex ==0)}">
+                                                Female
+                                            </c:if>
+                                            <c:if test="${(itemFirst.toyInfo.sex ==1)}">
+                                                Male
+                                            </c:if>
+                                            <c:if test="${(itemFirst.toyInfo.sex ==2)}">
+                                                Unisex
+                                            </c:if> · ${itemFirst.toyInfo.age} </p>
+                                <p class="description"> ${itemFirst.toyInfo.des}</p>
+                                <p> ${itemFirst.firstHandItem.amount} in Stock  · $ ${itemFirst.firstHandItem.price}</p>
+                                <a href="cart?sid=${itemSecond.firstHandItem.id}&recycle=0"><button type="button" class="btn btn-primary btn-lg">Add to Cart</button></a>
+                            </div>
+                         </div>
+                    </c:if>
+
+                    
+                    
                     
                     <div class="comments">
                         <p class="CommentsTitle">Comments for "Item Name"</p>

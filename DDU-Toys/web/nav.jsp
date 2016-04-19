@@ -4,7 +4,7 @@
             <div class="nav">
                 <div class="centering">
                     <ul id="navItems">
-                        <li>Home Page</li>
+                        <li><a href="${pageContext.request.contextPath}"  style="color:white; text-decoration: none">Home Page</a></li>
                         <li>
                             <div class="btn-group">
                                 <button type="button" class="btn navBtn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

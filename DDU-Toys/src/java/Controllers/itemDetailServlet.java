@@ -57,14 +57,14 @@ public class itemDetailServlet extends basicServlet {
             SecondHandItem item = new SecondHandItem();
             item.setUsedItem(stock);
             isRecycled=true;
-            request.setAttribute("item", item);
+            request.setAttribute("itemSecond", item);
         }
         //if not then create a first hand bean
         else{
             FirstHandItem item = new FirstHandItem();
             item.setItem(stock);
             isRecycled=false;
-            request.setAttribute("item", item);
+            request.setAttribute("itemFirst", item);
         }
         request.setAttribute("isRecycled", isRecycled);
         
