@@ -44,16 +44,16 @@ public class cartServlet extends basicServlet {
         
         
         Boolean isCartEmpty = true;
-//        int sid = Integer.parseInt(request.getParameter("sid"));
+        int sid = Integer.parseInt(request.getParameter("sid"));
         
-        int sid = 1;
-        int recycle = 0;
+//        int sid = 1;
+//        int recycle = 0;
 
         if(sid != 0) {
             isCartEmpty = false;
             request.setAttribute("isCartEmpty",isCartEmpty);
             HttpSession session = request.getSession();
- //           int recycle = Integer.parseInt(request.getParameter("recycle"));
+            int recycle = Integer.parseInt(request.getParameter("recycle"));
             try {
                 if(recycle == 0) {
                     
@@ -84,7 +84,7 @@ public class cartServlet extends basicServlet {
                         } else {
                             PrintWriter out = response.getWriter();
                             out.println("<script type=\"text/javascript\">alert(\"Reached stock limit\")</script>");
-                            out.println("<script type=\"text/javascript\">window.location=\"cart\";</script>");
+                            out.println("<script type=\"text/javascript\">window.location=\"cart?sid=0\";</script>");
                             out.close();
                         }
                     } 
@@ -96,11 +96,42 @@ public class cartServlet extends basicServlet {
                     session.setAttribute("firstHandCartList", firstHandList);
                     
                 } else {
-                    ArrayList<Bean.SpecificBean.SecondHandItem> secondHandList = (ArrayList<Bean.SpecificBean.SecondHandItem>) session.getAttribute("secondHandCartList");
+                    // Get the session FirstHandList and check if null
+                    ArrayList<Bean.SpecificBean.SecondHandCartItem> secondHandList = (ArrayList<Bean.SpecificBean.SecondHandCartItem>) session.getAttribute("secondHandCartList");
                     if(secondHandList == null) {
                         throw new NullPointerException();
                     }
-                    secondHandList = updateSecondHandCartList(secondHandList,sid);
+                    
+                    // Check if item already existst
+                    Boolean exists = false;
+                    int matchIndex = -1;
+                    for(int i = 0; i < secondHandList.size(); i++){
+                        if(sid == secondHandList.get(i).getUsedItem().getId()){
+                            exists = true;
+                            matchIndex = i;
+                        }
+                    }
+                    
+                    //If exist increase amount - if not: add to list
+                    if(exists) {                        
+                        //Check if there enought amount
+                        if(secondHandList.get(matchIndex).getItemAmount() < secondHandList.get(matchIndex).getUsedItem().getAmount()){
+                            int amount = secondHandList.get(matchIndex).getItemAmount();
+                            amount++;
+                            secondHandList.get(matchIndex).setItemAmount(amount);
+                        } else {
+                            PrintWriter out = response.getWriter();
+                            out.println("<script type=\"text/javascript\">alert(\"Reached stock limit\")</script>");
+                            out.println("<script type=\"text/javascript\">window.location=\"cart?sid=0\";</script>");
+                            out.close();
+                        }
+                    } 
+                    else {
+                        secondHandList = updateSecondHandCartList(secondHandList,sid);
+                    }
+                    
+                    
+                    //Set attribute
                     session.setAttribute("secondHandCartList", secondHandList);
                 }
             } catch(NullPointerException e) {
@@ -109,7 +140,7 @@ public class cartServlet extends basicServlet {
                     firstHandList = updateFirthHandCartList(firstHandList,sid);
                     session.setAttribute("firstHandCartList", firstHandList);
                 } else {
-                    ArrayList<Bean.SpecificBean.SecondHandItem> secondHandList = new ArrayList<Bean.SpecificBean.SecondHandItem>();
+                    ArrayList<Bean.SpecificBean.SecondHandCartItem> secondHandList = new ArrayList<Bean.SpecificBean.SecondHandCartItem>();
                     secondHandList = updateSecondHandCartList(secondHandList,sid);
                     session.setAttribute("secondHandCartList", secondHandList);
                 }
@@ -122,8 +153,6 @@ public class cartServlet extends basicServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("cart.jsp"); 
         dispatcher.forward(request, response);
     }
-  
-
     
     private ArrayList<Bean.SpecificBean.FirstHandCartItem> updateFirthHandCartList(ArrayList<Bean.SpecificBean.FirstHandCartItem> cartList, int sid) throws ClassNotFoundException, SQLException {
         // Setup connection to db
@@ -163,7 +192,7 @@ public class cartServlet extends basicServlet {
         return cartList;
     }
     
-    private ArrayList<Bean.SpecificBean.SecondHandItem> updateSecondHandCartList(ArrayList<Bean.SpecificBean.SecondHandItem> cartList, int sid) throws ClassNotFoundException, SQLException {
+    private ArrayList<Bean.SpecificBean.SecondHandCartItem> updateSecondHandCartList(ArrayList<Bean.SpecificBean.SecondHandCartItem> cartList, int sid) throws ClassNotFoundException, SQLException {
         // Setup connection to db
         Globals.openConn();
         Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -185,8 +214,9 @@ public class cartServlet extends basicServlet {
                     item.setPrice(Float.parseFloat(rs.getString("Price")));
                     item.setCid(Globals.tryParse(rs.getString("Cid")));
                     item.setTid(Integer.parseInt(rs.getString("Tid")));
-                    Bean.SpecificBean.SecondHandItem featuredUsedItem = new Bean.SpecificBean.SecondHandItem();
+                    Bean.SpecificBean.SecondHandCartItem featuredUsedItem = new Bean.SpecificBean.SecondHandCartItem();
                     featuredUsedItem.setUsedItem(item);
+                    featuredUsedItem.setItemAmount(1);
                     cartList.add(featuredUsedItem);
             }
         }
