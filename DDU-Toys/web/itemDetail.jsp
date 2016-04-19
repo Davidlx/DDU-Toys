@@ -6,7 +6,7 @@
 --%>
 <%--<jsp:useBean id="userInfo"  class="Bean.***"  scope="session"/>Contains whether the user logged in, user name, how many items in the cart--%>
 <jsp:useBean id="isRecycled"  type="java.lang.Boolean"  scope="request"/>
-<jsp:useBean id="comments"  class="java.util.ArrayList"  scope="request"/>
+<jsp:useBean id="listComments"  class="java.util.ArrayList"  scope="request"/>
 <%--<jsp:useBean id="items"  class="java.util.ArrayList"  scope="request"/> List of similar items--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -79,11 +79,23 @@
                     
                     
                     <div class="comments">
-                        <p class="CommentsTitle">Comments for "Item Name"</p>
-                        <div class="comment">
-                            <p class="commentContent">Comments</p>
-                            <p class="CommentorInfo">Commentor · Comment Time</p>
-                        </div>
+                        <p class="CommentsTitle">Comments for <c:if test="${!isRecycled}">${itemFirst.toyInfo.name}</c:if><c:if test="${isRecycled}">${itemSecond.toyInfo.name}</c:if></p>
+                         <c:forEach items="${listComments}" var="com">
+                            
+                             <div class="comment">
+                                <p class="commentContent">${com.comment}</p>
+                                <p class="CommentorInfo">${com.cid} · ${com.postTime}</p>
+                                <c:if test="${(com.reply!=null)}">
+                                    <div class="replyComment">
+                                        <p class="commentContent">${com.reply.comment}</p>
+                                        <p class="CommentorInfo">${com.reply.mid} · ${com.reply.postTime}</p>
+                                    </div>
+                                </c:if>
+                            </div>
+                             
+                        </c:forEach>
+                        
+                        
                         <c:if test="${isLoggedIn}">
                             <p class="CommentsTitle" style="border-top:1px solid rgb(213,213,213)">New Comment</p>
                             <form class="form-horizontal">
