@@ -52,7 +52,7 @@
                             <a class="btn navBtn" href="${pageContext.request.contextPath}/login?from=${pageContext.request.requestURI}" role="button">Login</a>
                         </c:if>
                         
-                        <a class="btn navBtn" href="cart?sid=0" role="button">Cart</a>
+                        <a class="btn navBtn" href="cart?sid=0&action=0" role="button">Cart</a>
                     </p>
                 </div>
             </div>

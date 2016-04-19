@@ -29,10 +29,14 @@
                             <div class="col-md-6">
                                 <h1 class="itemName">Snacks</h1>
                                 <p class="basicInformation">Category · Sex · Age</p>
-                                <a href=""><p>Delete this item</p></a>
+                                <a href="cart?sid=10&action=2"><p>Delete this item</p></a>
                             </div>
                             <div class="col-md-2 itemPrice"> Price</div>
-                            <div class="col-md-2">1</div>
+                            <div class="col-md-2">
+                                <p>Current Quantity: 1</p>
+                                <a href="cart?sid=10&action=3"><p>Current Quantity: 1</p></a>
+                                <a href="cart?sid=10&action=4"><p>Current Quantity: 1</p></a>
+                            </div>
                         </div>
                     </div>
                     <div class="cartSummary">
