@@ -137,7 +137,7 @@ body{
 
 /*Item Detail*/
 .itemName {
-    font-size: 20px;
+    font-size: 25px;
 }
 .basicInformation, .CommentorInfo{
     color:gray;
