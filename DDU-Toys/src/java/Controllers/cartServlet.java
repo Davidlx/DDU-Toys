@@ -51,10 +51,10 @@ public class cartServlet extends basicServlet {
         if(action != 0) {    
 
             int sid = Integer.parseInt(request.getParameter("sid"));
-                
+            int recycle = Integer.parseInt(request.getParameter("recycle"));
+            
             // Add to cart
             if(action == 1) {
-                int recycle = Integer.parseInt(request.getParameter("recycle"));
                 if(recycle == 0) {
                     isFirstHandCartEmpty = false;
                     AddToFirstHandItemCart(session, sid, response);
@@ -66,8 +66,39 @@ public class cartServlet extends basicServlet {
             
             // Delete
             if(action == 2){
-                
+                if(recycle == 0) {
+                    if(DeleteFirstHandItem(session, sid)){
+                        isFirstHandCartEmpty = true;
+                    }
+                } else {
+                    if(DeleteSecondHandItem(session, sid)){
+                        isSecondHandCartEmpty = true;
+                    }
+                }
             }
+            
+            // Increment
+            if(action == 3){
+                if(recycle == 0){
+                    increaseFirstHandAmount(session, sid, response);
+                } else {
+                    increaseSecondHandAmount(session, sid, response);
+                }
+            }
+            
+            // Decrement
+            if(action == 4) {
+                if(recycle == 0){
+                    if(decreaseFirstHandAmount(session, sid)){
+                        isFirstHandCartEmpty = true;
+                    }
+                } else {
+                    if(decreaseSecondHandAmount(session, sid)){
+                        isSecondHandCartEmpty = true;
+                    }
+                }
+            }
+            
         }        
         // Set attributes
         session.setAttribute("isFirstHandCartEmpty", isFirstHandCartEmpty);
@@ -103,6 +134,114 @@ public class cartServlet extends basicServlet {
        }
     }
     
+    // Returns true if the list now is empty
+    private Boolean decreaseFirstHandAmount(HttpSession session, int sid) {
+        ArrayList<Bean.SpecificBean.FirstHandCartItem> firstHandList = (ArrayList<Bean.SpecificBean.FirstHandCartItem>) session.getAttribute("firstHandCartList");
+        for(int i = 0; i < firstHandList.size(); i++){
+            if(sid == firstHandList.get(i).getFirstHandItem().getId()) {
+                if(1 > firstHandList.get(i).getItemAmount()){
+                    int amount = firstHandList.get(i).getItemAmount();
+                    amount--;
+                    firstHandList.get(i).setItemAmount(amount);
+                    return false;
+                } else {
+                    firstHandList.remove(i);
+                    session.removeAttribute("firstHandCartList");
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    // Returns true if the list now is empty
+    private Boolean decreaseSecondHandAmount(HttpSession session, int sid) {
+        ArrayList<Bean.SpecificBean.SecondHandCartItem> secondHandList = (ArrayList<Bean.SpecificBean.SecondHandCartItem>) session.getAttribute("secondHandCartList");
+        for(int i = 0; i < secondHandList.size(); i++){
+            if(sid == secondHandList.get(i).getUsedItem().getId()) {
+                if(1 > secondHandList.get(i).getItemAmount()){
+                    int amount = secondHandList.get(i).getItemAmount();
+                    amount--;
+                    secondHandList.get(i).setItemAmount(amount);
+                    return false;
+                } else {
+                    secondHandList.remove(i);
+                    session.removeAttribute("secondHandCartList");
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    private void increaseFirstHandAmount(HttpSession session, int sid, HttpServletResponse response) throws IOException {
+        ArrayList<Bean.SpecificBean.FirstHandCartItem> firstHandList = (ArrayList<Bean.SpecificBean.FirstHandCartItem>) session.getAttribute("firstHandCartList");
+        for(int i = 0; i < firstHandList.size(); i++){
+            if(sid == firstHandList.get(i).getFirstHandItem().getId()) {
+                if(firstHandList.get(i).getItemAmount() < firstHandList.get(i).getFirstHandItem().getAmount()){
+                    int amount = firstHandList.get(i).getItemAmount();
+                    amount++;
+                    firstHandList.get(i).setItemAmount(amount);
+                } else {
+                    PrintWriter out = response.getWriter();
+                    out.println("<script type=\"text/javascript\">alert(\"Reached stock limit\")</script>");
+                    out.println("<script type=\"text/javascript\">window.location=\"cart?action=0\";</script>");
+                    out.close();
+                }
+            }
+        }
+    }
+    
+    private void increaseSecondHandAmount(HttpSession session, int sid, HttpServletResponse response) throws IOException {
+        ArrayList<Bean.SpecificBean.SecondHandCartItem> secondHandList = (ArrayList<Bean.SpecificBean.SecondHandCartItem>) session.getAttribute("secondHandCartList");
+        for(int i = 0; i < secondHandList.size(); i++){
+            if(sid == secondHandList.get(i).getUsedItem().getId()) {
+                if(secondHandList.get(i).getItemAmount() < secondHandList.get(i).getUsedItem().getAmount()){
+                    int amount = secondHandList.get(i).getItemAmount();
+                    amount++;
+                    secondHandList.get(i).setItemAmount(amount);
+                } else {
+                    PrintWriter out = response.getWriter();
+                    out.println("<script type=\"text/javascript\">alert(\"Reached stock limit\")</script>");
+                    out.println("<script type=\"text/javascript\">window.location=\"cart?action=0\";</script>");
+                    out.close();
+                }
+            }
+        }
+    }
+    
+    // Returns true if the list now is empty
+    private Boolean DeleteFirstHandItem(HttpSession session, int sid) {
+        ArrayList<Bean.SpecificBean.FirstHandCartItem> firstHandList = (ArrayList<Bean.SpecificBean.FirstHandCartItem>) session.getAttribute("firstHandCartList");
+        for(int i = 0; i < firstHandList.size(); i++){
+            if(sid == firstHandList.get(i).getFirstHandItem().getId()) {
+                firstHandList.remove(i);
+                if(firstHandList.isEmpty()){
+                    session.removeAttribute("firstHandCartList");
+                    return true;
+                } 
+                return false;
+            }
+        }
+        return false;
+    }
+    
+    // Returns true if the list now is empty
+    private Boolean DeleteSecondHandItem(HttpSession session, int sid) {
+        ArrayList<Bean.SpecificBean.SecondHandCartItem> secondHandList = (ArrayList<Bean.SpecificBean.SecondHandCartItem>) session.getAttribute("secondHandCartList");
+        for(int i = 0; i < secondHandList.size(); i++){
+            if(sid == secondHandList.get(i).getUsedItem().getId()) {
+                secondHandList.remove(i);
+                if(secondHandList.isEmpty()){
+                    session.removeAttribute("secondHandCartList");
+                    return true;
+                } 
+                return false;
+            }
+        }
+        return false;
+    }
+    
     private void AddToFirstHandItemCart(HttpSession session, int sid, HttpServletResponse response) throws ClassNotFoundException, SQLException, IOException{
             try {
                     // Get the session FirstHandList and check if null
@@ -132,7 +271,7 @@ public class cartServlet extends basicServlet {
                         } else {
                             PrintWriter out = response.getWriter();
                             out.println("<script type=\"text/javascript\">alert(\"Reached stock limit\")</script>");
-                            out.println("<script type=\"text/javascript\">window.location=\"cart?sid=0\";</script>");
+                            out.println("<script type=\"text/javascript\">window.location=\"cart?action=0\";</script>");
                             out.close();
                         }
                     } 
@@ -177,7 +316,7 @@ public class cartServlet extends basicServlet {
                         } else {
                             PrintWriter out = response.getWriter();
                             out.println("<script type=\"text/javascript\">alert(\"Reached stock limit\")</script>");
-                            out.println("<script type=\"text/javascript\">window.location=\"cart?sid=0\";</script>");
+                            out.println("<script type=\"text/javascript\">window.location=\"cart?action=0\";</script>");
                             out.close();
                         }
                     } 
