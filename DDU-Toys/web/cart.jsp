@@ -7,8 +7,8 @@
 <%--<jsp:useBean id="userInfo"  class="Bean.***"  scope="session"/>Contains whether the user logged in, user name, how many items in the cart--%>
 <%--<jsp:useBean id="items"  class="java.util.Arraylist"  scope="request"/>Contains an array list of the item object which contains the name, img link, description, price for the item, remember to have a int in her eto spercify the number of items--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="isFirstHandCartEmpty"  type="java.lang.Boolean"  scope="request"/>
-<jsp:useBean id="isSecondHandCartEmpty"  type="java.lang.Boolean"  scope="request"/>
+<jsp:useBean id="isFirstHandCartEmpty"  type="java.lang.Boolean"  scope="session"/>
+<jsp:useBean id="isSecondHandCartEmpty"  type="java.lang.Boolean"  scope="session"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,21 +25,21 @@
                     <h1 class="homePageTitle">Shopping Cart</h1>
                     
                     <c:if test="${isFirstHandCartEmpty&&isSecondHandCartEmpty}">
-                        <p>
+                        <p style="text-align: center">
                             The cart is empty!
                         </p>
                     </c:if>
                         
                     <c:if test="${!isFirstHandCartEmpty}">
-                        <jsp:useBean id="firstHandCartList"  type="java.util.ArrayList"  scope="request"/>
+                        <jsp:useBean id="firstHandCartList"  type="java.util.ArrayList"  scope="session"/>
                         <c:forEach items="${firstHandCartList}" var="item">
                             <div class="cartItem">
                                 <div class="row">
-                                    <div class="col-md-2">
-                                        <img data-src="holder.js/100%x200" alt="100%x200" style="width: 100%; height:400px; display: block;" src="${item.toyInfo.picUrl}"/> 
+                                    <div class="col-md-1">
+                                        <img data-src="holder.js/100%x200" alt="100%x200" style="width: 100%; height:100px; display: block;" src="${item.toyInfo.picUrl}"/> 
                                     </div>
-                                    <div class="col-md-6">
-                                        <h1 class="itemName">{item.toyInfo.name}</h1>
+                                    <div class="col-md-7">
+                                        <h1 class="itemName">${item.toyInfo.name}</h1>
                                         <p class="basicInformation">${item.toyInfo.categoryName} & <c:if test="${(item.toyInfo.sex ==0)}">
                                                 Female
                                             </c:if>
@@ -52,11 +52,11 @@
                                             & ${item.toyInfo.age} Years Old</p>
                                         <a href="cart?sid=${item.firstHandItem.id}&action=2&recycle=${item.firstHandItem.recycled}"><p>Delete this item</p></a>
                                     </div>
-                                    <div class="col-md-2 itemPrice"> Price</div>
+                                    <div class="col-md-2 itemPrice"> $${item.firstHandItem.price}</div>
                                     <div class="col-md-2">
                                         <p>Current Quantity: ${item.itemAmount}</p>
-                                        <a href="cart?sid=${item.firstHandItem.id}&action=3&recycle=${item.firstHandItem.recycled}"><p>Current Quantity: 1</p></a>
-                                        <a href="cart?sid=${item.firstHandItem.id}&action=4&recycle=${item.firstHandItem.recycled}"><p>Current Quantity: 1</p></a>
+                                        <a href="cart?sid=${item.firstHandItem.id}&action=3&recycle=${item.firstHandItem.recycled}"><p>Increase Quantity</p></a>
+                                        <a href="cart?sid=${item.firstHandItem.id}&action=4&recycle=${item.firstHandItem.recycled}"><p>Decrease Quantity</p></a>
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                     </c:if>
                         
                      <c:if test="${!isSecondHandCartEmpty}">
-                        <jsp:useBean id="isSecondHandCartList"  type="java.util.ArrayList"  scope="request"/>
+                        <jsp:useBean id="isSecondHandCartList"  type="java.util.ArrayList"  scope="session"/>
                         <c:forEach items="${isSecondHandCartList}" var="item">
                             <div class="cartItem">
                                 <div class="row">
@@ -85,7 +85,7 @@
                                             & ${item.toyInfo.age} Years Old & Sold by ${item.customerInfo.username}</p>
                                         <a href="cart?sid=${item.usedItem.id}&action=2&recycle=${item.usedItem.recycled}"><p>Delete this item</p></a>
                                     </div>
-                                    <div class="col-md-2 itemPrice"> Price</div>
+                                    <div class="col-md-2 itemPrice"> $${item.usedItem.price}</div>
                                     <div class="col-md-2">
                                         <p>Current Quantity: ${item.itemAmount}</p>
                                         <a href="cart?sid=${item.usedItem.id}&action=3&recycle=${item.usedItem.recycled}"><p>Current Quantity: 1</p></a>
@@ -97,10 +97,12 @@
                     </c:if>
                     
                     
-                    <div class="cartSummary">
-                        <h1>Subtotal (n items): Price</h1>
-                        <button type="button" class="btn btn-success">Proceed to Checkout</button>
-                    </div>
+                    <c:if test="${!isFirstHandCartEmpty||!isSecondHandCartEmpty}">
+                        <div class="cartSummary">
+                            <h1>Subtotal (${firstHandCartAmount+secondHandCartAmount} items): $${ firstHandCartPrice+secondHandCartPrice}</h1>
+                            <button type="button" class="btn btn-success">Proceed to Checkout</button>
+                        </div>
+                    </c:if>
                 </div>
             </div>
                 <%@ include file="footer.jsp" %>
