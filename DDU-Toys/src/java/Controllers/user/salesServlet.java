@@ -5,10 +5,20 @@
  */
 package Controllers.user;
 
+import Bean.Customer;
+import Bean.Globals;
+import Bean.OrderItem;
+import Bean.SpecificBean.SecondHandItem;
+import Bean.Stock;
 import Controllers.basicServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -16,6 +26,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -36,7 +47,49 @@ public class salesServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
-
+        HttpSession session = request.getSession();
+        Customer c=(Customer)session.getAttribute("customer");
+        int cid = c.getId();
+        
+        ArrayList<SecondHandItem> sales = new ArrayList<SecondHandItem>();
+        try{
+            Globals.openConn();
+            Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            //retreive all orders of the user
+            ResultSet rs = stmt.executeQuery("SELECT * FROM [Stock] WHERE [Cid] = "+cid);
+            int numRow = 0;
+            if(rs != null && rs.last() != false) {
+                numRow = rs.getRow();
+                rs.beforeFirst();
+            }
+            if(numRow !=0) {
+                while(rs != null && rs.next() != false) {
+                    Stock item = new Stock();
+                    item.setId(rs.getInt("Sid"));
+                    item.setRecycled(rs.getInt("Recycle"));
+                    item.setConDes(rs.getString("ConditionDescription"));
+                    item.setAmount(rs.getInt("Amount"));
+                    item.setPrice(Float.parseFloat(rs.getString("Price")));
+                    item.setCid(rs.getInt("Cid"));
+                    item.setTid(rs.getInt("Tid"));
+                    SecondHandItem usedItem = new SecondHandItem();
+                    usedItem.setUsedItem(item);
+                    sales.add(usedItem);
+                }
+            }
+            if(rs != null) {
+                rs.close();
+            }
+            Globals.closeConn();
+        }
+        catch (ClassNotFoundException e) {
+            Globals.beanLog.info(e.toString());
+        } catch (SQLException e) {
+            Globals.beanLog.info(e.toString());
+        }
+        
+        request.setAttribute("listSales", sales);
+        
         RequestDispatcher dispatcher = request.getRequestDispatcher("sales.jsp"); 
         dispatcher.forward(request, response);
     }
