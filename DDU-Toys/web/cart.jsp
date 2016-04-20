@@ -7,7 +7,8 @@
 <%--<jsp:useBean id="userInfo"  class="Bean.***"  scope="session"/>Contains whether the user logged in, user name, how many items in the cart--%>
 <%--<jsp:useBean id="items"  class="java.util.Arraylist"  scope="request"/>Contains an array list of the item object which contains the name, img link, description, price for the item, remember to have a int in her eto spercify the number of items--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="isCartEmpty"  type="java.lang.Boolean"  scope="request"/>
+<jsp:useBean id="isFirstHandCartEmpty"  type="java.lang.Boolean"  scope="request"/>
+<jsp:useBean id="isSecondHandCartEmpty"  type="java.lang.Boolean"  scope="request"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,36 +24,79 @@
                 <div class="sections">
                     <h1 class="homePageTitle">Shopping Cart</h1>
                     
-                    <c:if test="${isCartEmpty}">
+                    <c:if test="${isFirstHandCartEmpty&&isSecondHandCartEmpty}">
                         <p>
                             The cart is empty!
                         </p>
                     </c:if>
                         
-                    <c:if test="${!isCartEmpty}">
-                        <p>
-                            The cart is empty!
-                        </p>
+                    <c:if test="${!isFirstHandCartEmpty}">
+                        <jsp:useBean id="firstHandCartList"  type="java.util.ArrayList"  scope="request"/>
+                        <c:forEach items="${firstHandCartList}" var="item">
+                            <div class="cartItem">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <img data-src="holder.js/100%x200" alt="100%x200" style="width: 100%; height:400px; display: block;" src="${item.toyInfo.picUrl}"/> 
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h1 class="itemName">{item.toyInfo.name}</h1>
+                                        <p class="basicInformation">${item.toyInfo.categoryName} & <c:if test="${(item.toyInfo.sex ==0)}">
+                                                Female
+                                            </c:if>
+                                            <c:if test="${(item.toyInfo.sex ==1)}">
+                                                Male
+                                            </c:if>
+                                            <c:if test="${(item.toyInfo.sex ==2)}">
+                                                Unisex
+                                            </c:if>
+                                            & ${item.toyInfo.age} Years Old</p>
+                                        <a href="cart?sid=${item.firstHandItem.id}&action=2&recycle=${item.firstHandItem.recycled}"><p>Delete this item</p></a>
+                                    </div>
+                                    <div class="col-md-2 itemPrice"> Price</div>
+                                    <div class="col-md-2">
+                                        <p>Current Quantity: 1</p>
+                                        <a href="cart?sid=${item.firstHandItem.id}&action=3&recycle=${item.firstHandItem.recycled}"><p>Current Quantity: 1</p></a>
+                                        <a href="cart?sid=${item.firstHandItem.id}&action=4&recycle=${item.firstHandItem.recycled}"><p>Current Quantity: 1</p></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </c:if>
+                        
+                     <c:if test="${!isSecondHandCartEmpty}">
+                        <jsp:useBean id="isSecondHandCartList"  type="java.util.ArrayList"  scope="request"/>
+                        <c:forEach items="${isSecondHandCartList}" var="item">
+                            <div class="cartItem">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <img data-src="holder.js/100%x200" alt="100%x200" style="width: 100%; height:400px; display: block;" src="${item.toyInfo.picUrl}"/> 
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h1 class="itemName">{item.toyInfo.name}</h1>
+                                        <p class="basicInformation">${item.toyInfo.categoryName} & <c:if test="${(item.toyInfo.sex ==0)}">
+                                                Female
+                                            </c:if>
+                                            <c:if test="${(item.toyInfo.sex ==1)}">
+                                                Male
+                                            </c:if>
+                                            <c:if test="${(item.toyInfo.sex ==2)}">
+                                                Unisex
+                                            </c:if>
+                                            & ${item.toyInfo.age} Years Old & Sold by ${item.customerInfo.username}</p>
+                                        <a href="cart?sid=${item.usedItem.id}&action=2&recycle=${item.usedItem.recycled}"><p>Delete this item</p></a>
+                                    </div>
+                                    <div class="col-md-2 itemPrice"> Price</div>
+                                    <div class="col-md-2">
+                                        <p>Current Quantity: 1</p>
+                                        <a href="cart?sid=${item.usedItem.id}&action=3&recycle=${item.usedItem.recycled}"><p>Current Quantity: 1</p></a>
+                                        <a href="cart?sid=${item.usedItem.id}&action=4&recycle=${item.usedItem.recycled}"><p>Current Quantity: 1</p></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
                     </c:if>
                     
-                    <div class="cartItem">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <img data-src="holder.js/100%x200" alt="100%x200" style="width: 70%; display: block;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTkyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDE5MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MjAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTUzZmEzNDU4YzAgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNTNmYTM0NThjMCI+PHJlY3Qgd2lkdGg9IjE5MiIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI3MC4wNTQ2ODc1IiB5PSIxMDQuNSI+MTkyeDIwMDwvdGV4dD48L2c+PC9nPjwvc3ZnPg==" data-holder-rendered="true">
-                            </div>
-                            <div class="col-md-6">
-                                <h1 class="itemName">Snacks</h1>
-                                <p class="basicInformation">Category · Sex · Age</p>
-                                <a href="cart?sid=10&action=2"><p>Delete this item</p></a>
-                            </div>
-                            <div class="col-md-2 itemPrice"> Price</div>
-                            <div class="col-md-2">
-                                <p>Current Quantity: 1</p>
-                                <a href="cart?sid=10&action=3&recycle"><p>Current Quantity: 1</p></a>
-                                <a href="cart?sid=10&action=4&recycle"><p>Current Quantity: 1</p></a>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="cartSummary">
                         <h1>Subtotal (n items): Price</h1>
                         <button type="button" class="btn btn-success">Proceed to Checkout</button>
