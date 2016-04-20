@@ -4,7 +4,7 @@
     Author     : David Liu
 --%>
 <%--<jsp:useBean id="userInfo"  class="Bean.***"  scope="session"/>--%>//Contains whether the user logged in, user name, how many items in the cart
-<%--<jsp:useBean id="items"  class="java.util.Arraylist"  scope="request"/>--%>//Contains an array list of the item object which contains the name, img link, description, price for the item
+<jsp:useBean id="listSales"  class="java.util.ArrayList"  scope="request"/>
 <%--<jsp:useBean id="Scope"  class="String"  scope="session"/>--%> // Spercify which category/kind of item the user wants to see
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -27,19 +27,36 @@
                     <div class="col-md-10">
                         <div class="userMainContent">
                             <h1>Sales</h1>
-                            <div class="row  borderBottom marginTop">
-                                <div class="col-md-2">
-                                    <img data-src="holder.js/100%x200" alt="100%x200" style="padding-left: 10px;padding-bottom: 10px;width: 100%; display: block;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTkyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDE5MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MjAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTUzZmEzNDU4YzAgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNTNmYTM0NThjMCI+PHJlY3Qgd2lkdGg9IjE5MiIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI3MC4wNTQ2ODc1IiB5PSIxMDQuNSI+MTkyeDIwMDwvdGV4dD48L2c+PC9nPjwvc3ZnPg==" data-holder-rendered="true">
-                                </div>
-                                 <div class="col-md-6">
-                                    <h1 class="itemName" style="border:none;padding-top: 0; margin-top: 0px;">Snacks</h1>
-                                    <p class="basicInformation">Category · Sex · Age · Brand New / Second Hand</p>
-                                    <p>description</p>
-                                    <p>Delete & Edit</p>
-                                </div>
-                                 <div class="col-md-2">1</div>
-                                 <div class="col-md-2 itemPrice">Price</div>
-                            </div>
+                            
+                                <c:forEach items="${listSales}" var="item">
+                                    
+                                    <div class="row  borderBottom marginTop">
+                                        <div class="col-md-2">
+                                            <img data-src="holder.js/100%x200" alt="100%x200" style="width: 100%; height:400px; display: block;" src="${item.toyInfo.picUrl}"/> 
+                                        </div>
+                                         <div class="col-md-6">
+                                            <h1 class="itemName" style="border:none;padding-top: 0; margin-top: 0px;">{item.toyInfo.name}</h1>
+                                            <p class="basicInformation">${item.toyInfo.categoryName} & <c:if test="${(item.toyInfo.sex ==0)}">
+                                                        Female
+                                                    </c:if>
+                                                    <c:if test="${(item.toyInfo.sex ==1)}">
+                                                        Male
+                                                    </c:if>
+                                                    <c:if test="${(item.toyInfo.sex ==2)}">
+                                                        Unisex
+                                                    </c:if>
+                                                    & ${item.toyInfo.age} Years Old & Sold by ${item.customerInfo.username}</p>
+                                            <p>${item.usedItem.conDes}</p>
+                                            <a href="deleteSales?sid=${item.usedItem.id}"><p>Delete this Item</p></a>
+                                        </div>
+                                         <div class="col-md-2">${item.usedItem.amount}</div>
+                                         <div class="col-md-2 itemPrice">${item.usedItem.price}</div>
+                                    </div>
+                                </c:forEach>
+                            
+                            
+                            
+                            
                         </div>
                     </div>
                 </div>
