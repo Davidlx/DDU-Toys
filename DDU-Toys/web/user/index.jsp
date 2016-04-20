@@ -5,6 +5,10 @@
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<jsp:useBean id="listOrders"  class="java.util.ArrayList"  scope="request"/>
+
+<!--This is to have an array list of order object, which contains the basic order information(date time, proce, order number, status, list of items)--> 
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,6 +28,9 @@
                     <div class="col-md-10">
                         <div class="userMainContent">
                             <h1>Orders</h1>
+                            <c:forEach items="${listOrders}" var="order">
+                                
+                            </c:forEach>
                             <div class="orderItem">
                                 <div class="orderBasicInfo">
                                     <p>Purchase Time & Order ID</p>
