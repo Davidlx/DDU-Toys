@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="col-md-2 itemPrice"> Price</div>
                                     <div class="col-md-2">
-                                        <p>Current Quantity: 1</p>
+                                        <p>Current Quantity: ${item.itemAmount}</p>
                                         <a href="cart?sid=${item.firstHandItem.id}&action=3&recycle=${item.firstHandItem.recycled}"><p>Current Quantity: 1</p></a>
                                         <a href="cart?sid=${item.firstHandItem.id}&action=4&recycle=${item.firstHandItem.recycled}"><p>Current Quantity: 1</p></a>
                                     </div>
@@ -87,7 +87,7 @@
                                     </div>
                                     <div class="col-md-2 itemPrice"> Price</div>
                                     <div class="col-md-2">
-                                        <p>Current Quantity: 1</p>
+                                        <p>Current Quantity: ${item.itemAmount}</p>
                                         <a href="cart?sid=${item.usedItem.id}&action=3&recycle=${item.usedItem.recycled}"><p>Current Quantity: 1</p></a>
                                         <a href="cart?sid=${item.usedItem.id}&action=4&recycle=${item.usedItem.recycled}"><p>Current Quantity: 1</p></a>
                                     </div>
