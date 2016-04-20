@@ -39,7 +39,7 @@
                                         <img data-src="holder.js/100%x200" alt="100%x200" style="width: 100%; height:100px; display: block;" src="${item.toyInfo.picUrl}"/> 
                                     </div>
                                     <div class="col-md-7">
-                                        <h1 class="itemName">${item.toyInfo.name}</h1>
+                                        <h1 class="itemName" onclick="location.href='${pageContext.request.contextPath}/itemDetail?stockId=${item.firstHandItem.id}'"  style="cursor: pointer">${item.toyInfo.name}</h1>
                                         <p class="basicInformation">${item.toyInfo.categoryName} & <c:if test="${(item.toyInfo.sex ==0)}">
                                                 Female
                                             </c:if>
@@ -72,7 +72,7 @@
                                         <img data-src="holder.js/100%x200" alt="100%x200" style="width: 100%; height:400px; display: block;" src="${item.toyInfo.picUrl}"/> 
                                     </div>
                                     <div class="col-md-6">
-                                        <h1 class="itemName">{item.toyInfo.name}</h1>
+                                        <h1 class="itemName" onclick="location.href='${pageContext.request.contextPath}/itemDetail?stockId=${item.usedItem.id}'"  style="cursor: pointer">{item.toyInfo.name}</h1>
                                         <p class="basicInformation">${item.toyInfo.categoryName} & <c:if test="${(item.toyInfo.sex ==0)}">
                                                 Female
                                             </c:if>
