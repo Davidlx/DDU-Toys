@@ -8,6 +8,5 @@
                             <li role="presentation"><a href="${pageContext.request.contextPath}/admin">Toys</a></li>
                             <li role="presentation"><a href="${pageContext.request.contextPath}/admin/addToys">New Toys</a></li>
                             <li role="presentation"><a href="${pageContext.request.contextPath}/admin/comments">Comments</a></li>
-                            <li role="presentation"><a href="${pageContext.request.contextPath}/admin/manageSales">Manage Sales</a></li>
                             <li role="presentation"><a href="${pageContext.request.contextPath}/admin/pendingSales">Pending Sales</a></li>
                         </ul>
