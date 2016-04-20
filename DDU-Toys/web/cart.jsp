@@ -7,6 +7,7 @@
 <%--<jsp:useBean id="userInfo"  class="Bean.***"  scope="session"/>Contains whether the user logged in, user name, how many items in the cart--%>
 <%--<jsp:useBean id="items"  class="java.util.Arraylist"  scope="request"/>Contains an array list of the item object which contains the name, img link, description, price for the item, remember to have a int in her eto spercify the number of items--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean id="isCartEmpty"  type="java.lang.Boolean"  scope="request"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,6 +22,19 @@
                 <%@ include file="shopTitle.jsp" %>
                 <div class="sections">
                     <h1 class="homePageTitle">Shopping Cart</h1>
+                    
+                    <c:if test="${isCartEmpty}">
+                        <p>
+                            The cart is empty!
+                        </p>
+                    </c:if>
+                        
+                    <c:if test="${!isCartEmpty}">
+                        <p>
+                            The cart is empty!
+                        </p>
+                    </c:if>
+                    
                     <div class="cartItem">
                         <div class="row">
                             <div class="col-md-2">
@@ -34,8 +48,8 @@
                             <div class="col-md-2 itemPrice"> Price</div>
                             <div class="col-md-2">
                                 <p>Current Quantity: 1</p>
-                                <a href="cart?sid=10&action=3"><p>Current Quantity: 1</p></a>
-                                <a href="cart?sid=10&action=4"><p>Current Quantity: 1</p></a>
+                                <a href="cart?sid=10&action=3&recycle"><p>Current Quantity: 1</p></a>
+                                <a href="cart?sid=10&action=4&recycle"><p>Current Quantity: 1</p></a>
                             </div>
                         </div>
                     </div>
