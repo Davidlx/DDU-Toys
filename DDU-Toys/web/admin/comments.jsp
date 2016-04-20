@@ -2,6 +2,9 @@
     Document   : userIndex
     Created on : 2016-4-9, 22:15:27
     Author     : David Liu
+
+Fetch an array list of the comments attached to the stock, information needed spercified in the table, and rememeber to have an stock bean contains the toy information
+
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

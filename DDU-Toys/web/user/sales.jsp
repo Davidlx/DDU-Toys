@@ -3,9 +3,7 @@
     Created on : 2016-4-9, 22:16:40
     Author     : David Liu
 --%>
-<%--<jsp:useBean id="userInfo"  class="Bean.***"  scope="session"/>--%>//Contains whether the user logged in, user name, how many items in the cart
 <jsp:useBean id="listSales"  class="java.util.ArrayList"  scope="request"/>
-<%--<jsp:useBean id="Scope"  class="String"  scope="session"/>--%> // Spercify which category/kind of item the user wants to see
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

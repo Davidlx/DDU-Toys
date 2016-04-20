@@ -2,6 +2,10 @@
     Document   : userIndex
     Created on : 2016-4-9, 22:15:27
     Author     : David Liu
+
+
+An Arraylist of all the pending sales object containing all the information in the table (please refer to it)
+
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

@@ -2,6 +2,8 @@
     Document   : userIndex
     Created on : 2016-4-9, 22:15:27
     Author     : David Liu
+
+A bean containing the original informaiton of the stock
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
