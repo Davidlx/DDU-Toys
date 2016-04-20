@@ -6,7 +6,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <jsp:useBean id="listOrders"  class="java.util.ArrayList"  scope="request"/>
-
 <!--This is to have an array list of order object, which contains the basic order information(date time, proce, order number, status, list of items)--> 
 
 <html>
