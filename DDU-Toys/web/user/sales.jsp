@@ -42,7 +42,7 @@
                                                 <c:if test="${(item.toyInfo.sex ==2)}">
                                                     Unisex
                                                 </c:if>
-                                                & ${item.toyInfo.age} Years Old & Sold by ${item.customerInfo.username}</p>
+                                                & ${item.toyInfo.age} Years Old</p>
                                         <p>${item.usedItem.conDes}</p>
                                         <a href="deleteSales?sid=${item.usedItem.id}"><p>Delete this Item</p></a>
                                     </div>
