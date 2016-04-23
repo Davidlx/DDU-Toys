@@ -5,6 +5,7 @@
  */
 package Controllers.admin;
 
+import Bean.Toy;
 import Controllers.basicServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,7 +37,16 @@ public class toyEditServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("addToy.jsp"); 
+        
+        int tid = Integer.parseInt(request.getParameter("tid"));
+        
+        Toy tempToy = new Toy();
+        tempToy.setId(tid);
+        tempToy.getOnId();
+        
+        request.setAttribute("toy", tempToy);
+        
+        RequestDispatcher dispatcher = request.getRequestDispatcher("editToy.jsp"); 
         dispatcher.forward(request, response);
     }
 

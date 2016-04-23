@@ -74,7 +74,7 @@ Fetch an array list of the comments attached to the stock, information needed sp
                                         <td>${comment.postTime}</td>
                                         <td><c:if test="${comment.reply==null}">Not replied yet</c:if><c:if test="${comment.reply!=null}">${comment.reply.comment}</c:if></td>
                                         <td><c:if test="${comment.reply==null}"></c:if><c:if test="${comment.reply!=null}">${comment.reply.postTime}</c:if></td>
-                                        <td><a  data-toggle="modal" data-target="#reply${comment.id}"><p>Reply Comments</p></a></td>
+                                        <td><c:if test="${comment.reply==null}"><a  data-toggle="modal" data-target="#reply${comment.id}"><p>Reply Comments</p></a></c:if></td>
                                     </tr>
                                     </c:forEach>
                                 </tbody>
