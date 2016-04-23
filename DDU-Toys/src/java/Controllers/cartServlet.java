@@ -45,8 +45,13 @@ public class cartServlet extends basicServlet {
         Boolean isFirstHandCartEmpty = isFirstHandCartEmpty(session);
         Boolean isSecondHandCartEmpty = isSecondHandCartEmpty(session);
         
-        int action = Integer.parseInt(request.getParameter("action"));
+        int action;
         
+        try {
+            action = Integer.parseInt(request.getParameter("action"));
+        } catch (NullPointerException e) {
+            action = 0;
+        }
         // action = 0: Just pressed the navigation cart button
         if(action != 0) {    
 
@@ -431,8 +436,9 @@ public class cartServlet extends basicServlet {
             price += list.get(i).getItemAmount() * list.get(i).getFirstHandItem().getPrice();
             amount += list.get(i).getItemAmount();
         }
+        
         session.setAttribute("firstHandCartAmount", amount);
-        session.setAttribute("firstHandCartPrice", price);
+        session.setAttribute("firstHandCartPrice", String.format("%.2f", price));
     }
     
     private void calcSecondHandPriceAndAmount(HttpSession session, ArrayList<Bean.SpecificBean.SecondHandCartItem> list) {
@@ -443,7 +449,7 @@ public class cartServlet extends basicServlet {
             amount += list.get(i).getItemAmount();
         }
         session.setAttribute("secondHandCartAmount", amount);
-        session.setAttribute("secondHandCartPrice", price);
+        session.setAttribute("secondHandCartPrice", String.format("%.2f", price));
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

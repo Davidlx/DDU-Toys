@@ -25,6 +25,7 @@ public class OrderItem {
     private String description;
     private int oid;
     private int tid;
+    private int cid;
     
     public OrderItem(){};
     
@@ -39,8 +40,9 @@ public class OrderItem {
         return this.recycled;
     }
     public void setRecycled(int recycled){
-        if(recycled > 1)
+        if(recycled > 1){
             recycled = 1;
+        }
         
         this.recycled = recycled;
     }
@@ -85,13 +87,14 @@ public class OrderItem {
             Globals.openConn();
             
             // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("INSERT INTO [OrderItem] ([Recycled], [Amount], [Price], [Description], [Oid], [Tid]) VALUES (?, ?, ?, ?, ?, ?)");
+            PreparedStatement pstmt = Globals.con.prepareStatement("INSERT INTO [OrderItem] ([Recycled], [Amount], [Price], [Description], [Oid], [Tid], [Cid]) VALUES (?, ?, ?, ?, ?, ?, ?)");
             pstmt.setString(1, Integer.toString(recycled));
             pstmt.setString(2, Integer.toString(amount));
             pstmt.setString(3, Float.toString(price));
             pstmt.setString(4, description);
             pstmt.setString(5, Integer.toString(oid));
             pstmt.setString(6, Integer.toString(tid));
+            pstmt.setString(7, Integer.toString(cid));
             
             // execute the SQL statement
             pstmt.executeUpdate();
@@ -133,14 +136,15 @@ public class OrderItem {
             Globals.openConn();
             
             // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("UPDATE [OrderItem] SET [Recycled] = ?, [Amount] = ?, [Price] = ?, [Description] = ?, [Oid] = ?, [Tid] = ? WHERE [OItemId] = ?");
+            PreparedStatement pstmt = Globals.con.prepareStatement("UPDATE [OrderItem] SET [Recycled] = ?, [Amount] = ?, [Price] = ?, [Description] = ?, [Oid] = ?, [Tid] = ?, [Cid] = ? WHERE [OItemId] = ?");
             pstmt.setString(1, Integer.toString(recycled));
             pstmt.setString(2, Integer.toString(amount));
             pstmt.setString(3, Float.toString(price));
             pstmt.setString(4, description);
             pstmt.setString(5, Integer.toString(oid));
             pstmt.setString(6, Integer.toString(tid));
-            pstmt.setString(7, Integer.toString(id));
+            pstmt.setString(7, Integer.toString(cid));
+            pstmt.setString(8, Integer.toString(id));
                         
             // execute the SQL statement
             pstmt.executeUpdate();
@@ -216,6 +220,7 @@ public class OrderItem {
                     description = rs.getString("Description");
                     oid = Integer.parseInt(rs.getString("Oid"));
                     tid = Integer.parseInt(rs.getString("Tid"));
+                    cid = Integer.parseInt(rs.getString("Cid"));
                 }
             }
                                   
@@ -239,6 +244,20 @@ public class OrderItem {
         } finally {
             Globals.closeConn();
         }     
+    }
+
+    /**
+     * @return the cid
+     */
+    public int getCid() {
+        return cid;
+    }
+
+    /**
+     * @param cid the cid to set
+     */
+    public void setCid(int cid) {
+        this.cid = cid;
     }
     
 }

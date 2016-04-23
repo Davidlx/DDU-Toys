@@ -33,9 +33,6 @@ public class TempToy {
     
     public TempToy(){};
     
-    public int getTid(){
-        return this.tid;
-    }
     
     public int getId(){
         return this.id;
@@ -80,9 +77,6 @@ public class TempToy {
         this.age = age;
     }
     
-    public void setTid(int tid){
-        this.tid=tid;
-    }
     
     public float getPrice(){
         return this.price;
@@ -131,7 +125,7 @@ public class TempToy {
             Globals.openConn();
             
             // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("INSERT INTO [TempToys] ([Price], [Description], [ConditionDescription], [OrgPrice], [Amount], [Name], [Age], [Sex], [Cid], [CategoryId]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement pstmt = Globals.con.prepareStatement("INSERT INTO [TempToys] ([Price], [Description], [ConditionDescription], [OrgPrice], [Amount], [Name], [Age], [Sex], [Cid], [CategoryId], [PicUrl], [Tid]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             pstmt.setString(1, Float.toString(price));
             pstmt.setString(2, des);
             pstmt.setString(3, conDes);
@@ -142,6 +136,8 @@ public class TempToy {
             pstmt.setString(8, Integer.toString(sex));
             pstmt.setString(9, Integer.toString(cid));
             pstmt.setString(10, Integer.toString(categoryId));
+            pstmt.setString(11, picUrl);
+            pstmt.setString(12, Integer.toString(tid));
             
             // execute the SQL statement
             pstmt.executeUpdate();
@@ -183,7 +179,7 @@ public class TempToy {
             Globals.openConn();
             
             // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("UPDATE [TempToys] SET [Price] = ?, [Description] = ?, [ConditionDescription] = ?, [OrgPrice] = ?, [Amount] = ?, [Name] = ?, [Age] = ?, [Sex] = ?, [Cid] = ?, [CategoryId] = ? WHERE [TTid] = ?");
+            PreparedStatement pstmt = Globals.con.prepareStatement("UPDATE [TempToys] SET [Price] = ?, [Description] = ?, [ConditionDescription] = ?, [OrgPrice] = ?, [Amount] = ?, [Name] = ?, [Age] = ?, [Sex] = ?, [Cid] = ?, [CategoryId] = ?, [PicUrl] = ?, [Tid] = ? WHERE [TTid] = ?");
             pstmt.setString(1, Float.toString(price));
             pstmt.setString(2, des);
             pstmt.setString(3, conDes);
@@ -195,6 +191,8 @@ public class TempToy {
             pstmt.setString(9, Integer.toString(cid));
             pstmt.setString(10, Integer.toString(categoryId));
             pstmt.setString(11, Integer.toString(id));
+            pstmt.setString(12, picUrl);
+            pstmt.setString(13, Integer.toString(tid));
                         
             // execute the SQL statement
             pstmt.executeUpdate();
@@ -274,6 +272,8 @@ public class TempToy {
                     sex = Integer.parseInt(rs.getString("Sex"));
                     cid = Integer.parseInt(rs.getString("Cid"));
                     categoryId = Integer.parseInt(rs.getString("CategoryId"));
+                    picUrl = rs.getString("PicUrl");
+                    tid = Integer.parseInt(rs.getString("Tid"));
                 }
             }
                                   
@@ -297,5 +297,19 @@ public class TempToy {
         } finally {
             Globals.closeConn();
         }     
+    }
+
+    /**
+     * @return the tid
+     */
+    public int getTid() {
+        return tid;
+    }
+
+    /**
+     * @param tid the tid to set
+     */
+    public void setTid(int tid) {
+        this.tid = tid;
     }
 }

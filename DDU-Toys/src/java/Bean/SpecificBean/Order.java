@@ -6,6 +6,7 @@
 package Bean.SpecificBean;
 
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -13,97 +14,68 @@ import java.util.ArrayList;
  * @author David Liu
  */
 public class Order {
-    private String orderId;
-    private Timestamp orderTime;
-    private float totalPrice;
-    private int numberOfItem;
+    private Bean.CustomerOrder orderInfo;
+    private float totalPrice = 0;
+    private int numberOfItems = 0;
+    private ArrayList<Bean.SpecificBean.OItem> items;
     
-    private ArrayList<FirstHandItem> firstHandItems;
-    private ArrayList<SecondHandItem> secondHandItems;
-
+    
     /**
-     * @return the orderId
+     * @return the orderInfo
      */
-    public String getOrderId() {
-        return orderId;
+    public Bean.CustomerOrder getOrderInfo() {
+        return orderInfo;
     }
 
     /**
-     * @param orderId the orderId to set
+     * @param orderInfo the orderInfo to set
      */
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    /**
-     * @return the orderTime
-     */
-    public Timestamp getOrderTime() {
-        return orderTime;
-    }
-
-    /**
-     * @param orderTime the orderTime to set
-     */
-    public void setOrderTime(Timestamp orderTime) {
-        this.orderTime = orderTime;
+    public void setOrderInfo(Bean.CustomerOrder orderInfo) {
+        this.orderInfo = orderInfo;
     }
 
     /**
      * @return the totalPrice
      */
     public float getTotalPrice() {
-        return totalPrice;
+        return this.totalPrice;
     }
 
     /**
-     * @param totalPrice the totalPrice to set
+     * @return the numberOfItems
      */
-    public void setTotalPrice(float totalPrice) {
-        this.totalPrice = totalPrice;
+    public int getNumberOfItems() {
+        return numberOfItems;
     }
 
     /**
-     * @return the numberOfItem
+     * @return the items
      */
-    public int getNumberOfItem() {
-        return numberOfItem;
+    public ArrayList<OItem> getItems() {
+        return items;
     }
 
     /**
-     * @param numberOfItem the numberOfItem to set
+     * @param items the items to set
      */
-    public void setNumberOfItem(int numberOfItem) {
-        this.numberOfItem = numberOfItem;
-    }
-
-    /**
-     * @return the firstHandItems
-     */
-    public ArrayList<FirstHandItem> getFirstHandItems() {
-        return firstHandItems;
-    }
-
-    /**
-     * @param firstHandItems the firstHandItems to set
-     */
-    public void setFirstHandItems(ArrayList<FirstHandItem> firstHandItems) {
-        this.firstHandItems = firstHandItems;
-    }
-
-    /**
-     * @return the secondHandItems
-     */
-    public ArrayList<SecondHandItem> getSecondHandItems() {
-        return secondHandItems;
-    }
-
-    /**
-     * @param secondHandItems the secondHandItems to set
-     */
-    public void setSecondHandItems(ArrayList<SecondHandItem> secondHandItems) {
-        this.secondHandItems = secondHandItems;
+    public void setItems(ArrayList<Bean.SpecificBean.OItem> items) {
+        this.items = items;
+        setPriceAndTotalNumber();
     }
     
-    
+    private void setPriceAndTotalNumber(){
+        float price = 0;
+        int amount = 0;
+        for(int i = 0; i < items.size(); i++){
+            price += items.get(i).getItemInfo().getAmount() * items.get(i).getItemInfo().getPrice();
+            amount += items.get(i).getItemInfo().getAmount();
+        }
+        
+        DecimalFormat df = new DecimalFormat("#.00");
+        price = Float.parseFloat(df.format(price));
+        
+        this.totalPrice = price;
+        this.numberOfItems = amount;
+    }
+
 }
