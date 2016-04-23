@@ -2,6 +2,9 @@
     Document   : userIndex
     Created on : 2016-4-9, 22:15:27
     Author     : David Liu
+
+A bean contains the information for Toy and an arrayList of stocks
+
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
