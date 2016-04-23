@@ -31,7 +31,6 @@ public class Order {
      */
     public void setOrderInfo(Bean.CustomerOrder orderInfo) {
         this.orderInfo = orderInfo;
-        setPriceAndTotalNumber();
     }
 
     /**

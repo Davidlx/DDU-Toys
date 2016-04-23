@@ -81,8 +81,8 @@ public class userIndexServlet extends basicServlet {
         }
         if(numRow > 0) {
  
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con2 = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad072_db", "aiad072", "aiad072");
+           // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+           // Connection con2 = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad072_db", "aiad072", "aiad072");
             
             while(rs != null && rs.next() != false) {
                     // Create Order
@@ -90,6 +90,9 @@ public class userIndexServlet extends basicServlet {
                     Order.setId(Integer.parseInt(rs.getString("Oid")));
                     Order.setOrderTime(rs.getTimestamp("OrderTime"));
                     Order.setCid(Integer.parseInt(rs.getString("Cid")));
+                    
+                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                    Connection con2 = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad072_db", "aiad072", "aiad072");
                     
                     // Insert OrderItems
                     Statement stmt2 = con2.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -107,14 +110,14 @@ public class userIndexServlet extends basicServlet {
                         while(rs2 != null && rs2.next() != false) {
                             //Set OrderItem
                             OrderItem item = new OrderItem();
-                            item.setId(rs2.getInt(1));
-                            item.setRecycled(Integer.parseInt(rs.getString("Recycled")));
-                            item.setAmount(Integer.parseInt(rs.getString("Amount")));
-                            item.setPrice(Float.parseFloat(rs.getString("Price")));
-                            item.setDescription(rs.getString("Description"));
-                            item.setOid(Integer.parseInt(rs.getString("Oid")));
-                            item.setTid(Integer.parseInt(rs.getString("Tid")));
-                            item.setCid(Integer.parseInt(rs.getString("Cid")));
+                            item.setId(rs2.getInt("OItemId"));
+                            item.setRecycled(Integer.parseInt(rs2.getString("Recycled")));
+                            item.setAmount(Integer.parseInt(rs2.getString("Amount")));
+                            item.setPrice(Float.parseFloat(rs2.getString("Price")));
+                            item.setDescription(rs2.getString("Description"));
+                            item.setOid(Integer.parseInt(rs2.getString("Oid")));
+                            item.setTid(Integer.parseInt(rs2.getString("Tid")));
+                            item.setCid(Integer.parseInt(rs2.getString("Cid")));
                             
                             //Set Oitem
                             Bean.SpecificBean.OItem oitem = new Bean.SpecificBean.OItem();
@@ -134,6 +137,7 @@ public class userIndexServlet extends basicServlet {
                         rs2.close();
                     }
                 con2.close();
+                stmt2.close();
             }
 
         }

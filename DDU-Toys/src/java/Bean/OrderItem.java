@@ -40,8 +40,9 @@ public class OrderItem {
         return this.recycled;
     }
     public void setRecycled(int recycled){
-        if(recycled > 1)
+        if(recycled > 1){
             recycled = 1;
+        }
         
         this.recycled = recycled;
     }
