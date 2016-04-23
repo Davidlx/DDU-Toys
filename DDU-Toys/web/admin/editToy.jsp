@@ -31,32 +31,32 @@ A bean containing the original informaiton of the stock
                                 <form>
                                     <div class="form-group">
                                       <label for="exampleInputEmail1">Item Name</label>
-                                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Item Name" value="">
+                                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Item Name" value="${toy.name}">
                                     </div>
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Description</label>
-                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Description" value="">
+                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Description" value="${toy.des}">
                                     </div>
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Original Price</label>
-                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Original Price" value="">
+                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Original Price" value="${toy.price}">
                                     </div>
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Target Age (Inclusive)</label>
-                                      <input type="number" class="form-control" id="exampleInputPassword1" placeholder=">Target Age (Inclusive)" value="">
+                                      <input type="number" class="form-control" id="exampleInputPassword1" placeholder=">Target Age (Inclusive)" value="${toy.age}">
                                     </div>
                                     
                                     <div class="form-group">
                                       <label for="exampleInputEmail1">Picture Url</label>
-                                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Picture Url" value="">
+                                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Picture Url" value="${toy.picUrl}">
                                     </div>
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Sex</label>
-                                      <select class="form-control" value="">
+                                      <select class="form-control" value="${toy.sex}">
                                         <option value = "0">Female</option>
                                         <option value = "1">Male</option>
                                         <option value = "2">Unisex</option>
@@ -65,7 +65,7 @@ A bean containing the original informaiton of the stock
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Category</label>
-                                      <select class="form-control" value="">
+                                      <select class="form-control" value="${toy.categoryId}">
                                         <c:forEach items="${cate}" var="category">
                                             <option value = "${category.id}">${category.name}</option>
                                         </c:forEach>

@@ -197,7 +197,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>toyEditServlet</servlet-name>
-        <url-pattern>/admin/toyEdit</url-pattern>
+        <url-pattern>/admin/editToy</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
