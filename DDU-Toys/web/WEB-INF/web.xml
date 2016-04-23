@@ -132,6 +132,7 @@
     <servlet-mapping>
         <servlet-name>adminIndexServlet</servlet-name>
         <url-pattern>/admin/index</url-pattern>
+        <url-pattern>/admin/</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>registerServlet</servlet-name>

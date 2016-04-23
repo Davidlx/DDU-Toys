@@ -43,7 +43,8 @@
                                                 Unisex
                                             </c:if> ·For ${itemSecond.toyInfo.age} years above · Sold by ${itemSecond.customerInfo.username}</p>
                                 <p class="description"> ${itemSecond.toyInfo.des}</p>
-                                <p> ${itemSecond.usedItem.amount} in Stock  · $ ${itemSecond.usedItem.price}</p>
+                                <p> ${itemSecond.usedItem.amount} in Stock  · <del>Original Price:$${itemSecond.toyInfo.price}</del></p>
+                                <p>Current Price: $${itemSecond.usedItem.price}</p>
                                 <a href="cart?sid=${itemSecond.usedItem.id}&recycle=1&action=1"><button type="button" class="btn btn-primary btn-lg">Add to Cart</button></a>
                             </div>
                          </div>
@@ -69,15 +70,13 @@
                                                 Unisex
                                             </c:if> · For ${itemFirst.toyInfo.age} years above</p>
                                 <p class="description"> ${itemFirst.toyInfo.des}</p>
-                                <p> ${itemFirst.firstHandItem.amount} in Stock  · $ ${itemFirst.firstHandItem.price}</p>
+                                <p> ${itemFirst.firstHandItem.amount} in Stock  · <del>Original Price:$${itemFirst.toyInfo.price}</del></p>
+                                <p>Current Price: $${itemFirst.firstHandItem.price}</p>
                                 <a href="cart?sid=${itemFirst.firstHandItem.id}&recycle=0&action=1"><button type="button" class="btn btn-primary btn-lg">Add to Cart</button></a>
                             </div>
                          </div>
                     </c:if>
-
-                    
-                    
-                    
+                       
                     <div class="comments">
                         
                         <c:if test="${isLoggedIn}">

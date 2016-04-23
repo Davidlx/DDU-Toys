@@ -100,7 +100,7 @@
                     <c:if test="${!isFirstHandCartEmpty||!isSecondHandCartEmpty}">
                         <div class="cartSummary">
                             <h1>Subtotal (${firstHandCartAmount+secondHandCartAmount} items): $${ firstHandCartPrice+secondHandCartPrice}</h1>
-                            <button type="button" class="btn btn-success">Proceed to Checkout</button>
+                            <a href="checkOut"><button type="button" class="btn btn-success">Proceed to Checkout</button></a>
                         </div>
                     </c:if>
                 </div>

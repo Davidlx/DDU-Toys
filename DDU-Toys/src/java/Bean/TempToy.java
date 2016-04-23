@@ -33,6 +33,7 @@ public class TempToy {
     
     public TempToy(){};
     
+    
     public int getId(){
         return this.id;
     }
@@ -75,6 +76,7 @@ public class TempToy {
     public void setAge(int age){
         this.age = age;
     }
+    
     
     public float getPrice(){
         return this.price;
