@@ -26,16 +26,11 @@
                         <div class="userMainContent">
                             <h1>New Sale Item</h1>
                             <div class="row marginTop marginLeft">
-<<<<<<< HEAD
-                                <form>
-                                    
-=======
                                 <form method="POST" action="${pageContext.request.contextPath}/newSale">
->>>>>>> 482af62e7fcb4ccedcd8fff4b69d62281a1dfc71
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Choose Existing Toys</label>
-                                      <select class="form-control" id="toySelection">
-                                          <option value = "0">I would like to spercify new toys</option>
+                                      <select class="form-control" name="existingToy" id="toySelection">
+                                          <option value = "0">I would like to specify a new toy</option>
                                         <c:forEach items="${toys}" var="toy">
                                             <option value = "${toy.id}">${toy.name} & ${toy.categoryName}</option>
                                         </c:forEach>
@@ -92,7 +87,7 @@
                                       </select>
                                     </div>
                                     
-                                    <div class="form-group class="ToyInput"">
+                                    <div class="form-group" class="ToyInput">
                                       <label for="exampleInputPassword1">Category</label>
                                       <select class="form-control">
                                         <c:forEach items="${cate}" var="category">

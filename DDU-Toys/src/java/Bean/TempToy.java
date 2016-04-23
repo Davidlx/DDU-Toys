@@ -27,10 +27,15 @@ public class TempToy {
     private float orgPrice;
     private int amount;
     private String picUrl;
-    private int Cid;
+    private int cid;
     private int categoryId;
+    private int tid;
     
     public TempToy(){};
+    
+    public int getTid(){
+        return this.tid;
+    }
     
     public int getId(){
         return this.id;
@@ -75,6 +80,10 @@ public class TempToy {
         this.age = age;
     }
     
+    public void setTid(int tid){
+        this.tid=tid;
+    }
+    
     public float getPrice(){
         return this.price;
     }
@@ -104,10 +113,10 @@ public class TempToy {
     }
     
     public int getCid(){
-        return this.Cid;
+        return this.cid;
     }
     public void setCid(int Cid){
-        this.Cid = Cid;
+        this.cid = Cid;
     }
     
     public int getCategoryId(){
@@ -131,7 +140,7 @@ public class TempToy {
             pstmt.setString(6, name);
             pstmt.setString(7, Integer.toString(age));
             pstmt.setString(8, Integer.toString(sex));
-            pstmt.setString(9, Integer.toString(Cid));
+            pstmt.setString(9, Integer.toString(cid));
             pstmt.setString(10, Integer.toString(categoryId));
             
             // execute the SQL statement
@@ -183,7 +192,7 @@ public class TempToy {
             pstmt.setString(6, name);
             pstmt.setString(7, Integer.toString(age));
             pstmt.setString(8, Integer.toString(sex));
-            pstmt.setString(9, Integer.toString(Cid));
+            pstmt.setString(9, Integer.toString(cid));
             pstmt.setString(10, Integer.toString(categoryId));
             pstmt.setString(11, Integer.toString(id));
                         
@@ -263,7 +272,7 @@ public class TempToy {
                     name = rs.getString("Name");
                     age = Integer.parseInt(rs.getString("Age"));
                     sex = Integer.parseInt(rs.getString("Sex"));
-                    Cid = Integer.parseInt(rs.getString("Cid"));
+                    cid = Integer.parseInt(rs.getString("Cid"));
                     categoryId = Integer.parseInt(rs.getString("CategoryId"));
                 }
             }
