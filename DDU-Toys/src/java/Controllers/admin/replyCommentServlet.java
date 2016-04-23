@@ -60,6 +60,7 @@ public class replyCommentServlet extends basicServlet {
         comment.setSid(Integer.parseInt(sid));
         comment.setReplyId(Integer.parseInt(commentId));
         comment.setMid(mid);
+        comment.setCid(0);
         comment.insert();
        
         RequestDispatcher dispatcher = request.getRequestDispatcher("comments.jsp");
