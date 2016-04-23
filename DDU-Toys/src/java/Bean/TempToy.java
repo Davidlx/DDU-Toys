@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Bean;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,11 +13,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.function.Supplier;
 import java.util.logging.Logger;
+
 /**
  *
  * @author Dennis T
  */
 public class TempToy {
+
     private int id;
     private String name;
     private String des;
@@ -30,102 +33,114 @@ public class TempToy {
     private int cid;
     private int categoryId;
     private int tid;
+
+    public TempToy() {
+    }
+
+    ;
     
-    public TempToy(){};
     
-    
-    public int getId(){
+    public int getId() {
         return this.id;
     }
-    public void setId(int id){
+
+    public void setId(int id) {
         this.id = id;
     }
-    
-    public String getName(){
+
+    public String getName() {
         return this.name;
     }
-    public void setName(String name){
+
+    public void setName(String name) {
         this.name = name;
     }
-    
-    public String getDes(){
+
+    public String getDes() {
         return this.des;
     }
-    public void setDes(String des){
+
+    public void setDes(String des) {
         this.des = des;
     }
-    
-    public String getConDes(){
+
+    public String getConDes() {
         return this.conDes;
     }
-    public void setConDes(String conDes){
+
+    public void setConDes(String conDes) {
         this.conDes = conDes;
     }
-    
-    public int getSex(){
+
+    public int getSex() {
         return this.sex;
     }
-    public void setSex(int sex){
+
+    public void setSex(int sex) {
         // Needs some kind of validation
         this.sex = sex;
     }
-    
-    public int getAge(){
+
+    public int getAge() {
         return this.age;
     }
-    public void setAge(int age){
+
+    public void setAge(int age) {
         this.age = age;
     }
-    
-    
-    public float getPrice(){
+
+    public float getPrice() {
         return this.price;
     }
-    public void setPrice(float price){
+
+    public void setPrice(float price) {
         this.price = price;
     }
-    
-    public float getOrgPrice(){
+
+    public float getOrgPrice() {
         return this.orgPrice;
     }
-    public void setOrgPrice(float orgPrice){
+
+    public void setOrgPrice(float orgPrice) {
         this.orgPrice = orgPrice;
     }
-    
-    public int getAmount(){
+
+    public int getAmount() {
         return this.amount;
     }
-    public void setAmount(int amount){
+
+    public void setAmount(int amount) {
         this.amount = amount;
     }
-    
-    public String getPicUrl(){
+
+    public String getPicUrl() {
         return this.picUrl;
     }
-    public void setPicUrl(String picUrl){
+
+    public void setPicUrl(String picUrl) {
         this.picUrl = picUrl;
     }
-    
-    public int getCid(){
+
+    public int getCid() {
         return this.cid;
     }
-    public void setCid(int Cid){
+
+    public void setCid(int Cid) {
         this.cid = Cid;
     }
-    
-    public int getCategoryId(){
+
+    public int getCategoryId() {
         return this.categoryId;
     }
-    public void setCategoryId(int catId){
+
+    public void setCategoryId(int catId) {
         this.categoryId = catId;
     }
 
-    public void insert() throws ClassNotFoundException, SQLException{
-    try {
+    public void insert() throws ClassNotFoundException, SQLException {
+        try {
             Globals.openConn();
-            
-            // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("INSERT INTO [TempToys] ([Price], [Description], [ConditionDescription], [OrgPrice], [Amount], [Name], [Age], [Sex], [Cid], [CategoryId], [PicUrl], [Tid]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement pstmt = Globals.con.prepareStatement("INSERT INTO [TempToys] ([Price], [Description], [ConditionDescription], [OrgPrice], [Amount], [Name], [Age], [Sex], [Cid], [CategoryId], [PicUrl], [Tid]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)");
             pstmt.setString(1, Float.toString(price));
             pstmt.setString(2, des);
             pstmt.setString(3, conDes);
@@ -138,10 +153,10 @@ public class TempToy {
             pstmt.setString(10, Integer.toString(categoryId));
             pstmt.setString(11, picUrl);
             pstmt.setString(12, Integer.toString(tid));
-            
+
             // execute the SQL statement
             pstmt.executeUpdate();
-            
+
             // set new id of object
             Statement stmt = Globals.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT @@IDENTITY AS [@@IDENTITY]");
@@ -149,35 +164,35 @@ public class TempToy {
                 id = rs.getInt(1);
                 rs.close();
             }
-                      
+
             // close connections and statements
-            if(rs != null) {
+            if (rs != null) {
                 rs.close();
             }
-            
-            if(stmt != null) {
+
+            if (stmt != null) {
                 stmt.close();
             }
-            
-            if(pstmt != null) {
+
+            if (pstmt != null) {
                 pstmt.close();
             }
-            
-            Globals.closeConn();
-            
+
+            Globals.con.close();
+
         } catch (ClassNotFoundException e) {
             Globals.beanLog.info(e.toString());
         } catch (SQLException e) {
             Globals.beanLog.info(e.toString());
         } finally {
             Globals.closeConn();
-        }        
+        }
     }
-    
+
     public void update() throws SQLException {
-    try {
+        try {
             Globals.openConn();
-            
+
             // Create a preparedstatement to set the SQL statement	
             PreparedStatement pstmt = Globals.con.prepareStatement("UPDATE [TempToys] SET [Price] = ?, [Description] = ?, [ConditionDescription] = ?, [OrgPrice] = ?, [Amount] = ?, [Name] = ?, [Age] = ?, [Sex] = ?, [Cid] = ?, [CategoryId] = ?, [PicUrl] = ?, [Tid] = ? WHERE [TTid] = ?");
             pstmt.setString(1, Float.toString(price));
@@ -193,75 +208,74 @@ public class TempToy {
             pstmt.setString(11, Integer.toString(id));
             pstmt.setString(12, picUrl);
             pstmt.setString(13, Integer.toString(tid));
-                        
+
             // execute the SQL statement
             pstmt.executeUpdate();
-            
+
             // close connections
-            if(pstmt != null) {
+            if (pstmt != null) {
                 pstmt.close();
             }
-            
+
             Globals.closeConn();
-            
+
         } catch (ClassNotFoundException e) {
             Globals.beanLog.info(e.toString());
         } catch (SQLException e) {
             Globals.beanLog.info(e.toString());
         } finally {
             Globals.closeConn();
-        } 
+        }
     }
-    
+
     public void delete() throws SQLException {
-    try {
+        try {
             Globals.openConn();
-            
+
             // Create a preparedstatement to set the SQL statement	
             PreparedStatement pstmt = Globals.con.prepareStatement("DELETE FROM [TempToys] WHERE [TTid] = ?");
             pstmt.setString(1, Integer.toString(id));
-                        
+
             // execute the SQL statement
             pstmt.executeUpdate();
-            
+
             // close connections
-            if(pstmt != null) {
+            if (pstmt != null) {
                 pstmt.close();
             }
-            
+
             Globals.closeConn();
-            
+
         } catch (ClassNotFoundException e) {
             Globals.beanLog.info(e.toString());
         } catch (SQLException e) {
             Globals.beanLog.info(e.toString());
         } finally {
             Globals.closeConn();
-        } 
+        }
     }
 
     public void getOnId() throws SQLException {
-    try {
-            
-            if(id == 0) {
-               throw new IllegalArgumentException("Id not set");
+        try {
+
+            if (id == 0) {
+                throw new IllegalArgumentException("Id not set");
             }
-            
+
             Globals.openConn();
 
-            
             // Create SQL statement and execute	
             Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ResultSet rs = stmt.executeQuery("SELECT * FROM [TempToys] WHERE [TTid] = " + Integer.toString(id));
-            
+
             int numRow = 0;
-            if(rs != null && rs.last() != false) {
+            if (rs != null && rs.last() != false) {
                 numRow = rs.getRow();
                 rs.beforeFirst();
             }
-                
-            if(numRow == 1) {
-                while(rs != null && rs.next() != false) {
+
+            if (numRow == 1) {
+                while (rs != null && rs.next() != false) {
                     price = Float.parseFloat(rs.getString("Price"));
                     des = rs.getString("Description");
                     conDes = rs.getString("ConditionDescription");
@@ -276,18 +290,18 @@ public class TempToy {
                     tid = Integer.parseInt(rs.getString("Tid"));
                 }
             }
-                                  
+
             // close connections and statements
-            if(rs != null) {
+            if (rs != null) {
                 rs.close();
             }
-            
-            if(stmt != null) {
+
+            if (stmt != null) {
                 stmt.close();
             }
-            
+
             Globals.closeConn();
-            
+
         } catch (IllegalArgumentException e) {
             Globals.beanLog.info(e.toString());
         } catch (ClassNotFoundException e) {
@@ -296,7 +310,58 @@ public class TempToy {
             Globals.beanLog.info(e.toString());
         } finally {
             Globals.closeConn();
-        }     
+        }
+    }
+
+    public void getOnTid() throws SQLException, ClassNotFoundException {
+        try {
+
+            if (tid == 0) {
+                throw new IllegalArgumentException("Id not set");
+            }
+
+            Globals.openConn();
+
+            // Create SQL statement and execute	
+            Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM [Toys] WHERE [Tid] = " + tid);
+
+            int numRow = 0;
+            if (rs != null && rs.last() != false) {
+                numRow = rs.getRow();
+                rs.beforeFirst();
+            }
+
+            if (numRow == 1) {
+                while (rs != null && rs.next() != false) {
+                    name = rs.getString("Name");
+                    des = rs.getString("Description");
+                    age = Integer.parseInt(rs.getString("Age"));
+                    sex = Integer.parseInt(rs.getString("Sex"));
+                    orgPrice = Float.parseFloat(rs.getString("Price"));
+                    picUrl = rs.getString("PicUrl");
+                    categoryId=Integer.parseInt(rs.getString("CategoryId"));
+                }
+            }
+
+            // close connections and statements
+            if (rs != null) {
+                rs.close();
+            }
+
+            if (stmt != null) {
+                stmt.close();
+            }
+
+            Globals.closeConn();
+
+        } catch (IllegalArgumentException e) {
+            Globals.beanLog.info(e.toString());
+        } catch (SQLException e) {
+            Globals.beanLog.info(e.toString());
+        } finally {
+            Globals.closeConn();
+        }
     }
 
     /**

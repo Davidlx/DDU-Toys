@@ -7,5 +7,5 @@
                         <ul class="nav nav-pills nav-stacked" style="background-color: white;">
                             <li role="presentation"><a href="${pageContext.request.contextPath}/user">Orders</a></li>
                             <li role="presentation"><a href="${pageContext.request.contextPath}/user/sales">Sales</a></li>
-                            <li role="presentation"><a href="${pageContext.request.contextPath}/user/newSale?from=${pageContext.request.requestURI}">New Sale</a></li>
+                            <li role="presentation"><a href="${pageContext.request.contextPath}/user/newSale">New Sale</a></li>
                         </ul>
