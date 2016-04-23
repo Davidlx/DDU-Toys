@@ -6,6 +6,7 @@
 package Bean.SpecificBean;
 
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -69,6 +70,10 @@ public class Order {
             price += items.get(i).getItemInfo().getAmount() * items.get(i).getItemInfo().getPrice();
             amount += items.get(i).getItemInfo().getAmount();
         }
+        
+        DecimalFormat df = new DecimalFormat("#.00");
+        price = Float.parseFloat(df.format(price));
+        
         this.totalPrice = price;
         this.numberOfItems = amount;
     }
