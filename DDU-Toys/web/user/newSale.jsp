@@ -26,7 +26,7 @@
                         <div class="userMainContent">
                             <h1>New Sale Item</h1>
                             <div class="row marginTop marginLeft">
-                                <form method="POST" action="${pageContext.request.contextPath}/newSale">
+                                <form method="POST" action="${pageContext.request.contextPath}/user/newSale">
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Choose Existing Toys</label>
                                       <select class="form-control" name="existingToy" id="toySelection">

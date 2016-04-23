@@ -51,115 +51,120 @@ public class newSaleServlet extends basicServlet {
 
     private void addSale(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
-        int existingToyId = -1;
-        if (request.getParameter("existingToy") != null) {
-            existingToyId = Integer.parseInt(request.getParameter("existingToy"));
-        }
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
-        String conDescription = request.getParameter("conDescription");
-        String originalPrice = request.getParameter("originalPrice");
-        String currentPrice = request.getParameter("currentPrice");
-        String amountToys = request.getParameter("amountToys");
-        String targetAge = request.getParameter("targetAge");
-        String pictureUrl = request.getParameter("pictureUrl");
-        String sex = request.getParameter("sex");
-        String categoryId = request.getParameter("categoryId");
-        
-        HttpSession session = request.getSession();
-        Customer c=(Customer)session.getAttribute("customer");
-        int cid = c.getId();
-        //if the user specifies a new toy
-        if (existingToyId == 0) {
-            if (name != null && !name.equalsIgnoreCase("")
-                    && description != null && !description.equalsIgnoreCase("")
-                    && conDescription != null && !conDescription.equalsIgnoreCase("")
-                    && originalPrice != null && !originalPrice.equalsIgnoreCase("")
-                    && currentPrice != null && !currentPrice.equalsIgnoreCase("")
-                    && amountToys != null && !amountToys.equalsIgnoreCase("")
-                    && targetAge != null && !targetAge.equalsIgnoreCase("")
-                    && pictureUrl != null && !pictureUrl.equalsIgnoreCase("")
-                    && sex != null && !sex.equalsIgnoreCase("")
-                    && categoryId != null && !categoryId.equalsIgnoreCase("")) {
-                TempToy temp = new TempToy();
-                temp.setName(name);
-                temp.setDes(description);
-                temp.setConDes(conDescription);
-                temp.setOrgPrice(Integer.parseInt(originalPrice));
-                temp.setPrice(Integer.parseInt(currentPrice));
-                temp.setAmount(Integer.parseInt(amountToys));
-                temp.setAge(Integer.parseInt(targetAge));
-                temp.setPicUrl(pictureUrl);
-                temp.setSex(Integer.parseInt(sex));
-                temp.setCategoryId(Integer.parseInt(categoryId));
-                temp.setCid(cid);
-                temp.insert();
-                String uri = request.getParameter("from");
-                //removes the .jsp
-                if (uri.toLowerCase().contains(".jsp")) {
-                    uri = uri.substring(0, uri.length() - 4);
-                }
-                response.sendRedirect(uri);
+        try {
+            int existingToyId = -1;
+            if (request.getParameter("existingToy") != null) {
+                existingToyId = Integer.parseInt(request.getParameter("existingToy"));
             }
-        }
-        //the user wants to sell a toy that already exists
-        else if (existingToyId > 0) {
-            if (conDescription != null && !conDescription.equalsIgnoreCase("")
-                    && currentPrice != null && !currentPrice.equalsIgnoreCase("")
-                    && amountToys != null && !amountToys.equalsIgnoreCase("")) {
-                TempToy temp = new TempToy();
-                temp.setTid(existingToyId);
-                temp.setConDes(conDescription);
-                temp.setPrice(Integer.parseInt(currentPrice));
-                temp.setAmount(Integer.parseInt(amountToys));
-                temp.setCid(cid);
-                temp.insert();
-                
-                String uri = request.getParameter("from");
-                //removes the .jsp
-                if (uri.toLowerCase().contains(".jsp")) {
-                    uri = uri.substring(0, uri.length() - 4);
-                }
-                response.sendRedirect(uri);
-            }
-        } 
-        //redirect
-        else {
-            //send a list of toys
-            ArrayList<Toy> toys = new ArrayList<Toy>();
-            try {
-                Globals.openConn();
-                Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                //retreive all orders of the user
-                ResultSet rs = stmt.executeQuery("SELECT * FROM [Toys]");
-                int numRow = 0;
-                if (rs != null && rs.last() != false) {
-                    numRow = rs.getRow();
-                    rs.beforeFirst();
-                }
-                if (numRow > 0) {
-                    while (rs != null && rs.next() != false) {
-                        Toy toy = new Toy();
-                        toy.setId(rs.getInt(1));
-                        toy.getOnId();
-                        toys.add(toy);
-                    }
-                }
-                if (rs != null) {
-                    rs.close();
-                }
-                Globals.closeConn();
-            } catch (ClassNotFoundException e) {
-                Globals.beanLog.info(e.toString());
-            } catch (SQLException e) {
-                Globals.beanLog.info(e.toString());
-            }
+            String name = request.getParameter("name");
+            String description = request.getParameter("description");
+            String conDescription = request.getParameter("conDescription");
+            String originalPrice = request.getParameter("originalPrice");
+            String currentPrice = request.getParameter("currentPrice");
+            String amountToys = request.getParameter("amountToys");
+            String targetAge = request.getParameter("targetAge");
+            String pictureUrl = request.getParameter("pictureUrl");
+            String sex = request.getParameter("sex");
+            String categoryId = request.getParameter("categoryId");
 
-            request.setAttribute("toys", toys);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("newSale.jsp");
-            dispatcher.forward(request, response);
+            HttpSession session = request.getSession();
+            Customer c = (Customer) session.getAttribute("customer");
+            int cid = c.getId();
+            //if the user specifies a new toy
+            if (existingToyId == 0) {
+                if (name != null && !name.equalsIgnoreCase("")
+                        && description != null && !description.equalsIgnoreCase("")
+                        && conDescription != null && !conDescription.equalsIgnoreCase("")
+                        && originalPrice != null && !originalPrice.equalsIgnoreCase("")
+                        && currentPrice != null && !currentPrice.equalsIgnoreCase("")
+                        && amountToys != null && !amountToys.equalsIgnoreCase("")
+                        && targetAge != null && !targetAge.equalsIgnoreCase("")
+                        && pictureUrl != null && !pictureUrl.equalsIgnoreCase("")
+                        && sex != null && !sex.equalsIgnoreCase("")
+                        && categoryId != null && !categoryId.equalsIgnoreCase("")) {
+                    TempToy temp = new TempToy();
+                    temp.setName(name);
+                    temp.setDes(description);
+                    temp.setConDes(conDescription);
+                    temp.setOrgPrice(Integer.parseInt(originalPrice));
+                    temp.setPrice(Integer.parseInt(currentPrice));
+                    temp.setAmount(Integer.parseInt(amountToys));
+                    temp.setAge(Integer.parseInt(targetAge));
+                    temp.setPicUrl(pictureUrl);
+                    temp.setSex(Integer.parseInt(sex));
+                    temp.setCategoryId(Integer.parseInt(categoryId));
+                    temp.setCid(cid);
+                    temp.insert();
+                    response.sendRedirect("index");
+                    
+                } else {
+                    sendToys(request, response);
+                    response.sendRedirect("newSale");
+                }
+            } //the user wants to sell a toy that already exists
+            else if (existingToyId > 0) {
+                if (conDescription != null && !conDescription.equalsIgnoreCase("")
+                        && currentPrice != null && !currentPrice.equalsIgnoreCase("")
+                        && amountToys != null && !amountToys.equalsIgnoreCase("")) {
+                    TempToy temp = new TempToy();
+                    temp.setTid(existingToyId);
+                    temp.getOnTid();
+                    
+                    temp.setConDes(conDescription);
+                    temp.setPrice(Integer.parseInt(currentPrice));
+                    temp.setAmount(Integer.parseInt(amountToys));
+                    temp.setCid(cid);
+                    temp.insert();
+
+                    response.sendRedirect("index");
+                }
+            } //redirect
+            else {
+                sendToys(request, response);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("newSale.jsp");
+                dispatcher.forward(request, response);
+            }
+        } catch (ClassNotFoundException e) {
+            Globals.beanLog.info(e.toString());
+        } catch (SQLException e) {
+            Globals.beanLog.info(e.toString());
         }
 
+    }
+
+    public void sendToys(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
+        //send a list of toys
+        ArrayList<Toy> toys = new ArrayList<Toy>();
+        try {
+            Globals.openConn();
+            Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            //retreive all orders of the user
+            ResultSet rs = stmt.executeQuery("SELECT * FROM [Toys]");
+            int numRow = 0;
+            if (rs != null && rs.last() != false) {
+                numRow = rs.getRow();
+                rs.beforeFirst();
+            }
+            if (numRow > 0) {
+                while (rs != null && rs.next() != false) {
+                    Toy toy = new Toy();
+                    toy.setId(rs.getInt(1));
+                    toy.getOnId();
+                    toys.add(toy);
+                }
+            }
+            if (rs != null) {
+                rs.close();
+            }
+            Globals.closeConn();
+        } catch (ClassNotFoundException e) {
+            Globals.beanLog.info(e.toString());
+        } catch (SQLException e) {
+            Globals.beanLog.info(e.toString());
+        }
+
+        request.setAttribute("toys", toys);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
