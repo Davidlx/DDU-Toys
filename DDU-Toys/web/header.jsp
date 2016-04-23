@@ -6,4 +6,5 @@
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
         <script src="${pageContext.request.contextPath}/js/jquery-2.2.3.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+        <script src="${pageContext.request.contextPath}/js/ddu.js"></script>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

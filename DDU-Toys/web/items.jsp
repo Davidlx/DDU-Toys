@@ -33,8 +33,9 @@
                         </c:if>
                                 
                                 <div class="col-sm-6 col-md-3">
-                                  <div class="thumbnail"  onclick="location.href='${pageContext.request.contextPath}/itemDetail?stockId=${item.firstHandItem.id}'"  style="cursor: pointer">
+                                  
                                      <c:if test="${firstHand}">
+                                      <div class="thumbnail"  onclick="location.href='${pageContext.request.contextPath}/itemDetail?stockId=${item.firstHandItem.id}'"  style="cursor: pointer">
                                      <img data-src="holder.js/100%x200" alt="100%x200" style="width: 100%; height:400px; display: block;" src="${item.toyInfo.picUrl}"/> 
                                      <div class="caption">
                                         <h3>${item.toyInfo.name}</h3>
@@ -53,6 +54,7 @@
                                     </div>
                                     </c:if>
                                       <c:if test="${!firstHand}">
+                                     <div class="thumbnail"  onclick="location.href='${pageContext.request.contextPath}/itemDetail?stockId=${item.usedItem.id}'"  style="cursor: pointer">
                                      <img data-src="holder.js/100%x200" alt="100%x200" style="width: 100%; height:400px; display: block;" src="${item.toyInfo.picUrl}"/> 
                                      <div class="caption">
                                         <h3>${item.toyInfo.name}</h3>
