@@ -70,7 +70,7 @@
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Target Age (Inclusive)</label>
-                                      <input type="number" class="form-control" id="ageInput" placeholder=">Target Age (Inclusive)">
+                                      <input type="number" class="form-control" id="ageInput" placeholder="Target Age (Inclusive)">
                                     </div>
                                     
                                     <div class="form-group">
