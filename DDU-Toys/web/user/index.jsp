@@ -29,28 +29,40 @@
                             <h1>Orders</h1>
                             <c:forEach items="${listOrders}" var="order">
                                 
-                            </c:forEach>
-                            <div class="orderItem">
+                                <div class="orderItem">
                                 <div class="orderBasicInfo">
-                                    <p>Purchase Time & Order ID</p>
+                                    <p>Order Time: ${order.orderInfo.orderTime} & Order Number: ${order.orderInfo.id}</p>
                                     
                                 </div>
-                                <div class="row borderBottom">
-                                    <div class="col-md-2">
-                                        <img data-src="holder.js/100%x200" alt="100%x200" style="padding-left: 10px;padding-bottom: 10px;width: 100%; display: block;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTkyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDE5MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MjAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTUzZmEzNDU4YzAgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNTNmYTM0NThjMCI+PHJlY3Qgd2lkdGg9IjE5MiIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI3MC4wNTQ2ODc1IiB5PSIxMDQuNSI+MTkyeDIwMDwvdGV4dD48L2c+PC9nPjwvc3ZnPg==" data-holder-rendered="true">
-                                    </div>
-                                     <div class="col-md-6">
-                                        <h1 class="itemName" style="border:none;padding-top: 0; margin-top: 0px;">Snacks</h1>
-                                        <p class="basicInformation">Category · Sex · Age · Brand New / Second Hand</p>
-                                        <p>description</p>
-                                    </div>
-                                     <div class="col-md-2">1</div>
-                                     <div class="col-md-2 itemPrice">Price</div>
-                                </div>
+                                    <c:forEach items="${order.items}" var="item">
+                                        <div class="row borderBottom" style="padding-top:10px;">
+                                            <div class="col-md-2">
+                                                <img data-src="holder.js/100%x200" alt="100%x200" style="padding-left: 10px;width: 100%; height:200px;display: block;" src="${item.toyInfo.picUrl}">
+                                            </div>
+                                             <div class="col-md-6">
+                                                <h1 class="itemName" style="border:none;padding-top: 0; margin-top: 0px;">${item.toyInfo.name}</h1>
+                                                <p class="basicInformation">${item.toyInfo.categoryName} ·  <c:if test="${(item.toyInfo.sex ==0)}">
+                                                Female
+                                            </c:if>
+                                            <c:if test="${(item.toyInfo.sex ==1)}">
+                                                Male
+                                            </c:if>
+                                            <c:if test="${(item.toyInfo.sex ==2)}">
+                                                Unisex
+                                            </c:if> ·  ${item.toyInfo.age} years above · <c:if test="${item.itemInfo.recycled==0}">Brand New</c:if><c:if test="${item.itemInfo.recycled!=0}">Second Hand · Sold by ${item.sellerInfo.username}</c:if></p>
+                                                <p>${item.itemInfo.description}</p>
+                                            </div>
+                                             <div class="col-md-2">${item.itemInfo.amount}</div>
+                                             <div class="col-md-2 itemPrice">$${item.itemInfo.price}</div>
+                                        </div>
+                                    </c:forEach>
+                                
                                 <div class="orderSummary">
-                                    <h1>Subtotal (n items): Price</h1>
+                                    <h1>Subtotal (${order.numberOfItems} items): ${order.totalPrice}</h1>
                                 </div>
                             </div>
+                            </c:forEach>
+                            
                         </div>
                     </div>
                 </div>
