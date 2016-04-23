@@ -5,6 +5,9 @@
  */
 package Controllers.admin;
 
+import Bean.Globals;
+import Bean.Stock;
+import Bean.Toy;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -13,7 +16,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Controllers.basicServlet;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -35,6 +41,48 @@ public class toyStockServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
+        
+        ArrayList<Stock> stocks = new ArrayList<Stock>();
+        int tid = Integer.parseInt(request.getParameter("tid"));
+        Toy currentToy = new Toy();
+        currentToy.setId(tid);
+        currentToy.getOnId();
+        
+        request.setAttribute("currentToy", currentToy);
+        
+        try {
+            Globals.openConn();
+            Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            //retreive all orders of the user
+            ResultSet rs = stmt.executeQuery("SELECT * FROM [Stock] WHERE [Tid] = "+tid);
+            int numRow = 0;
+            if (rs != null && rs.last() != false) {
+                numRow = rs.getRow();
+                rs.beforeFirst();
+            }
+            if (numRow > 0) {
+                while (rs != null && rs.next() != false) {
+                    Stock tempStock = new Stock();
+                    tempStock.setId(rs.getInt(1));
+                    tempStock.getOnId();
+                    stocks.add(tempStock);
+                }
+            }
+            if (rs != null) {
+                rs.close();
+            }
+            Globals.closeConn();
+        } catch (ClassNotFoundException e) {
+            Globals.beanLog.info(e.toString());
+        } catch (SQLException e) {
+            Globals.beanLog.info(e.toString());
+        }
+
+        request.setAttribute("stocks", stocks);
+        
+        
+        
+        
         RequestDispatcher dispatcher = request.getRequestDispatcher("toyStock.jsp"); 
         dispatcher.forward(request, response);
     }

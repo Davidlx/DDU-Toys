@@ -5,10 +5,19 @@
  */
 package Controllers.admin;
 
+import Bean.Comment;
+import Bean.Globals;
+import Bean.SpecificBean.FirstHandItem;
+import Bean.SpecificBean.ReplyComment;
+import Bean.SpecificBean.SecondHandItem;
+import Bean.Stock;
 import Controllers.basicServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -36,6 +45,58 @@ public class commentsServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
+        
+        int tid = Integer.parseInt(request.getParameter("stockId"));
+        Stock temp = new Stock();
+        
+        temp.setId(tid);
+        temp.getOnId();
+        
+        if (temp.getRecycled()==0) {
+            FirstHandItem tempItem = new FirstHandItem();
+            tempItem.setItem(temp);
+            request.setAttribute("type", 0);
+            request.setAttribute("item", tempItem);
+        }else{
+            SecondHandItem tempItem = new SecondHandItem();
+            tempItem.setUsedItem(temp);
+            request.setAttribute("type", 1);
+            request.setAttribute("item", tempItem);
+        }
+        
+        ArrayList<Comment> comments = new ArrayList<Comment>();
+         try {
+            Globals.openConn();
+            Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            //retreive all orders of the user
+            ResultSet rs = stmt.executeQuery("SELECT * FROM [Comment] WHERE [Mid]=0 AND [Sid] = "+tid);
+            int numRow = 0;
+            if (rs != null && rs.last() != false) {
+                numRow = rs.getRow();
+                rs.beforeFirst();
+            }
+            if (numRow > 0) {
+                while (rs != null && rs.next() != false) {
+                    Comment tempStock = new Comment();
+                    tempStock.setId(rs.getInt(1));
+                    tempStock.getOnId();
+                    
+                    comments.add(tempStock);
+                }
+            }
+            if (rs != null) {
+                rs.close();
+            }
+            Globals.closeConn();
+        } catch (ClassNotFoundException e) {
+            Globals.beanLog.info(e.toString());
+        } catch (SQLException e) {
+            Globals.beanLog.info(e.toString());
+        }
+         
+         request.setAttribute("comments", comments);
+        
+        
         RequestDispatcher dispatcher = request.getRequestDispatcher("comments.jsp"); 
         dispatcher.forward(request, response);
     }

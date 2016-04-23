@@ -49,7 +49,7 @@ public class cartServlet extends basicServlet {
         
         try {
             action = Integer.parseInt(request.getParameter("action"));
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             action = 0;
         }
         // action = 0: Just pressed the navigation cart button
