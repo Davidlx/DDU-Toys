@@ -79,22 +79,6 @@
                     
                     
                     <div class="comments">
-                        <p class="CommentsTitle">Comments for <c:if test="${!isRecycled}">${itemFirst.toyInfo.name}</c:if><c:if test="${isRecycled}">${itemSecond.toyInfo.name}</c:if></p>
-                         <c:forEach items="${listComments}" var="com">
-                            
-                             <div class="comment">
-                                <p class="commentContent">${com.comment}</p>
-                                <p class="CommentorInfo">${com.username} · ${com.postTime}</p>
-                                <c:if test="${(com.reply!=null)}">
-                                    <div class="replyComment">
-                                        <p class="commentContent">${com.reply.comment}</p>
-                                        <p class="CommentorInfo">${com.reply.username} · ${com.reply.postTime}</p>
-                                    </div>
-                                </c:if>
-                            </div>
-                             
-                        </c:forEach>
-                        
                         
                         <c:if test="${isLoggedIn}">
                             <p class="CommentsTitle" style="border-top:1px solid rgb(213,213,213)">New Comment</p>
@@ -111,6 +95,23 @@
                                 </div>
                               </form>
                         </c:if>
+                        
+                        <p class="CommentsTitle">Comments for <c:if test="${!isRecycled}">${itemFirst.toyInfo.name}</c:if><c:if test="${isRecycled}">${itemSecond.toyInfo.name}</c:if></p>
+                         <c:forEach items="${listComments}" var="com">
+                            
+                             <div class="comment">
+                                <p class="commentContent">${com.comment}</p>
+                                <p class="CommentorInfo">${com.username} · ${com.postTime}</p>
+                                <c:if test="${(com.reply!=null)}">
+                                    <div class="replyComment">
+                                        <p class="commentContent">${com.reply.comment}</p>
+                                        <p class="CommentorInfo">${com.reply.username} · ${com.reply.postTime}</p>
+                                    </div>
+                                </c:if>
+                            </div>
+                             
+                        </c:forEach>
+                        
                     </div>
                     
                     <h1 class="homePageTitle" style="padding-top:50px">Similar Items</h1>
