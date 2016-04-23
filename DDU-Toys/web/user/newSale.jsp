@@ -24,6 +24,10 @@
                     </div>
                     <div class="col-md-10">
                         <div class="userMainContent">
+                            
+                            <h1>Pending Sales</h1>
+                            
+                            
                             <h1>New Sale Item</h1>
                             <div class="row marginTop marginLeft">
                                 <form method="POST" action="${pageContext.request.contextPath}/newSale">
