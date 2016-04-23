@@ -86,7 +86,7 @@ Fetch an array list of the comments attached to the stock, information needed sp
                                     <div class="modal-header">
                                       <h4 class="modal-title" id="myModalLabel">Reply Message</h4>
                                     </div>
-                                    <form class="form-horizontal" method="POST" action="${pageContext.request.contextPath}/replyComment">
+                                    <form class="form-horizontal" method="POST" action="${pageContext.request.contextPath}/replyComment?commentId=${comment.id}&sid=<c:if test="${type==0}">${item.firstHandItem.id}</c:if><c:if test="${type==1}">${item.usedItem.id}</c:if>">
                                     <div class="modal-body">
                                         <p>Original Messages</p>
                                         <p>${comment.comment}</p>
