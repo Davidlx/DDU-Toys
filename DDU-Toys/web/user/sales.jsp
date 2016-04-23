@@ -29,10 +29,10 @@
 
                                 <div class="row  borderBottom marginTop">
                                     <div class="col-md-2">
-                                        <img data-src="holder.js/100%x200" alt="100%x200" style="width: 100%; height:400px; display: block;" src="${item.toyInfo.picUrl}"/> 
+                                        <img data-src="holder.js/100%x200" alt="100%x200" style="width: 100%; height:200px; display: block;" src="${item.toyInfo.picUrl}"/> 
                                     </div>
                                      <div class="col-md-6">
-                                        <h1 class="itemName" style="border:none;padding-top: 0; margin-top: 0px;">{item.toyInfo.name}</h1>
+                                        <h1 class="itemName" style="border:none;padding-top: 0; margin-top: 0px;">${item.toyInfo.name}</h1>
                                         <p class="basicInformation">${item.toyInfo.categoryName} & <c:if test="${(item.toyInfo.sex ==0)}">
                                                     Female
                                                 </c:if>
@@ -46,8 +46,8 @@
                                         <p>${item.usedItem.conDes}</p>
                                         <a href="deleteSales?sid=${item.usedItem.id}"><p>Delete this Item</p></a>
                                     </div>
-                                     <div class="col-md-2">${item.usedItem.amount}</div>
-                                     <div class="col-md-2 itemPrice">${item.usedItem.price}</div>
+                                     <div class="col-md-2">${item.usedItem.amount} in stock</div>
+                                     <div class="col-md-2 itemPrice">$${item.usedItem.price}</div>
                                 </div>
                             </c:forEach>
                         </div>
