@@ -100,6 +100,10 @@
         <servlet-name>toyEditServlet</servlet-name>
         <servlet-class>Controllers.admin.toyEditServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>replyCommentServlet</servlet-name>
+        <servlet-class>Controllers.admin.replyCommentServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -198,6 +202,10 @@
     <servlet-mapping>
         <servlet-name>toyEditServlet</servlet-name>
         <url-pattern>/admin/toyEdit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>replyCommentServlet</servlet-name>
+        <url-pattern>/replyComment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

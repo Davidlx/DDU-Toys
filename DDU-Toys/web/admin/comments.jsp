@@ -86,13 +86,13 @@ Fetch an array list of the comments attached to the stock, information needed sp
                                     <div class="modal-header">
                                       <h4 class="modal-title" id="myModalLabel">Reply Message</h4>
                                     </div>
-                                    <form class="form-horizontal">
+                                    <form class="form-horizontal" method="POST" action="${pageContext.request.contextPath}/replyComment">
                                     <div class="modal-body">
                                         <p>Original Messages</p>
                                         <p>${comment.comment}</p>
                                             <div class="form-group">
                                               <div class="col-sm-12">
-                                                <textarea class="form-control" rows="2"></textarea>
+                                                <textarea class="form-control" rows="2" name = "text"></textarea>
                                               </div>
                                             </div>
 
