@@ -26,18 +26,25 @@ A bean containing the original informaiton of the stock, and a bean contains the
                     </div>
                     <div class="col-md-10">
                         <div class="userMainContent">
-                            <h1>Stocks for "Toy Name"</h1>
+                            <h1>Edit stocks for ${toy.name}</h1>
                             <div class="ToyItem">
                                 <div class="row borderBottom" style="margin-top:10px;">
                                     <div class="col-md-2">
-                                        <img data-src="holder.js/100%x200" alt="100%x200" style="padding-left: 10px;padding-bottom: 10px;width: 100%; display: block;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTkyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDE5MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MjAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTUzZmEzNDU4YzAgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNTNmYTM0NThjMCI+PHJlY3Qgd2lkdGg9IjE5MiIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI3MC4wNTQ2ODc1IiB5PSIxMDQuNSI+MTkyeDIwMDwvdGV4dD48L2c+PC9nPjwvc3ZnPg==" data-holder-rendered="true">
-                                    </div>
+                                        <img data-src="holder.js/100%x200" alt="100%x200" style="padding-left: 10px;padding-bottom: 10px;width: 100%; display: block;" src=" ${toy.picUrl}"/></div>
                                      <div class="col-md-6">
-                                        <h1 class="itemName" style="border:none;padding-top: 0; margin-top: 0px;">Item Name</h1>
-                                        <p class="basicInformation">Category · Sex · Age</p>
-                                        <p>description</p>
+                                        <h1 class="itemName" style="border:none;padding-top: 0; margin-top: 0px;"> ${toy.name}</h1>
+                                        <p class="basicInformation">${toy.categoryName} ·  <c:if test="${(toy.sex ==0)}">
+                                                Female
+                                            </c:if>
+                                            <c:if test="${(toy.sex ==1)}">
+                                                Male
+                                            </c:if>
+                                            <c:if test="${(toy.sex ==2)}">
+                                                Unisex
+                                            </c:if> · ${toy.age}</p>
+                                        <p>${toy.des}</p>
                                     </div>
-                                     <div class="col-md-4">price</div>
+                                     <div class="col-md-4">Original Price: ${toy.price}</div>
                                 </div>
                             </div>
                             
@@ -47,17 +54,17 @@ A bean containing the original informaiton of the stock, and a bean contains the
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Condition Description</label>
-                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Condition Description" value="">
+                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Condition Description" value="${stock.conDes}">
                                     </div>
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Current Price</label>
-                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Current Price" value="">
+                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Current Price" value="${stock.price}">
                                     </div>
                                     
                                     <div class="form-group">
-                                      <label for="exampleInputPassword1">Amont of Toys</label>
-                                      <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Amont of Toys" value="">
+                                      <label for="exampleInputPassword1">Amount of Toys</label>
+                                      <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Amont of Toys" value="${stock.amount}">
                                     </div>
                                     
                                     <button type="submit" class="btn btn-default">Submit</button>
