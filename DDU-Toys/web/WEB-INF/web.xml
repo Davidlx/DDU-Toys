@@ -92,6 +92,14 @@
         <servlet-name>checkOutServlet</servlet-name>
         <servlet-class>Controllers.checkOutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>editStockServlet</servlet-name>
+        <servlet-class>Controllers.admin.editStockServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>toyEditServlet</servlet-name>
+        <servlet-class>Controllers.admin.toyEditServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -182,6 +190,14 @@
     <servlet-mapping>
         <servlet-name>checkOutServlet</servlet-name>
         <url-pattern>/checkOut</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editStockServlet</servlet-name>
+        <url-pattern>/admin/editStock</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>toyEditServlet</servlet-name>
+        <url-pattern>/admin/toyEdit</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

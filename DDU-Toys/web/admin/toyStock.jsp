@@ -71,8 +71,8 @@ A bean contains the information for Toy and an arrayList of stocks
                                         <td>$${item.price}</td>
                                         <td>${item.cid}</td>
                                         <td><a href="comments?stockId=${item.id}"><p>View Comments</p></a></td>
-                                        <td><a href="editStock?stockId=${item.id}"><p>Edit Comments</p></a></td>
-                                        <td><a href="deleteStock?stockId=${item.id}"><p>Delete Comments</p></a></td>
+                                        <td><a href="editStock?stockId=${item.id}"><p>Edit Stock</p></a></td>
+                                        <td><a href="deleteStock?stockId=${item.id}"><p>Delete Stock</p></a></td>
                                     </tr>
                                 </c:forEach>
                                 
