@@ -58,7 +58,7 @@
                                     </c:forEach>
                                 
                                 <div class="orderSummary">
-                                    <h1>Subtotal (${order.numberOfItems} items): ${order.totalPrice}</h1>
+                                    <h1>Subtotal (${order.numberOfItems} items): $${order.totalPrice}</h1>
                                 </div>
                             </div>
                             </c:forEach>
