@@ -42,7 +42,7 @@ public class adminIndexServlet extends basicServlet {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
         
-         ArrayList<Toy> toys = new ArrayList<Toy>();
+        ArrayList<Toy> toys = new ArrayList<Toy>();
         try {
             Globals.openConn();
             Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
