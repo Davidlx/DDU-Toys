@@ -34,7 +34,7 @@ public class OItem {
         this.toyInfo.getOnId();
         if(this.itemInfo.getRecycled() == 1) {
             this.sellerInfo = new Bean.Customer();
-            this.sellerInfo.setId(this.itemInfo.getTid());
+            this.sellerInfo.setId(this.itemInfo.getCid());
             this.sellerInfo.getOnId();
         }
     }
