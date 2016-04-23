@@ -26,30 +26,30 @@
                         <div class="userMainContent">
                             <h1>New Sale Item</h1>
                             <div class="row marginTop marginLeft">
-                                <form>
+                                <form method="POST" action="${pageContext.request.contextPath}/newSale">
                                     <div class="form-group">
                                       <label for="exampleInputEmail1">Item Name</label>
-                                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Item Name">
+                                      <input type="text" class="form-control" id="exampleInputEmail1" name = "name" placeholder="Item Name">
                                     </div>
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Description</label>
-                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Description">
+                                      <input type="text" class="form-control" id="exampleInputPassword1" name = "description" placeholder="Description">
                                     </div>
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Condition Description</label>
-                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Condition Description">
+                                      <input type="text" class="form-control" id="exampleInputPassword1"  name = "conDescription" placeholder="Condition Description">
                                     </div>
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Original Price</label>
-                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Original Price">
+                                      <input type="text" class="form-control" id="exampleInputPassword1" name = "originalPrice" placeholder="Original Price">
                                     </div>
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Current Price</label>
-                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Current Price">
+                                      <input type="text" class="form-control" id="exampleInputPassword1" name = "name" placeholder="Current Price">
                                     </div>
                                     
                                     <div class="form-group">
