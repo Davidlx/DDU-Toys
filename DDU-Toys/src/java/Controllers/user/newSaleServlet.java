@@ -5,10 +5,18 @@
  */
 package Controllers.user;
 
+import Bean.Customer;
+import Bean.Globals;
+import Bean.SpecificBean.SecondHandItem;
+import Bean.Stock;
+import Bean.Toy;
 import Controllers.basicServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -36,9 +44,68 @@ public class newSaleServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("newSale.jsp"); 
-        dispatcher.forward(request, response);
+        addSale(request,response);
+        //RequestDispatcher dispatcher = request.getRequestDispatcher("newSale.jsp"); 
+        //dispatcher.forward(request, response);
     }
+    
+    private void addSale(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException, ClassNotFoundException, SQLException {
+            String username = request.getParameter("name");
+            String email = request.getParameter("description");
+            String password = request.getParameter("conDescription");
+            //form completed
+            if (email != null && !email.equalsIgnoreCase("") &&
+                password != null && !password.equalsIgnoreCase("") &&
+                username != null && !username.equalsIgnoreCase("")) {
+                Customer c = new Customer();
+                c.setUsername(username);
+                c.setEmail(email);
+                c.setPassword(password);
+                c.insert();
+                String uri = request.getParameter("from");
+                //removes the .jsp
+                if(uri.toLowerCase().contains(".jsp"))
+                   uri=uri.substring(0, uri.length()-4);
+                response.sendRedirect(uri);
+            }
+            else{
+                //send a list of toys
+                ArrayList<Toy> toys = new ArrayList<Toy>();
+                try{
+                    Globals.openConn();
+                    Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                    //retreive all orders of the user
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM [Toys]");
+                    int numRow = 0;
+                    if(rs != null && rs.last() != false) {
+                        numRow = rs.getRow();
+                        rs.beforeFirst();
+                    }
+                    if(numRow >0) {
+                        while(rs != null && rs.next() != false) {
+                            Toy toy = new Toy();
+                            toy.setId(rs.getInt(1));
+                            toy.getOnId();
+                            toys.add(toy);
+                        }
+                    }
+                    if(rs != null) {
+                        rs.close();
+                    }
+                    Globals.closeConn();
+                }
+                catch (ClassNotFoundException e) {
+                    Globals.beanLog.info(e.toString());
+                } catch (SQLException e) {
+                    Globals.beanLog.info(e.toString());
+                }
+
+                request.setAttribute("toys", toys);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("newSale.jsp"); 
+                dispatcher.forward(request, response);
+            }
+        }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
