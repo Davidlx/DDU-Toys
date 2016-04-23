@@ -88,6 +88,10 @@
         <servlet-name>SecondHandCartItem</servlet-name>
         <servlet-class>Bean.SpecificBean.SecondHandCartItem</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>checkOutServlet</servlet-name>
+        <servlet-class>Controllers.checkOutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -173,6 +177,10 @@
     <servlet-mapping>
         <servlet-name>SecondHandCartItem</servlet-name>
         <url-pattern>/SecondHandCartItem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkOutServlet</servlet-name>
+        <url-pattern>/checkOut</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

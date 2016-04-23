@@ -132,22 +132,40 @@ public class Stock {
     try {
             Globals.openConn();
             
-            // Create a preparedstatement to set the SQL statement	
-            PreparedStatement pstmt = Globals.con.prepareStatement("UPDATE [Stock] SET [Recycle] = ?, [ConditionDescription] = ?, [Amount] = ?, [Price] = ?, [Cid] = ?, [Tid] = ? WHERE [Sid] = ?");
-            pstmt.setString(1, Integer.toString(recycled));
-            pstmt.setString(2, conDes);
-            pstmt.setString(3, Integer.toString(amount));
-            pstmt.setString(4, Float.toString(price));
-            pstmt.setString(5, Integer.toString(Cid));
-            pstmt.setString(6, Integer.toString(Tid));
-            pstmt.setString(7, Integer.toString(id));
-                        
-            // execute the SQL statement
-            pstmt.executeUpdate();
-            
-            // close connections
-            if(pstmt != null) {
-                pstmt.close();
+            // Create a preparedstatement to set the SQL statement
+            if(Cid == 0) {
+                PreparedStatement pstmt = Globals.con.prepareStatement("UPDATE [Stock] SET [Recycle] = ?, [ConditionDescription] = ?, [Amount] = ?, [Price] = ?, [Tid] = ? WHERE [Sid] = ?");
+                pstmt.setString(1, Integer.toString(recycled));
+                pstmt.setString(2, conDes);
+                pstmt.setString(3, Integer.toString(amount));
+                pstmt.setString(4, Float.toString(price));
+                pstmt.setString(5, Integer.toString(Tid));
+                pstmt.setString(6, Integer.toString(id));
+
+                // execute the SQL statement
+                pstmt.executeUpdate();
+
+                // close connections
+                if(pstmt != null) {
+                    pstmt.close();
+                }
+            } else {
+                PreparedStatement pstmt = Globals.con.prepareStatement("UPDATE [Stock] SET [Recycle] = ?, [ConditionDescription] = ?, [Amount] = ?, [Price] = ?, [Cid] = ?, [Tid] = ? WHERE [Sid] = ?");
+                pstmt.setString(1, Integer.toString(recycled));
+                pstmt.setString(2, conDes);
+                pstmt.setString(3, Integer.toString(amount));
+                pstmt.setString(4, Float.toString(price));
+                pstmt.setString(5, Integer.toString(Cid));
+                pstmt.setString(6, Integer.toString(Tid));
+                pstmt.setString(7, Integer.toString(id));
+
+                // execute the SQL statement
+                pstmt.executeUpdate();
+
+                // close connections
+                if(pstmt != null) {
+                    pstmt.close();
+                }
             }
             
             Globals.closeConn();

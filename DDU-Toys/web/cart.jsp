@@ -64,15 +64,15 @@
                     </c:if>
                         
                      <c:if test="${!isSecondHandCartEmpty}">
-                        <jsp:useBean id="isSecondHandCartList"  type="java.util.ArrayList"  scope="session"/>
-                        <c:forEach items="${isSecondHandCartList}" var="item">
+                        <jsp:useBean id="secondHandCartList"  type="java.util.ArrayList"  scope="session"/>
+                        <c:forEach items="${secondHandCartList}" var="item">
                             <div class="cartItem">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <img data-src="holder.js/100%x200" alt="100%x200" style="width: 100%; height:400px; display: block;" src="${item.toyInfo.picUrl}"/> 
+                                        <img data-src="holder.js/100%x200" alt="100%x200" style="width: 100%; height:200px; display: block;" src="${item.toyInfo.picUrl}"/> 
                                     </div>
                                     <div class="col-md-6">
-                                        <h1 class="itemName" onclick="location.href='${pageContext.request.contextPath}/itemDetail?stockId=${item.usedItem.id}'"  style="cursor: pointer">{item.toyInfo.name}</h1>
+                                        <h1 class="itemName" onclick="location.href='${pageContext.request.contextPath}/itemDetail?stockId=${item.usedItem.id}'"  style="cursor: pointer">${item.toyInfo.name}</h1>
                                         <p class="basicInformation">${item.toyInfo.categoryName} & <c:if test="${(item.toyInfo.sex ==0)}">
                                                 Female
                                             </c:if>
