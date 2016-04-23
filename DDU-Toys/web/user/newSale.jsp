@@ -60,27 +60,27 @@
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Current Price</label>
-                                      <input type="text" class="form-control" id="exampleInputPassword1" name = "name" placeholder="Current Price">
+                                      <input type="text" class="form-control" id="exampleInputPassword1" name = "currentPrice" placeholder="Current Price">
                                     </div>
                                     
                                     <div class="form-group" >
                                       <label for="exampleInputPassword1">Amont of Toys</label>
-                                      <input type="number" class="form-control" id="amontInput" placeholder="Amont of Toys">
+                                      <input type="number" class="form-control" id="amontInput" name = "amountToys" placeholder="Amont of Toys">
                                     </div>
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Target Age (Inclusive)</label>
-                                      <input type="number" class="form-control" id="ageInput" placeholder=">Target Age (Inclusive)">
+                                      <input type="number" class="form-control" id="ageInput" name = "targetAge" placeholder=">Target Age (Inclusive)">
                                     </div>
                                     
                                     <div class="form-group">
                                       <label for="exampleInputEmail1">Picture Url</label>
-                                      <input type="text" class="form-control" id="picInput" placeholder="Picture Url">
+                                      <input type="text" class="form-control" id="picInput" name = "pictureUrl" placeholder="Picture Url">
                                     </div>
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Sex</label>
-                                      <select class="form-control" id="sexSelection">
+                                      <select class="form-control" id="sexSelection" name = "sex">
                                         <option value = "0">Female</option>
                                         <option value = "1">Male</option>
                                         <option value = "2">Unisex</option>
@@ -89,7 +89,7 @@
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Category</label>
-                                      <select class="form-control" id="cateSelection">
+                                      <select class="form-control" id="cateSelection" name = "categoryId">
                                         <c:forEach items="${cate}" var="category">
                                             <option value = "${category.id}">${category.name}</option>
                                         </c:forEach>
