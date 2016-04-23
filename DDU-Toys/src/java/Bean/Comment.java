@@ -97,7 +97,7 @@ public class Comment {
             pstmt.setTimestamp(1, postTime);
             pstmt.setString(2, comment);
             pstmt.setString(3, Integer.toString(sid));
-            pstmt.setString(4, Integer.toString(sid));
+            pstmt.setString(4, Integer.toString(cid));
             pstmt.setString(5, Integer.toString(mid));
             pstmt.setString(6, Integer.toString(replyId));
             

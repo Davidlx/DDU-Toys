@@ -20,7 +20,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -61,10 +63,11 @@ public class replyCommentServlet extends basicServlet {
         comment.setReplyId(Integer.parseInt(commentId));
         comment.setMid(mid);
         comment.setCid(0);
+        Date date= new Date();
+        comment.setPostTime(new Timestamp(date.getTime()));
         comment.insert();
        
-        RequestDispatcher dispatcher = request.getRequestDispatcher("comments.jsp");
-        dispatcher.forward(request, response);
+        response.sendRedirect("admin/index");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
