@@ -14,6 +14,8 @@ import Bean.Stock;
 import Controllers.basicServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -44,48 +46,73 @@ public class commentsServlet extends basicServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        request=super.retrieveBasicAttributes(request);
-        
-        int tid = Integer.parseInt(request.getParameter("stockId"));
+        request = super.retrieveBasicAttributes(request);
+
+        int sid = Integer.parseInt(request.getParameter("stockId"));
         Stock temp = new Stock();
-        
-        temp.setId(tid);
+
+        temp.setId(sid);
         temp.getOnId();
-        
-        if (temp.getRecycled()==0) {
+
+        if (temp.getRecycled() == 0) {
             FirstHandItem tempItem = new FirstHandItem();
             tempItem.setItem(temp);
             request.setAttribute("type", 0);
             request.setAttribute("item", tempItem);
-        }else{
+        } else {
             SecondHandItem tempItem = new SecondHandItem();
             tempItem.setUsedItem(temp);
             request.setAttribute("type", 1);
             request.setAttribute("item", tempItem);
         }
-        
+
         ArrayList<Comment> comments = new ArrayList<Comment>();
-         try {
+        try {
             Globals.openConn();
             Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             //retreive all orders of the user
-            ResultSet rs = stmt.executeQuery("SELECT * FROM [Comment] WHERE [Mid]=0 AND [Sid] = "+tid);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM [Comment] WHERE [Mid] = 0 AND [Sid] = " + sid);
             int numRow = 0;
             if (rs != null && rs.last() != false) {
                 numRow = rs.getRow();
                 rs.beforeFirst();
             }
             if (numRow > 0) {
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                Connection con2 = DriverManager.getConnection("jdbc:sqlserver://w2ksa.cs.cityu.edu.hk:1433;databaseName=aiad072_db", "aiad072", "aiad072");
                 while (rs != null && rs.next() != false) {
-                    Comment tempStock = new Comment();
-                    tempStock.setId(rs.getInt(1));
-                    tempStock.getOnId();
-                    
-                    comments.add(tempStock);
+                    Comment comment = new Comment();
+                    comment.setId(rs.getInt(1));
+                    comment.getOnId();
+
+                    //check if this comment has a reply
+                    Statement stmt2 = con2.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                    ResultSet rs2 = stmt2.executeQuery("SELECT * FROM [Comment] WHERE [ReplyId] = '" + rs.getInt(1) + "'");
+                    int numRow2 = 0;
+                    if (rs2 != null && rs2.last() != false) {
+                        numRow2 = rs2.getRow();
+                        rs2.beforeFirst();
+                    }
+                    //if it has a reply we set it in the bean
+                    if (numRow2 == 1) {
+                        while (rs2 != null && rs2.next() != false) {
+                            comment.setReplyComment(rs2.getInt(1));
+                        }
+                    }
+
+                    comments.add(comment);
+                    if (rs2 != null) {
+                        rs2.close();
+                    }
+
                 }
-            }
-            if (rs != null) {
-                rs.close();
+
+                con2.close();
+
+                if (rs != null) {
+                    rs.close();
+                }
+
             }
             Globals.closeConn();
         } catch (ClassNotFoundException e) {
@@ -93,11 +120,10 @@ public class commentsServlet extends basicServlet {
         } catch (SQLException e) {
             Globals.beanLog.info(e.toString());
         }
-         
-         request.setAttribute("comments", comments);
-        
-        
-        RequestDispatcher dispatcher = request.getRequestDispatcher("comments.jsp"); 
+
+        request.setAttribute("comments", comments);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("comments.jsp");
         dispatcher.forward(request, response);
     }
 
