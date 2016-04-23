@@ -72,7 +72,9 @@ public class Order {
         }
         
         DecimalFormat df = new DecimalFormat("#.00");
-        price = Float.parseFloat(df.format(price));
+        String s = df.format(price);
+        String newS = s.replace(',','.');
+        price = Float.parseFloat(newS);
         
         this.totalPrice = price;
         this.numberOfItems = amount;
