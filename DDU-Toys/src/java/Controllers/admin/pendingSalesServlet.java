@@ -78,7 +78,7 @@ public class pendingSalesServlet extends basicServlet {
             Globals.beanLog.info(e.toString());
         }
         
-        request.setAttribute("listPendingSales", toys);
+        request.setAttribute("pendingSalesList", toys);
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("pendingSales.jsp"); 
         dispatcher.forward(request, response);
