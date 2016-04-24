@@ -55,13 +55,19 @@ public class deleteSales extends basicServlet {
             temp.setId(stockId);
             temp.delete();
 
-            response.sendRedirect("sales");
+            PrintWriter out = response.getWriter();
+            out.println("<script type=\"text/javascript\">alert(\"The sale has been deleted\")</script>");
+            out.println("<script type=\"text/javascript\">window.location=\"sales\";</script>");
+            out.close();
         }else{
             TempToy temp = new TempToy();
             temp.setId(stockId);
             temp.delete();
-
-            response.sendRedirect("pendingSales.jsp");
+            
+            PrintWriter out = response.getWriter();
+            out.println("<script type=\"text/javascript\">alert(\"The pending sale has been deleted\")</script>");
+            out.println("<script type=\"text/javascript\">window.location=\"pendingSales\";</script>");
+            out.close();
         }
     }
 
