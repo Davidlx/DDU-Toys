@@ -44,21 +44,19 @@ public class ProcessPendingSaleServlet extends basicServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        request=super.retrieveBasicAttributes(request);
-        HttpSession session = request.getSession();
-        Customer c=(Customer)session.getAttribute("customer");
-        int cid = c.getId();
-        
-        int isAccepted= Integer.parseInt(request.getParameter("isAccepted"));
-        int ttid=Integer.parseInt(request.getParameter("ttid"));
+        request = super.retrieveBasicAttributes(request);
+
+        int isAccepted = Integer.parseInt(request.getParameter("isAccepted"));
+        int ttid = Integer.parseInt(request.getParameter("ttid"));
         TempToy temp = new TempToy();
         temp.setId(ttid);
         temp.getOnId();
         //if accepted, copy it 
-        if(isAccepted==1){
+        if (isAccepted == 1) {
             Stock stock = new Stock();
+            stock.setTid(temp.getTid());
             //if it is a new toy
-            if(temp.getTid()==0){
+            if (temp.getTid() == 0) {
                 //first add a toy
                 Toy toy = new Toy();
                 toy.setName(temp.getName());
@@ -70,27 +68,20 @@ public class ProcessPendingSaleServlet extends basicServlet {
                 toy.setCategoryId(temp.getCategoryId());
                 toy.insert();
                 //then set the stock
-                
+                stock.setTid(toy.getId());
             }
-            //we need to add a stock (no need to add a toy if the toy already exists
-            if(temp.getTid()==0){
-                
-            }
-                stock.setRecycled(1);
-                stock.setConDes(temp.getConDes());
-                stock.setCid(temp.getCid());
-                stock.setTid(temp.getTid());
-                stock.setAmount(temp.getAmount());
-                stock.setPrice(temp.getPrice());
-                stock.insert();
-            
+            stock.setRecycled(1);
+            stock.setConDes(temp.getConDes());
+            stock.setCid(temp.getCid());
+            stock.setAmount(temp.getAmount());
+            stock.setPrice(temp.getPrice());
+            stock.insert();
+
         }
-        //del
-        else{
-            
-        }
-        
-        RequestDispatcher dispatcher = request.getRequestDispatcher("pendingSales.jsp"); 
+        //then delete it from temp toys
+        temp.delete();
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pendingSales.jsp");
         dispatcher.forward(request, response);
     }
 
