@@ -21,6 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -41,6 +42,13 @@ public class adminIndexServlet extends basicServlet {
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
+        
+        HttpSession session = request.getSession();
+        Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
+        if(customer == null || !customer.getIsAdmin()) {
+            response.sendRedirect("../login?from=/admin/");
+            return;
+        }
         
         ArrayList<Toy> toys = new ArrayList<Toy>();
         try {

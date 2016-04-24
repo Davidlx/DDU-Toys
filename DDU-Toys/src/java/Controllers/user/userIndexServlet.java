@@ -47,6 +47,12 @@ public class userIndexServlet extends basicServlet {
         request=super.retrieveBasicAttributes(request);
         
         HttpSession session = request.getSession();
+        Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
+        if(customer == null || !customer.getIsAdmin()) {
+            response.sendRedirect("../login?from=/user/");
+            return;
+        }
+        
         Customer c=(Customer)session.getAttribute("customer");
         int cid = c.getId();
         ArrayList<Order> orders = new ArrayList<Order>();

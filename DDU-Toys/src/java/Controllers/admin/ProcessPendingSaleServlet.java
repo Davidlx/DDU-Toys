@@ -45,6 +45,13 @@ public class ProcessPendingSaleServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request = super.retrieveBasicAttributes(request);
+        
+        HttpSession session = request.getSession();
+        Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
+        if(customer == null || !customer.getIsAdmin()) {
+            response.sendRedirect("../login?from=/admin/");
+            return;
+        }
 
         int isAccepted = Integer.parseInt(request.getParameter("isAccepted"));
         int ttid = Integer.parseInt(request.getParameter("ttid"));

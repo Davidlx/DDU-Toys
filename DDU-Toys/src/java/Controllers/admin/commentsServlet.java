@@ -27,6 +27,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -48,6 +49,13 @@ public class commentsServlet extends basicServlet {
         response.setContentType("text/html;charset=UTF-8");
         request = super.retrieveBasicAttributes(request);
 
+        HttpSession session = request.getSession();
+        Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
+        if(customer == null || !customer.getIsAdmin()) {
+            response.sendRedirect("../login?from=/admin/");
+            return;
+        }
+        
         int sid = Integer.parseInt(request.getParameter("stockId"));
         Stock temp = new Stock();
 

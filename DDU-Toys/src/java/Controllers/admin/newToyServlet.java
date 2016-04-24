@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -38,6 +39,13 @@ public class newToyServlet extends basicServlet {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
         
+        HttpSession session = request.getSession();
+        Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
+        if(customer == null || !customer.getIsAdmin()) {
+            response.sendRedirect("../login?from=/admin/");
+            return;
+        }
+        
         RequestDispatcher dispatcher = request.getRequestDispatcher("newToy.jsp"); 
         dispatcher.forward(request, response);
     }
@@ -46,6 +54,13 @@ public class newToyServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException{
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
+        
+        HttpSession session = request.getSession();
+        Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
+        if(customer == null || !customer.getIsAdmin()) {
+            response.sendRedirect("../login?from=/admin/");
+            return;
+        }
         
         String itemName = request.getParameter("itemName");
         String desc =  request.getParameter("desc");
@@ -87,9 +102,9 @@ public class newToyServlet extends basicServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(addStockServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(newToyServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(addStockServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(newToyServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -107,9 +122,9 @@ public class newToyServlet extends basicServlet {
         try {
             processPost(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(addStockServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(newToyServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(addStockServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(newToyServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

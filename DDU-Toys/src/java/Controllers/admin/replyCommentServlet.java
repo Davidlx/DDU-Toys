@@ -50,7 +50,13 @@ public class replyCommentServlet extends basicServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+        request=super.retrieveBasicAttributes(request);
         HttpSession session = request.getSession();
+        Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
+        if(customer == null || !customer.getIsAdmin()) {
+            response.sendRedirect("../login?from=/admin/");
+            return;
+        }
         Customer c = (Customer) session.getAttribute("customer");
         int mid = c.getId();
         String commentId=request.getParameter("commentId");

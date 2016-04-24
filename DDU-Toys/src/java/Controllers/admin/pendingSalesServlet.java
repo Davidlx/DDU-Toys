@@ -44,6 +44,13 @@ public class pendingSalesServlet extends basicServlet {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
         HttpSession session = request.getSession();
+        
+        Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
+        if(customer == null || !customer.getIsAdmin()) {
+            response.sendRedirect("../login?from=/admin/");
+            return;
+        }
+        
         Customer c=(Customer)session.getAttribute("customer");
         int cid = c.getId();
         
