@@ -32,12 +32,19 @@ public class TempToy {
     private String picUrl;
     private int cid;
     private int categoryId;
+    private String categoryName;
     private int tid;
 
     public TempToy() {
     }
 
-    ;
+    public void setCategoryName(String categoryName){
+        this.categoryName=categoryName;
+    }
+    
+    public String getCategoryName(){
+        return this.categoryName;
+    }
     
     
     public int getId() {
@@ -133,8 +140,20 @@ public class TempToy {
         return this.categoryId;
     }
 
-    public void setCategoryId(int catId) {
+    public void setCategoryId(int catId) throws SQLException {
         this.categoryId = catId;
+        setCategoryName();
+    }
+    
+    private void setCategoryName() throws SQLException{
+        if(categoryId != 0) {
+            Category cat = new Category();
+            cat.setId(categoryId);
+            cat.getOnId();
+            this.categoryName = cat.getName();
+        } else {
+            this.categoryName = "Unknown";
+        }        
     }
 
     public void insert() throws ClassNotFoundException, SQLException {
@@ -285,7 +304,7 @@ public class TempToy {
                     age = Integer.parseInt(rs.getString("Age"));
                     sex = Integer.parseInt(rs.getString("Sex"));
                     cid = Integer.parseInt(rs.getString("Cid"));
-                    categoryId = Integer.parseInt(rs.getString("CategoryId"));
+                    setCategoryId(Integer.parseInt(rs.getString("CategoryId")));
                     picUrl = rs.getString("PicUrl");
                     tid = Integer.parseInt(rs.getString("Tid"));
                 }
