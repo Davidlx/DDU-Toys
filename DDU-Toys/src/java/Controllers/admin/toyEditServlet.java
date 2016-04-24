@@ -49,6 +49,40 @@ public class toyEditServlet extends basicServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("editToy.jsp"); 
         dispatcher.forward(request, response);
     }
+    
+     protected void processPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException, SQLException{
+        response.setContentType("text/html;charset=UTF-8");
+        request=super.retrieveBasicAttributes(request);
+        
+        String itemName = request.getParameter("itemName");
+        String desc =  request.getParameter("desc");
+        String originalPrice = request.getParameter("originalPrice");
+        String age = request.getParameter("age");
+        String picUrl = request.getParameter("picUrl");
+        String sex = request.getParameter("sex");
+        String category = request.getParameter("category");
+        
+        String tid=request.getParameter("tid");
+        
+        
+        Toy tempToy = new Toy();
+        tempToy.setId(Integer.parseInt(tid));
+        tempToy.getOnId();
+        
+        tempToy.setAge(Integer.parseInt(age));
+        tempToy.setCategoryId(Integer.parseInt(category));
+        tempToy.setDes(desc);
+        tempToy.setName(itemName);
+        tempToy.setPicUrl(picUrl);
+        tempToy.setPrice(Float.parseFloat(originalPrice));
+        tempToy.setSex(Integer.parseInt(sex));
+        
+        tempToy.update();
+        
+        response.sendRedirect("toyStock?tid="+tempToy.getId());
+        
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -83,7 +117,7 @@ public class toyEditServlet extends basicServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            processPost(request, response);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(addToyServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

@@ -44,7 +44,7 @@
                                             </c:if> · ${toy.age} Years Old</p>
                                             <p>${toy.des}</p>
                                         </div>
-                                         <div class="col-md-2">Original Price: ${toy.price}</div>
+                                         <div class="col-md-2">Original Price: $${toy.price}</div>
                                          <div class="col-md-2 itemPrice" style="font-size: 15px">
                                              <a href="toyStock?tid=${toy.id}"><p>View Stocks</p></a>
                                              <a href="editToy?tid=${toy.id}"><p>Edit this Toy</p></a>

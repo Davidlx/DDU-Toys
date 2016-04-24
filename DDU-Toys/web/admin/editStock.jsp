@@ -50,21 +50,21 @@ A bean containing the original informaiton of the stock, and a bean contains the
                             
                              <h1>Edit Stock</h1>
                             <div class="newToy">
-                                 <form>
+                                 <form method="POST" action="${pageContext.request.contextPath}/admin/editStock?sid=${stock.id}">
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Condition Description</label>
-                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Condition Description" value="${stock.conDes}">
+                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Condition Description" name="conDes" value="${stock.conDes}">
                                     </div>
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Current Price</label>
-                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Current Price" value="${stock.price}">
+                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Current Price" name="price" value="${stock.price}">
                                     </div>
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Amount of Toys</label>
-                                      <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Amont of Toys" value="${stock.amount}">
+                                      <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Amont of Toys" name="amount" value="${stock.amount}">
                                     </div>
                                     
                                     <button type="submit" class="btn btn-default">Submit</button>
