@@ -108,6 +108,10 @@
         <servlet-name>newCommentServlet</servlet-name>
         <servlet-class>Controllers.newCommentServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>newToyServlet</servlet-name>
+        <servlet-class>Controllers.admin.newToyServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -214,6 +218,10 @@
     <servlet-mapping>
         <servlet-name>newCommentServlet</servlet-name>
         <url-pattern>/newComment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>newToyServlet</servlet-name>
+        <url-pattern>/admin/newToy</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
