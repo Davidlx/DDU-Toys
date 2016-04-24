@@ -237,7 +237,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProcessPendingSaleServlet</servlet-name>
-        <url-pattern>/admin/ProcessPendingSale</url-pattern>
+        <url-pattern>/admin/processPendingSale</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
