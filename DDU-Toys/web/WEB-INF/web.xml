@@ -136,6 +136,10 @@
         <servlet-name>deleteSalesServlet</servlet-name>
         <servlet-class>Controllers.user.deleteSales</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>logoutServlet</servlet-name>
+        <servlet-class>Controllers.logoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -270,6 +274,10 @@
     <servlet-mapping>
         <servlet-name>deleteSalesServlet</servlet-name>
         <url-pattern>/admin/deleteSales</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
