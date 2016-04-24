@@ -42,7 +42,8 @@
                                             <c:if test="${(itemSecond.toyInfo.sex ==2)}">
                                                 Unisex
                                             </c:if> ·For ${itemSecond.toyInfo.age} years above · Sold by ${itemSecond.customerInfo.username}</p>
-                                <p class="description"> ${itemSecond.toyInfo.des}</p>
+                                <p class="description"> Toy Description: ${itemSecond.toyInfo.des}</p>
+                                <p class="description"> Toy Condition Description: ${itemSecond.usedItem.conDes}</p>
                                 <p> ${itemSecond.usedItem.amount} in Stock  · <del>Original Price:$${itemSecond.toyInfo.price}</del></p>
                                 <p>Current Price: $${itemSecond.usedItem.price}</p>
                                 <a href="cart?sid=${itemSecond.usedItem.id}&recycle=1&action=1"><button type="button" class="btn btn-primary btn-lg">Add to Cart</button></a>
