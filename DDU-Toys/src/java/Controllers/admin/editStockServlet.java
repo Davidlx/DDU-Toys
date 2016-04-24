@@ -43,7 +43,7 @@ public class editStockServlet extends basicServlet {
         HttpSession session = request.getSession();
         Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
         if(customer == null || !customer.getIsAdmin()) {
-            response.sendRedirect("../adminLogin?from=/admin/");
+            response.sendRedirect("../adminLogin?from=/DDU-Toys/admin/");
             return;
         }
         

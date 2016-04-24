@@ -103,23 +103,24 @@ public class toyStockServlet extends basicServlet {
         HttpSession session = request.getSession();
         Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
         if(customer == null || !customer.getIsAdmin()) {
-            response.sendRedirect("../adminLogin?from=/admin/");
+            response.sendRedirect("../adminLogin?from=/DDU-Toys/admin/");
             return;
         }
-        
-        String conditionDesc = request.getParameter("conditionDesc");
-        String price =  request.getParameter("price");
         String amount = request.getParameter("amount");
         String tid = request.getParameter("tid");
+        
+        Toy toy = new Toy();
+        toy.setId(Integer.parseInt(tid));
+        toy.getOnId();
         
         Stock stock = new Stock();
         
         stock.setAmount(Integer.parseInt(amount));
-        stock.setConDes(conditionDesc);
-        stock.setPrice(Float.parseFloat(price));
         stock.setRecycled(0);
-        stock.setTid(Integer.parseInt(tid));
+        stock.setPrice(toy.getPrice());
         stock.setCid(0);
+        stock.setTid(Integer.parseInt(tid));
+        stock.setConDes("");
         
         stock.insert();
         
