@@ -253,7 +253,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>deleteToyServlet</servlet-name>
-        <url-pattern>/deleteToy</url-pattern>
+        <url-pattern>/admin/deleteToy</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
