@@ -94,28 +94,26 @@ A bean contains the information for Toy and an arrayList of stocks
                                 
                             </table>
                             
-                             <h1 style="margin-bottom: 10px">New Stock</h1>
-                            <div class="newToy">
-                                 <form method="POST"action="${pageContext.request.contextPath}/admin/toyStock?tid=${currentToy.id}">
-                                    
-                                    <div class="form-group">
-                                      <label for="exampleInputPassword1">Condition Description</label>
-                                      <input type="text" class="form-control" id="exampleInputPassword1" name="conditionDesc" placeholder="Condition Description">
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                      <label for="exampleInputPassword1">Current Price</label>
-                                      <input type="text" class="form-control" id="exampleInputPassword1" name="price" placeholder="Current Price">
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                      <label for="exampleInputPassword1">Amount of Toys</label>
-                                      <input type="number" class="form-control" id="exampleInputPassword1" name="amount" placeholder="Amont of Toys">
-                                    </div>
-                                    
-                                    <button type="submit" class="btn btn-default">Submit</button>
-                                  </form>
-                            </div>
+                            <c:if test="${displayNewStock}">
+                                <h1 style="margin-bottom: 10px">New Stock</h1>
+                                <div class="newToy">
+                                     <form method="POST"action="${pageContext.request.contextPath}/admin/toyStock?tid=${currentToy.id}">
+
+                                        <div class="form-group">
+                                          <label for="exampleInputPassword1">Current Price</label>
+                                          <input type="text" class="form-control" id="exampleInputPassword1" name="price" placeholder="Current Price">
+                                        </div>
+
+                                        <div class="form-group">
+                                          <label for="exampleInputPassword1">Amount of Toys</label>
+                                          <input type="number" class="form-control" id="exampleInputPassword1" name="amount" placeholder="Amont of Toys">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-default">Submit</button>
+                                      </form>
+                                </div>
+                            </c:if>
+                            
                             
                         </div>
                     </div>

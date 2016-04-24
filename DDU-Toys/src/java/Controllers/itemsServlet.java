@@ -42,7 +42,19 @@ public class itemsServlet extends basicServlet {
         request = super.retrieveBasicAttributes(request);
         
         Boolean firstHand = true;
-        int choice = Integer.parseInt(request.getParameter("type"));
+        int choice=-1;
+        try{
+            choice = Integer.parseInt(request.getParameter("type"));
+        }
+        catch(NullPointerException e){
+            response.sendRedirect("index");
+            return;
+        }
+        catch(NumberFormatException e){
+            response.sendRedirect("index");
+            return;
+        }
+        
         
         switch(choice) {
             case 0:

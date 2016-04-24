@@ -124,6 +124,22 @@
         <servlet-name>adminServlet</servlet-name>
         <servlet-class>Controllers.admin.adminServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>deleteToyServlet</servlet-name>
+        <servlet-class>Controllers.admin.deleteToy</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteStockServlet</servlet-name>
+        <servlet-class>Controllers.admin.deleteStock</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteSalesServlet</servlet-name>
+        <servlet-class>Controllers.user.deleteSales</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>logoutServlet</servlet-name>
+        <servlet-class>Controllers.logoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -246,6 +262,22 @@
     <servlet-mapping>
         <servlet-name>adminServlet</servlet-name>
         <url-pattern>/adminServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteToyServlet</servlet-name>
+        <url-pattern>/admin/deleteToy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteStockServlet</servlet-name>
+        <url-pattern>/admin/deleteStock</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteSalesServlet</servlet-name>
+        <url-pattern>/admin/deleteSales</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

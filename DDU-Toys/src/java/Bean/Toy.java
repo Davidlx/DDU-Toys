@@ -186,31 +186,31 @@ public class Toy {
     }
     
     public void delete() throws SQLException {
-    try {
+        try {
             Globals.openConn();
-            
+
             // Create a preparedstatement to set the SQL statement	
             PreparedStatement pstmt = Globals.con.prepareStatement("DELETE FROM [Toys] WHERE [Tid] = ?");
             pstmt.setString(1, Integer.toString(id));
-                        
+
             // execute the SQL statement
             pstmt.executeUpdate();
-            
+
             // close connections
             if(pstmt != null) {
                 pstmt.close();
             }
-            
+
             Globals.closeConn();
-            
-        } catch (ClassNotFoundException e) {
-            Globals.beanLog.info(e.toString());
-        } catch (SQLException e) {
-            Globals.beanLog.info(e.toString());
-        } finally {
-            Globals.closeConn();
-        } 
-    }
+
+            } catch (ClassNotFoundException e) {
+                Globals.beanLog.info(e.toString());
+            } catch (SQLException e) {
+                Globals.beanLog.info(e.toString());
+            } finally {
+                Globals.closeConn();
+            } 
+        }
 
     public void getOnId() throws SQLException {
     try {

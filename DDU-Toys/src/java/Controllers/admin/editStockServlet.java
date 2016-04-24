@@ -76,19 +76,15 @@ public class editStockServlet extends basicServlet {
             return;
         }
         
-        String conditionDesc = request.getParameter("conditionDesc");
         String price =  request.getParameter("price");
         String amount = request.getParameter("amount");
         String sid = request.getParameter("sid");
-        
         
         Stock stock = new Stock();
         stock.setId(Integer.parseInt(sid));
         stock.getOnId();
         
-        
         stock.setAmount(Integer.parseInt(amount));
-        stock.setConDes(conditionDesc);
         stock.setPrice(Float.parseFloat(price));
         
         stock.update();

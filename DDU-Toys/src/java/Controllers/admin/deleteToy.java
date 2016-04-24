@@ -5,10 +5,8 @@
  */
 package Controllers.admin;
 
-import Bean.Customer;
 import Bean.Globals;
 import Bean.Stock;
-import Bean.TempToy;
 import Bean.Toy;
 import Controllers.basicServlet;
 import java.io.IOException;
@@ -28,9 +26,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Ugo
+ * @author David Liu
  */
-public class ProcessPendingSaleServlet extends basicServlet {
+public class deleteToy extends basicServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,9 +40,9 @@ public class ProcessPendingSaleServlet extends basicServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException {
+            throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        request = super.retrieveBasicAttributes(request);
+        request=super.retrieveBasicAttributes(request);
         
         HttpSession session = request.getSession();
         Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
@@ -52,43 +50,42 @@ public class ProcessPendingSaleServlet extends basicServlet {
             response.sendRedirect("../adminLogin?from=/admin/");
             return;
         }
-
-        int isAccepted = Integer.parseInt(request.getParameter("isAccepted"));
-        int ttid = Integer.parseInt(request.getParameter("ttid"));
-        TempToy temp = new TempToy();
-        temp.setId(ttid);
-        temp.getOnId();
-        //if accepted, copy it 
-        if (isAccepted == 1) {
-            Stock stock = new Stock();
-            stock.setTid(temp.getTid());
-            //if it is a new toy
-            if (temp.getTid() == 0) {
-                //first add a toy
-                Toy toy = new Toy();
-                toy.setName(temp.getName());
-                toy.setDes(temp.getDes());
-                toy.setSex(temp.getSex());
-                toy.setAge(temp.getAge());
-                toy.setPrice(temp.getOrgPrice());
-                toy.setPicUrl(temp.getPicUrl());
-                toy.setCategoryId(temp.getCategoryId());
-                toy.insert();
-                //then set the stock
-                stock.setTid(toy.getId());
+        
+        int tid = Integer.parseInt(request.getParameter("tid"));
+        
+        try {
+            Globals.openConn();
+            Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            //retreive all orders of the user
+            ResultSet rs = stmt.executeQuery("SELECT * FROM [Stock] WHERE [Tid] = "+tid);
+            int numRow = 0;
+            if (rs != null && rs.last() != false) {
+                numRow = rs.getRow();
+                rs.beforeFirst();
             }
-            stock.setRecycled(1);
-            stock.setConDes(temp.getConDes());
-            stock.setCid(temp.getCid());
-            stock.setAmount(temp.getAmount());
-            stock.setPrice(temp.getPrice());
-            stock.insert();
-
+            if (numRow > 0) {
+                while (rs != null && rs.next() != false) {
+                    Stock tempStock = new Stock();
+                    tempStock.setId(rs.getInt(1));
+                    tempStock.getOnId();
+                    tempStock.delete();
+                }
+            }
+            if (rs != null) {
+                rs.close();
+            }
+            Globals.closeConn();
+        } catch (ClassNotFoundException e) {
+            Globals.beanLog.info(e.toString());
+        } catch (SQLException e) {
+            Globals.beanLog.info(e.toString());
         }
-        //then delete it from temp toys
+        
+        Toy temp = new Toy();
+        temp.setId(tid);
         temp.delete();
-
-        response.sendRedirect("pendingSales");
+        
+        response.sendRedirect("index");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -105,10 +102,10 @@ public class ProcessPendingSaleServlet extends basicServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(pendingSalesServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(pendingSalesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(adminIndexServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(adminIndexServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -125,10 +122,10 @@ public class ProcessPendingSaleServlet extends basicServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(pendingSalesServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(pendingSalesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(adminIndexServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(adminIndexServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
