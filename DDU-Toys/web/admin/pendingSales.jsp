@@ -61,8 +61,24 @@ An Arraylist of all the pending sales object containing all the information in t
                                             <td>${item.cid}</td>
                                             <td>${item.categoryName}</td>
                                             <td><a href="processPendingSale?isAccepted=1&ttid=${item.id}"><p>Grant Sale</p></a></td>
-                                            <td><a href="processPendingSale?isAccepted=0&ttid=${item.id}"><p>Delete Sale</p></a></td>
+                                            <td><a href="processPendingSale?isAccepted=0&ttid=${item.id}" data-toggle="modal" data-target="#deleteSales${item.id}"><p>Delete Sale</p></a></td>
                                         </tr>
+                                         <div class="modal fade" id="deleteSales${item.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                            <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                  <h4 class="modal-title" id="myModalLabel">Delete Pending Sales</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                  Are you sure you want to delete this stock? Once the stock is delete, the comments related to it will also be deleted.
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="processPendingSale?isAccepted=0&ttid=${item.id}"><button type="button" class="btn btn-danger">Yes, I do want to delete</button></a>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
                                     </c:forEach>
                                 
                                 <tbody>

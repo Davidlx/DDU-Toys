@@ -46,6 +46,14 @@ public class newSaleServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request = super.retrieveBasicAttributes(request);
+        
+        HttpSession session = request.getSession();
+        Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
+        if(customer == null || !customer.getIsAdmin()) {
+            response.sendRedirect("../login?from=/user/");
+            return;
+        }
+        
         addSale(request, response);
     }
 

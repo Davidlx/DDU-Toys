@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -38,6 +39,13 @@ public class toyEditServlet extends basicServlet {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
         
+        HttpSession session = request.getSession();
+        Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
+        if(customer == null || !customer.getIsAdmin()) {
+            response.sendRedirect("../adminLogin?from=/admin/");
+            return;
+        }
+        
         int tid = Integer.parseInt(request.getParameter("tid"));
         
         Toy tempToy = new Toy();
@@ -54,6 +62,13 @@ public class toyEditServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException{
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
+        
+        HttpSession session = request.getSession();
+        Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
+        if(customer == null || !customer.getIsAdmin()) {
+            response.sendRedirect("../adminLogin?from=/admin/");
+            return;
+        }
         
         String itemName = request.getParameter("itemName");
         String desc =  request.getParameter("desc");
@@ -99,9 +114,9 @@ public class toyEditServlet extends basicServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(addToyServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(toyEditServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(addToyServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(toyEditServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -119,9 +134,9 @@ public class toyEditServlet extends basicServlet {
         try {
             processPost(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(addToyServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(toyEditServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(addToyServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(toyEditServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

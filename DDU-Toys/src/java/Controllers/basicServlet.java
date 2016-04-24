@@ -32,7 +32,7 @@ public class basicServlet extends HttpServlet {
         return request;
     }
        
-    private HttpServletRequest retrieveCate(HttpServletRequest request) throws ServletException, IOException, ClassNotFoundException, SQLException {
+    protected HttpServletRequest retrieveCate(HttpServletRequest request) throws ServletException, IOException, ClassNotFoundException, SQLException {
         ServletContext context = request.getServletContext();
         try {
                 ArrayList<Bean.Category> allCategories = (ArrayList<Bean.Category>) context.getAttribute("cate");
@@ -48,7 +48,7 @@ public class basicServlet extends HttpServlet {
 
     }
     
-    private HttpServletRequest retrieveUserSession(HttpServletRequest request) {
+    protected HttpServletRequest retrieveUserSession(HttpServletRequest request) {
         HttpSession session = request.getSession();
         try {
             Boolean isLoggedIn = (Boolean) session.getAttribute("isLoggedIn");
@@ -68,7 +68,7 @@ public class basicServlet extends HttpServlet {
         } 
     }
     
-    private ArrayList<Bean.Category> getAllCategories() throws ClassNotFoundException, SQLException{
+    protected ArrayList<Bean.Category> getAllCategories() throws ClassNotFoundException, SQLException{
         ArrayList<Bean.Category> result = new ArrayList<Bean.Category>();
         
         // Setup connection to db

@@ -22,6 +22,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 /**
  *
  * @author David Liu
@@ -41,6 +42,13 @@ public class toyStockServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
+        
+        HttpSession session = request.getSession();
+        Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
+        if(customer == null || !customer.getIsAdmin()) {
+            response.sendRedirect("../login?from=/admin/");
+            return;
+        }
         
         ArrayList<Stock> stocks = new ArrayList<Stock>();
         int tid = Integer.parseInt(request.getParameter("tid"));
@@ -92,11 +100,17 @@ public class toyStockServlet extends basicServlet {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
         
+        HttpSession session = request.getSession();
+        Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
+        if(customer == null || !customer.getIsAdmin()) {
+            response.sendRedirect("../adminLogin?from=/admin/");
+            return;
+        }
+        
         String conditionDesc = request.getParameter("conditionDesc");
         String price =  request.getParameter("price");
         String amount = request.getParameter("amount");
         String tid = request.getParameter("tid");
-        
         
         Stock stock = new Stock();
         

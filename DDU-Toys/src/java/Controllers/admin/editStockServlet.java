@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -38,6 +39,13 @@ public class editStockServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
+        
+        HttpSession session = request.getSession();
+        Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
+        if(customer == null || !customer.getIsAdmin()) {
+            response.sendRedirect("../adminLogin?from=/admin/");
+            return;
+        }
         
         int sid = Integer.parseInt(request.getParameter("stockId"));
         Stock tempStock = new Stock();
@@ -60,6 +68,13 @@ public class editStockServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException{
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
+        
+        HttpSession session = request.getSession();
+        Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
+        if(customer == null || !customer.getIsAdmin()) {
+            response.sendRedirect("../adminLogin?from=/admin/");
+            return;
+        }
         
         String conditionDesc = request.getParameter("conditionDesc");
         String price =  request.getParameter("price");
@@ -97,9 +112,9 @@ public class editStockServlet extends basicServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(addToyServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(editStockServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(addToyServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(editStockServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -117,9 +132,9 @@ public class editStockServlet extends basicServlet {
         try {
             processPost(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(addToyServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(editStockServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(addToyServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(editStockServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
