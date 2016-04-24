@@ -85,6 +85,11 @@ public class deleteToy extends basicServlet {
         temp.setId(tid);
         temp.delete();
         
+        PrintWriter out = response.getWriter();
+        out.println("<script type=\"text/javascript\">alert(\"The toy has been deleted\")</script>");
+        out.println("<script type=\"text/javascript\">window.location=\"index\";</script>");
+        out.close();
+        
         response.sendRedirect("index");
     }
 
