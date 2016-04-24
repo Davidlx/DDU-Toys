@@ -47,7 +47,19 @@ public class itemDetailServlet extends basicServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
-        int stockId = Integer.parseInt(request.getParameter("stockId"));
+        int stockId=-1;
+        
+        try{
+            stockId = Integer.parseInt(request.getParameter("stockId"));
+        }
+        catch(NullPointerException e){
+            response.sendRedirect("index");
+            return;
+        }
+        catch(NumberFormatException e){
+            response.sendRedirect("index");
+            return;
+        }
         Stock stock = new Stock();
         stock.setId(stockId);
         stock.getOnId();

@@ -81,7 +81,7 @@ public class ProcessPendingSaleServlet extends basicServlet {
         //then delete it from temp toys
         temp.delete();
 
-        response.sendRedirect("pendingSales.jsp");
+        response.sendRedirect("pendingSales");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
