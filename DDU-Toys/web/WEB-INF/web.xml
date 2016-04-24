@@ -132,6 +132,10 @@
         <servlet-name>deleteStockServlet</servlet-name>
         <servlet-class>Controllers.admin.deleteStock</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>deleteSalesServlet</servlet-name>
+        <servlet-class>Controllers.user.deleteSales</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -262,6 +266,10 @@
     <servlet-mapping>
         <servlet-name>deleteStockServlet</servlet-name>
         <url-pattern>/admin/deleteStock</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteSalesServlet</servlet-name>
+        <url-pattern>/admin/deleteSales</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

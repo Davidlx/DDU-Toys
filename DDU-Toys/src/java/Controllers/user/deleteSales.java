@@ -3,20 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controllers.admin;
+package Controllers.user;
 
-import Bean.Globals;
 import Bean.Stock;
-import Bean.Toy;
+import Bean.TempToy;
+import Controllers.admin.adminIndexServlet;
 import Controllers.basicServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +24,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author David Liu
  */
-public class deleteStock extends basicServlet {
+public class deleteSales extends basicServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,17 +43,28 @@ public class deleteStock extends basicServlet {
         HttpSession session = request.getSession();
         Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
         if(customer == null || !customer.getIsAdmin()) {
-            response.sendRedirect("../adminLogin?from=/admin/");
+            response.sendRedirect("../login?from=/user/");
             return;
         }
         
-        int stockId = Integer.parseInt(request.getParameter("stockId"));
+        int stockId = Integer.parseInt(request.getParameter("sid"));
+        String type = request.getParameter("type");
         
-        Stock temp = new Stock();
-        temp.setId(stockId);
-        temp.delete();
+        if (type.contentEquals("stock")) {
+            Stock temp = new Stock();
+            temp.setId(stockId);
+            temp.delete();
+
+            response.sendRedirect("sales");
+        }else{
+            TempToy temp = new TempToy();
+            temp.setId(stockId);
+            temp.delete();
+
+            response.sendRedirect("pendingSales.jsp");
+        }
         
-        response.sendRedirect("toyStock?tid="+temp.getTid());
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -109,4 +117,5 @@ public class deleteStock extends basicServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }
