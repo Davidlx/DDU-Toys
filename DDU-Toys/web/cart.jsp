@@ -104,7 +104,7 @@
                         </div>
                     </c:if>
                         
-                    <h1 class="homePageTitle">Featured Products</h1>
+                    <h1 class="homePageTitle" style="padding-top: 100px">Featured Products</h1>
                     <div class="row">
                         <c:forEach items="${featuredItem}" var="item">
                             <div class="col-sm-6 col-md-3">
