@@ -81,15 +81,16 @@
                         
                         <c:if test="${isLoggedIn}">
                             <p class="CommentsTitle" style="border-top:1px solid rgb(213,213,213)">New Comment</p>
-                            <form class="form-horizontal">
+                            <form class="form-horizontal"  method="POST" action="${pageContext.request.contextPath}/newComment">
+                                <input type="hidden" name="sid" value="<c:if test="${!isRecycled}">${itemFirst.firstHandItem.id}</c:if><c:if test="${isRecycled}">${itemSecond.usedItem.id}</c:if>">
                                 <div class="form-group">
                                   <div class="col-sm-12">
-                                    <textarea class="form-control" rows="2"></textarea>
+                                    <textarea class="form-control" rows="2" name = "text" ></textarea>
                                   </div>
                                 </div>
                                 <div class="form-group">
                                   <div class="col-sm-12">
-                                    <button type="submit" class="btn btn-default">Submit Comments</button>
+                                    <button type="submit" class="btn btn-default">Submit Comment</button>
                                   </div>
                                 </div>
                               </form>
