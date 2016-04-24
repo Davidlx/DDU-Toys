@@ -111,6 +111,8 @@
     <servlet>
         <servlet-name>newToyServlet</servlet-name>
         <servlet-class>Controllers.admin.newToyServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>pendingSalesUserServlet</servlet-name>
         <servlet-class>Controllers.user.pendingSalesUserServlet</servlet-class>
     </servlet>
@@ -224,8 +226,10 @@
     <servlet-mapping>
         <servlet-name>newToyServlet</servlet-name>
         <url-pattern>/admin/newToy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>pendingSalesUserServlet</servlet-name>
-        <url-pattern>/pendingSalesUser</url-pattern>
+        <url-pattern>/user/pendingSales</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
