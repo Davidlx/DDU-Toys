@@ -5,6 +5,7 @@
  */
 package Controllers.admin;
 
+import Bean.Toy;
 import Controllers.basicServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,12 +38,39 @@ public class newToyServlet extends basicServlet {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
         
-        
-        
-        
         RequestDispatcher dispatcher = request.getRequestDispatcher("newToy.jsp"); 
         dispatcher.forward(request, response);
     }
+    
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException, SQLException{
+        response.setContentType("text/html;charset=UTF-8");
+        request=super.retrieveBasicAttributes(request);
+        
+        String itemName = request.getParameter("itemName");
+        String desc =  request.getParameter("desc");
+        String originalPrice = request.getParameter("originalPrice");
+        String age = request.getParameter("age");
+        String picUrl = request.getParameter("picUrl");
+        String sex = request.getParameter("sex");
+        String category = request.getParameter("category");
+        
+        
+        Toy tempToy = new Toy();
+        tempToy.setAge(Integer.parseInt(age));
+        tempToy.setCategoryId(Integer.parseInt(category));
+        tempToy.setDes(desc);
+        tempToy.setName(itemName);
+        tempToy.setPicUrl(picUrl);
+        tempToy.setPrice(Float.parseFloat(originalPrice));
+        tempToy.setSex(Integer.parseInt(sex));
+        
+        tempToy.insert();
+        
+        response.sendRedirect("index");
+        
+    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -77,7 +105,7 @@ public class newToyServlet extends basicServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            processPost(request, response);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(addStockServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

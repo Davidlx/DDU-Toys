@@ -46,46 +46,27 @@ An Arraylist of all the pending sales object containing all the information in t
                                         <td></td>
                                     </tr>
                                 </thead>
-                                <tr>
-                                    <td>ID</td>
-                                    <td>Price</td>
-                                    <td>Description</td>
-                                    <td>Condition Description</td>
-                                    <td>Original Price</td>
-                                    <td>Amount</td>
-                                    <td>Name</td>
-                                    <td>Age</td>
-                                    <td>Sex</td>
-                                    <td>Seller</td>
-                                    <td>Category</td>
-                                    <td><a href="comments?stockId="><p>Grant Sale</p></a></td>
-                                    <td><a href="editStock?stockId="><p>Delete Sale</p></a></td>
-                                </tr>
+                                <tbody>
+                                    <c:forEach items="${pendingSalesList}" var="item">
+                                        <tr>
+                                            <td>${item.id}</td>
+                                            <td>${item.price}</td>
+                                            <td>${item.des}</td>
+                                            <td>${item.conDes}</td>
+                                            <td>${item.orgPrice}</td>
+                                            <td>${item.amount}</td>
+                                            <td>${item.name}</td>
+                                            <td>${item.age}</td>
+                                            <td>${item.sex}</td>
+                                            <td>${item.cid}</td>
+                                            <td>${item.categoryName}</td>
+                                            <td><a href="pendingSales?action=grant&tempToyId=${item.id}"><p>Grant Sale</p></a></td>
+                                            <td><a href="pendingSales?action=delete&tempToyId=${item.id}"><p>Delete Sale</p></a></td>
+                                        </tr>
+                                    </c:forEach>
+                                
+                                <tbody>
                             </table>
-                            
-                             <h1>New Stock</h1>
-                            <div class="newToy">
-                                 <form>
-                                    
-                                    <div class="form-group">
-                                      <label for="exampleInputPassword1">Condition Description</label>
-                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Condition Description">
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                      <label for="exampleInputPassword1">Current Price</label>
-                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Current Price">
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                      <label for="exampleInputPassword1">Amont of Toys</label>
-                                      <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Amont of Toys">
-                                    </div>
-                                    
-                                    <button type="submit" class="btn btn-default">Submit</button>
-                                  </form>
-                            </div>
-                            
                         </div>
                     </div>
                 </div>
