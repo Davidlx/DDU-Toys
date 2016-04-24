@@ -48,12 +48,12 @@
                                          <div class="col-md-2 itemPrice" style="font-size: 15px">
                                              <a href="toyStock?tid=${toy.id}"><p>View Stocks</p></a>
                                              <a href="editToy?tid=${toy.id}"><p>Edit this Toy</p></a>
-                                             <a href="deleteToy?tid=${toy.id}"data-toggle="modal" data-target="#deleteStock${toy.id}"><p>Delete this Toy</p></a>
+                                             <a href="deleteToy?tid=${toy.id}"data-toggle="modal" data-target="#deleteToy${toy.id}"><p>Delete this Toy</p></a>
                                          </div>
                                     </div>
                                 </div>
                                          
-                                <div class="modal fade" id="deleteStock${toy.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal fade" id="deleteToy${toy.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                     <div class="modal-dialog" role="document">
                                       <div class="modal-content">
                                         <div class="modal-header">
@@ -64,7 +64,7 @@
                                           Are you sure you want to delete this Toy? Once the toy is deleted, all the stock related to it will be deleted.
                                         </div>
                                         <div class="modal-footer">
-                                            <a href="deleteStock?stockId=${item.id}"><button type="button" class="btn btn-danger">Yes, I do want to delete</button></a>
+                                            <a href="deleteToy?tid=${toy.id}"><button type="button" class="btn btn-danger">Yes, I do want to delete</button></a>
                                         </div>
                                       </div>
                                     </div>
