@@ -87,12 +87,6 @@ public class editStockServlet extends basicServlet {
         stock.setAmount(Integer.parseInt(amount));
         stock.setPrice(Float.parseFloat(price));
         
-        Toy toy = new Toy();
-        toy.setId(stock.getTid());
-        toy.getOnId();
-        toy.setPrice(Float.parseFloat(price));
-        toy.update();
-        
         stock.update();
         
         response.sendRedirect("toyStock?tid="+stock.getTid());
