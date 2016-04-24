@@ -95,7 +95,10 @@ public class toyEditServlet extends basicServlet {
         
         tempToy.update();
         
-        response.sendRedirect("toyStock?tid="+tempToy.getId());
+        PrintWriter out = response.getWriter();
+        out.println("<script type=\"text/javascript\">alert(\"Toy Information has been updated successfully\")</script>");
+        out.println("<script type=\"text/javascript\">window.location=\"toyStock?tid="+tempToy.getId()+"\";</script>");
+        out.close();
         
     }
 
