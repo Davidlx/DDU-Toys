@@ -63,14 +63,13 @@ public class checkOutServlet extends basicServlet {
             
             customer = (Customer) session.getAttribute("customer");
             if(customer.getId() == 0) {
-                response.sendRedirect("/DDU-Toys/login?from=/DDU-Toys/checkOut");
+                response.sendRedirect("/DDU-Toys/login?from=/DDU-Toys/cart");
             } else {
                 
                 int cid = customer.getId();
                 createOrderInDB(session, cid, isFHCEmpty, isSHCEmpty);
              
-                RequestDispatcher dispatcher = request.getRequestDispatcher("user/index.jsp"); 
-                dispatcher.forward(request, response);
+                response.sendRedirect("user/index");
             }
             }
         } catch (NullPointerException e) {

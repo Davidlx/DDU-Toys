@@ -48,7 +48,7 @@ public class userIndexServlet extends basicServlet {
         
         HttpSession session = request.getSession();
         Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
-        if(customer == null || !customer.getIsAdmin()) {
+        if(customer == null || customer.getIsAdmin()) {
             response.sendRedirect("../login?from=/user/");
             return;
         }
