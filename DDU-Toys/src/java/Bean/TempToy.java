@@ -31,13 +31,21 @@ public class TempToy {
     private int amount;
     private String picUrl;
     private int cid;
+    private String customerName;
     private int categoryId;
     private String categoryName;
     private int tid;
 
     public TempToy() {
     }
+    
+    public void setCustomerName(String customerName){
+        this.customerName=customerName;
+    }
 
+    public String getCustomerName(){
+        return this.customerName;
+    }
     public void setCategoryName(String categoryName){
         this.categoryName=categoryName;
     }
@@ -132,8 +140,9 @@ public class TempToy {
         return this.cid;
     }
 
-    public void setCid(int Cid) {
+    public void setCid(int Cid) throws SQLException {
         this.cid = Cid;
+        setCustomerName();
     }
 
     public int getCategoryId() {
@@ -153,6 +162,17 @@ public class TempToy {
             this.categoryName = cat.getName();
         } else {
             this.categoryName = "Unknown";
+        }        
+    }
+    
+    private void setCustomerName() throws SQLException{
+        if(cid != 0) {
+            Customer c = new Customer();
+            c.setId(cid);
+            c.getOnId();
+            this.customerName = c.getUsername();
+        } else {
+            this.customerName = "Unknown";
         }        
     }
 
@@ -303,7 +323,7 @@ public class TempToy {
                     name = rs.getString("Name");
                     age = Integer.parseInt(rs.getString("Age"));
                     sex = Integer.parseInt(rs.getString("Sex"));
-                    cid = Integer.parseInt(rs.getString("Cid"));
+                    setCid(Integer.parseInt(rs.getString("Cid")));
                     setCategoryId(Integer.parseInt(rs.getString("CategoryId")));
                     picUrl = rs.getString("PicUrl");
                     tid = Integer.parseInt(rs.getString("Tid"));

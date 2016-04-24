@@ -66,7 +66,10 @@ public class ProcessPendingSaleServlet extends basicServlet {
                 Stock stock = new Stock();
                 stock.setRecycled(1);
                 stock.setConDes(temp.getConDes());
-                
+                stock.setCid(temp.getCid());
+                stock.setTid(temp.getTid());
+                stock.setAmount(temp.getAmount());
+                stock.setPrice(temp.getPrice());
             }
         }
         else{
