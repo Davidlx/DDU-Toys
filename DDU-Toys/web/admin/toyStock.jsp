@@ -72,7 +72,7 @@ A bean contains the information for Toy and an arrayList of stocks
                                         <td>${item.cid}</td>
                                         <td><a href="comments?stockId=${item.id}"><p>View Comments</p></a></td>
                                         <td><a href="editStock?stockId=${item.id}"><p>Edit Stock</p></a></td>
-                                        <td><a href="deleteStock?stockId=${item.id}" data-toggle="modal" data-target="#deleteStock${item.id}"><p>Delete Stock</p></a></td>
+                                        <td><a data-toggle="modal" data-target="#deleteStock${item.id}"><p>Delete Stock</p></a></td>
                                     </tr>
                                     <div class="modal fade" id="deleteStock${item.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                         <div class="modal-dialog" role="document">
@@ -82,7 +82,7 @@ A bean contains the information for Toy and an arrayList of stocks
                                               <h4 class="modal-title" id="myModalLabel">Delete Stock</h4>
                                             </div>
                                             <div class="modal-body">
-                                              Are you sure you want to delete this stock?
+                                              Are you sure you want to delete this stock? Once the stock is delete, the comments related to it will also be deleted.
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="deleteStock?stockId=${item.id}"><button type="button" class="btn btn-danger">Yes, I do want to delete</button></a>
