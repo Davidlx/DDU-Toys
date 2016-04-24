@@ -129,8 +129,6 @@ public class toyStockServlet extends basicServlet {
             //if a price has been written, we set it and update the toy
             if (newPrice != null && !"".equals(newPrice)) {
                 stock.setPrice(Float.parseFloat(newPrice));
-                toy.setPrice(Float.parseFloat(newPrice));
-                toy.update();
             } //if not we use the old price
             else {
                 stock.setPrice(toy.getPrice());
