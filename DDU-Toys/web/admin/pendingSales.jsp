@@ -49,19 +49,19 @@ An Arraylist of all the pending sales object containing all the information in t
                                 <tbody>
                                     <c:forEach items="${pendingSalesList}" var="item">
                                         <tr>
-                                            <td>item.id</td>
-                                            <td>item.price</td>
-                                            <td>item.des</td>
-                                            <td>item.conDes</td>
-                                            <td>item.orgPrice</td>
-                                            <td>item.amount</td>
-                                            <td>item.name</td>
-                                            <td>item.age</td>
-                                            <td>item.sex</td>
-                                            <td>item.cid</td>
-                                            <td>item.categoryName</td>
-                                            <td><a href="comments?stockId="><p>Grant Sale</p></a></td>
-                                            <td><a href="editStock?stockId="><p>Delete Sale</p></a></td>
+                                            <td>${item.id}</td>
+                                            <td>${item.price}</td>
+                                            <td>${item.des}</td>
+                                            <td>${item.conDes}</td>
+                                            <td>${item.orgPrice}</td>
+                                            <td>${item.amount}</td>
+                                            <td>${item.name}</td>
+                                            <td>${item.age}</td>
+                                            <td>${item.sex}</td>
+                                            <td>${item.cid}</td>
+                                            <td>${item.categoryName}</td>
+                                            <td><a href="pendingSales?action=grant&tempToyId=${item.id}"><p>Grant Sale</p></a></td>
+                                            <td><a href="pendingSales?action=delete&tempToyId=${item.id}"><p>Delete Sale</p></a></td>
                                         </tr>
                                     </c:forEach>
                                 
