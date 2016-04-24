@@ -86,6 +86,32 @@ public class toyStockServlet extends basicServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("toyStock.jsp"); 
         dispatcher.forward(request, response);
     }
+    
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException, SQLException{
+        response.setContentType("text/html;charset=UTF-8");
+        request=super.retrieveBasicAttributes(request);
+        
+        String conditionDesc = request.getParameter("conditionDesc");
+        String price =  request.getParameter("price");
+        String amount = request.getParameter("amount");
+        String tid = request.getParameter("tid");
+        
+        
+        Stock stock = new Stock();
+        
+        stock.setAmount(Integer.parseInt(amount));
+        stock.setConDes(conditionDesc);
+        stock.setPrice(Float.parseFloat(price));
+        stock.setRecycled(0);
+        stock.setTid(Integer.parseInt(tid));
+        stock.setCid(0);
+        
+        stock.insert();
+        
+        response.sendRedirect("toyStock?tid="+tid);
+        
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -120,7 +146,7 @@ public class toyStockServlet extends basicServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            processPost(request, response);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(pendingSalesServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
