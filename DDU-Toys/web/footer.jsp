@@ -34,7 +34,7 @@
                         <tr>
                             <td colspan="4">
                                 <p id="copyRight">Copyright ©2016 DDU-Toys · All Rights Reserved</p>
-                                <p>This web site exists to fulfill the coursework requirement of CS4280.Do not use your real personal data as input.</p>
+                                <p style="text-align: center">This web site exists to fulfill the coursework requirement of CS4280. Do not use your real personal data as input.</p>
                             </td>
                         </tr>
                     </tbody>
