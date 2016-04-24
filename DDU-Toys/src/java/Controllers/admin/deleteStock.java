@@ -14,7 +14,6 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -28,7 +27,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author David Liu
  */
-public class deleteToy extends basicServlet {
+public class deleteStock extends basicServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,41 +50,15 @@ public class deleteToy extends basicServlet {
             return;
         }
         
-        int tid = Integer.parseInt(request.getParameter("tid"));
+        int stockId = Integer.parseInt(request.getParameter("stockId"));
         
-        try {
-            Globals.openConn();
-            Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            //retreive all orders of the user
-            ResultSet rs = stmt.executeQuery("SELECT * FROM [Stock] WHERE [Tid] = "+tid);
-            int numRow = 0;
-            if (rs != null && rs.last() != false) {
-                numRow = rs.getRow();
-                rs.beforeFirst();
-            }
-            if (numRow > 0) {
-                while (rs != null && rs.next() != false) {
-                    Stock tempStock = new Stock();
-                    tempStock.setId(rs.getInt(1));
-                    tempStock.getOnId();
-                    tempStock.delete();
-                }
-            }
-            if (rs != null) {
-                rs.close();
-            }
-            Globals.closeConn();
-        } catch (ClassNotFoundException e) {
-            Globals.beanLog.info(e.toString());
-        } catch (SQLException e) {
-            Globals.beanLog.info(e.toString());
-        }
+       
         
-        Toy temp = new Toy();
-        temp.setId(tid);
+        Stock temp = new Stock();
+        temp.setId(stockId);
         temp.delete();
         
-        response.sendRedirect("index");
+        response.sendRedirect("toyStock?tid="+temp.getTid());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -138,5 +111,4 @@ public class deleteToy extends basicServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
