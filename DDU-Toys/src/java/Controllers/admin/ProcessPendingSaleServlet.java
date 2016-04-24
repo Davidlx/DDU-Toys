@@ -54,24 +54,38 @@ public class ProcessPendingSaleServlet extends basicServlet {
         TempToy temp = new TempToy();
         temp.setId(ttid);
         temp.getOnId();
-        
+        //if accepted, copy it 
         if(isAccepted==1){
-            Toy toy = new Toy();
+            Stock stock = new Stock();
             //if it is a new toy
+            if(temp.getTid()==0){
+                //first add a toy
+                Toy toy = new Toy();
+                toy.setName(temp.getName());
+                toy.setDes(temp.getDes());
+                toy.setSex(temp.getSex());
+                toy.setAge(temp.getAge());
+                toy.setPrice(temp.getOrgPrice());
+                toy.setPicUrl(temp.getPicUrl());
+                toy.setCategoryId(temp.getCategoryId());
+                toy.insert();
+                //then set the stock
+                
+            }
+            //we need to add a stock (no need to add a toy if the toy already exists
             if(temp.getTid()==0){
                 
             }
-            //else we just need to add a new stock
-            else{
-                Stock stock = new Stock();
                 stock.setRecycled(1);
                 stock.setConDes(temp.getConDes());
                 stock.setCid(temp.getCid());
                 stock.setTid(temp.getTid());
                 stock.setAmount(temp.getAmount());
                 stock.setPrice(temp.getPrice());
-            }
+                stock.insert();
+            
         }
+        //del
         else{
             
         }
