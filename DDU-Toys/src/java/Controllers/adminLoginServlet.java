@@ -85,7 +85,7 @@ public class adminLoginServlet extends basicServlet {
                     
                     if(uri.toLowerCase().contains(".jsp"))
                         uri=uri.substring(0, uri.length()-4);
-                    response.sendRedirect("DDU-Toys/"+uri);
+                    response.sendRedirect(uri);
                 }
                 //user doesn't exist
                 else{
