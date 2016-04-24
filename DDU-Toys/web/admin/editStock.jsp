@@ -53,11 +53,6 @@ A bean containing the original informaiton of the stock, and a bean contains the
                                  <form method="POST" action="${pageContext.request.contextPath}/admin/editStock?sid=${stock.id}">
                                     
                                     <div class="form-group">
-                                      <label for="exampleInputPassword1">Condition Description</label>
-                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Condition Description" name="conDes" value="${stock.conDes}">
-                                    </div>
-                                    
-                                    <div class="form-group">
                                       <label for="exampleInputPassword1">Current Price</label>
                                       <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Current Price" name="price" value="${stock.price}">
                                     </div>

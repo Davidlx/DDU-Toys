@@ -99,11 +99,6 @@ A bean contains the information for Toy and an arrayList of stocks
                                  <form method="POST"action="${pageContext.request.contextPath}/admin/toyStock?tid=${currentToy.id}">
                                     
                                     <div class="form-group">
-                                      <label for="exampleInputPassword1">Condition Description</label>
-                                      <input type="text" class="form-control" id="exampleInputPassword1" name="conditionDesc" placeholder="Condition Description">
-                                    </div>
-                                    
-                                    <div class="form-group">
                                       <label for="exampleInputPassword1">Current Price</label>
                                       <input type="text" class="form-control" id="exampleInputPassword1" name="price" placeholder="Current Price">
                                     </div>

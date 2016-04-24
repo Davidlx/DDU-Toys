@@ -107,7 +107,6 @@ public class toyStockServlet extends basicServlet {
             return;
         }
         
-        String conditionDesc = request.getParameter("conditionDesc");
         String price =  request.getParameter("price");
         String amount = request.getParameter("amount");
         String tid = request.getParameter("tid");
@@ -115,7 +114,6 @@ public class toyStockServlet extends basicServlet {
         Stock stock = new Stock();
         
         stock.setAmount(Integer.parseInt(amount));
-        stock.setConDes(conditionDesc);
         stock.setPrice(Float.parseFloat(price));
         stock.setRecycled(0);
         stock.setTid(Integer.parseInt(tid));
