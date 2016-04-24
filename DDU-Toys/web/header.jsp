@@ -1,4 +1,5 @@
 <!--this file is used to refer to the css and js files, so we use a single file to handle this-->
+        <meta name="description" content="This web site exists to fulfill the coursework requirement of CS4280.Do not use your real personal data as input.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css" />
         <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.css" />
