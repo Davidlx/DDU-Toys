@@ -111,7 +111,7 @@ public class itemsServlet extends basicServlet {
                                             "FROM [Stock] as stock\n" +
                                             "INNER JOIN [Toys] as toys\n" +
                                             "ON stock.Tid = toys.Tid\n" +
-                                            "WHERE stock.Recycle = 0 AND toys.CategoryId = " + categoryId);
+                                            "WHERE stock.Recycle = 0 AND toys.CategoryId = " + categoryId + " ORDER BY toys.Name");
         
         int numRow = 0;
         if(rs != null && rs.last() != false) {
@@ -155,7 +155,7 @@ public class itemsServlet extends basicServlet {
                                             "FROM [Stock] as stock\n" +
                                             "INNER JOIN [Toys] as toys\n" +
                                             "ON stock.Tid = toys.Tid\n" +
-                                            "WHERE stock.Recycle = 1");
+                                            "WHERE stock.Recycle = 1 ORDER BY toys.Name");
         
         int numRow = 0;
         if(rs != null && rs.last() != false) {
@@ -199,7 +199,7 @@ public class itemsServlet extends basicServlet {
                                             "FROM [Stock] as stock\n" +
                                             "INNER JOIN [Toys] as toys\n" +
                                             "ON stock.Tid = toys.Tid\n" +
-                                            "WHERE stock.Recycle = 0 AND (toys.Age BETWEEN "+lower+" AND "+upper+")");
+                                            "WHERE stock.Recycle = 0 AND (toys.Age BETWEEN "+lower+" AND "+upper+") ORDER BY toys.Name");
         
         int numRow = 0;
         if(rs != null && rs.last() != false) {
