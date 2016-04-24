@@ -8,27 +8,27 @@ package Controllers.admin;
 import Bean.Globals;
 import Bean.Stock;
 import Bean.Toy;
+import Controllers.basicServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import Controllers.basicServlet;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author David Liu
  */
-public class toyStockServlet extends basicServlet {
+public class deleteToy extends basicServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,30 +40,24 @@ public class toyStockServlet extends basicServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException {
+            throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        request = super.retrieveBasicAttributes(request);
-
+        request=super.retrieveBasicAttributes(request);
+        
         HttpSession session = request.getSession();
         Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
-        if (customer == null || !customer.getIsAdmin()) {
-            response.sendRedirect("../login?from=/admin/");
+        if(customer == null || !customer.getIsAdmin()) {
+            response.sendRedirect("../adminLogin?from=/admin/");
             return;
         }
-
-        ArrayList<Stock> stocks = new ArrayList<Stock>();
+        
         int tid = Integer.parseInt(request.getParameter("tid"));
-        Toy currentToy = new Toy();
-        currentToy.setId(tid);
-        currentToy.getOnId();
-
-        request.setAttribute("currentToy", currentToy);
-
+        
         try {
             Globals.openConn();
             Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             //retreive all orders of the user
-            ResultSet rs = stmt.executeQuery("SELECT * FROM [Stock] WHERE [Tid] = " + tid);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM [Stock] WHERE [Tid] = "+tid);
             int numRow = 0;
             if (rs != null && rs.last() != false) {
                 numRow = rs.getRow();
@@ -74,7 +68,7 @@ public class toyStockServlet extends basicServlet {
                     Stock tempStock = new Stock();
                     tempStock.setId(rs.getInt(1));
                     tempStock.getOnId();
-                    stocks.add(tempStock);
+                    tempStock.delete();
                 }
             }
             if (rs != null) {
@@ -86,57 +80,12 @@ public class toyStockServlet extends basicServlet {
         } catch (SQLException e) {
             Globals.beanLog.info(e.toString());
         }
-
-        request.setAttribute("stocks", stocks);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("toyStock.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    protected void processPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException {
-        response.setContentType("text/html;charset=UTF-8");
-        request = super.retrieveBasicAttributes(request);
-
-        HttpSession session = request.getSession();
-        Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
-        if (customer == null || !customer.getIsAdmin()) {
-            response.sendRedirect("../adminLogin?from=/DDU-Toys/admin/");
-            return;
-        }
-
-        String amount = request.getParameter("amount");
-        String newPrice = request.getParameter("price");
-        String tid = request.getParameter("tid");
-
-        if (amount != null && !"".equals(amount)) {
-            Toy toy = new Toy();
-            toy.setId(Integer.parseInt(tid));
-            toy.getOnId();
-
-            Stock stock = new Stock();
-
-            stock.setAmount(Integer.parseInt(amount));
-            stock.setRecycled(0);
-            stock.setCid(0);
-            stock.setTid(Integer.parseInt(tid));
-            //if a price has been written, we set it and update the toy
-            if (newPrice != null && !"".equals(newPrice)) {
-                stock.setPrice(Float.parseFloat(newPrice));
-                toy.setPrice(Float.parseFloat(newPrice));
-                toy.update();
-            } //if not we use the old price
-            else {
-                stock.setPrice(toy.getPrice());
-            }
-
-            stock.insert();
-
-            response.sendRedirect("toyStock?tid=" + tid);
-        } else {
-            response.sendRedirect("toyStock?tid=" + tid);
-        }
         
+        Toy temp = new Toy();
+        temp.setId(tid);
+        temp.delete();
+        
+        response.sendRedirect("index");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -153,10 +102,10 @@ public class toyStockServlet extends basicServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(pendingSalesServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(pendingSalesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(adminIndexServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(adminIndexServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -172,11 +121,11 @@ public class toyStockServlet extends basicServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processPost(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(pendingSalesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(pendingSalesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(adminIndexServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(adminIndexServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

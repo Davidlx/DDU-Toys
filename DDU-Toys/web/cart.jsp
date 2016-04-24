@@ -88,8 +88,8 @@
                                     <div class="col-md-2 itemPrice"> $${item.usedItem.price}</div>
                                     <div class="col-md-2">
                                         <p>Current Quantity: ${item.itemAmount}</p>
-                                        <a href="cart?sid=${item.usedItem.id}&action=3&recycle=${item.usedItem.recycled}"><p>Current Quantity: 1</p></a>
-                                        <a href="cart?sid=${item.usedItem.id}&action=4&recycle=${item.usedItem.recycled}"><p>Current Quantity: 1</p></a>
+                                        <a href="cart?sid=${item.usedItem.id}&action=3&recycle=${item.usedItem.recycled}"><p>Increase Quantity</p></a>
+                                        <a href="cart?sid=${item.usedItem.id}&action=4&recycle=${item.usedItem.recycled}"><p>Decrease Quantity</p></a>
                                     </div>
                                 </div>
                             </div>

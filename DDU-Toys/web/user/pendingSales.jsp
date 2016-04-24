@@ -45,7 +45,7 @@
                                                 </c:if>
                                                 & ${item.age} Years Old</p>
                                         <p>${item.conDes}</p>
-                                        <a href="deleteSales?sid=${item.id}"><p>Delete this Item</p></a>
+                                        <a href="deleteSales?type=pending&sid=${item.id}"><p>Delete this Item</p></a>
                                     </div>
                                      <div class="col-md-2">${item.amount} in stock</div>
                                      <div class="col-md-2 itemPrice">Current Price:$${item.price}</div>

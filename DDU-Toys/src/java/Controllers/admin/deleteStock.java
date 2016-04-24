@@ -5,12 +5,15 @@
  */
 package Controllers.admin;
 
+import Bean.Globals;
 import Bean.Stock;
 import Bean.Toy;
 import Controllers.basicServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -24,7 +27,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author David Liu
  */
-public class editStockServlet extends basicServlet {
+public class deleteStock extends basicServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,36 +39,7 @@ public class editStockServlet extends basicServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException {
-        response.setContentType("text/html;charset=UTF-8");
-        request=super.retrieveBasicAttributes(request);
-        
-        HttpSession session = request.getSession();
-        Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
-        if(customer == null || !customer.getIsAdmin()) {
-            response.sendRedirect("../adminLogin?from=/DDU-Toys/admin/");
-            return;
-        }
-        
-        int sid = Integer.parseInt(request.getParameter("stockId"));
-        Stock tempStock = new Stock();
-        tempStock.setId(sid);
-        tempStock.getOnId();
-        
-        request.setAttribute("stock", tempStock);
-        
-        Toy tempToy = new Toy();
-        tempToy.setId(tempStock.getTid());
-        tempToy.getOnId();
-        
-        request.setAttribute("toy", tempToy);
-        
-        RequestDispatcher dispatcher = request.getRequestDispatcher("editStock.jsp"); 
-        dispatcher.forward(request, response);
-    }
-    
-     protected void processPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException{
+            throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         request=super.retrieveBasicAttributes(request);
         
@@ -76,21 +50,13 @@ public class editStockServlet extends basicServlet {
             return;
         }
         
-        String price =  request.getParameter("price");
-        String amount = request.getParameter("amount");
-        String sid = request.getParameter("sid");
+        int stockId = Integer.parseInt(request.getParameter("stockId"));
         
-        Stock stock = new Stock();
-        stock.setId(Integer.parseInt(sid));
-        stock.getOnId();
+        Stock temp = new Stock();
+        temp.setId(stockId);
+        temp.delete();
         
-        stock.setAmount(Integer.parseInt(amount));
-        stock.setPrice(Float.parseFloat(price));
-        
-        stock.update();
-        
-        response.sendRedirect("toyStock?tid="+stock.getTid());
-        
+        response.sendRedirect("toyStock?tid="+temp.getTid());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -107,10 +73,10 @@ public class editStockServlet extends basicServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(editStockServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(editStockServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(adminIndexServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(adminIndexServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -126,11 +92,11 @@ public class editStockServlet extends basicServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processPost(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(editStockServlet.class.getName()).log(Level.SEVERE, null, ex);
+            processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(editStockServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(adminIndexServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(adminIndexServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -143,5 +109,4 @@ public class editStockServlet extends basicServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

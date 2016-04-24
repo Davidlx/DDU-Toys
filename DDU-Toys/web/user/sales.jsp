@@ -44,7 +44,7 @@
                                                 </c:if>
                                                 & ${item.toyInfo.age} Years Old</p>
                                         <p>${item.usedItem.conDes}</p>
-                                        <a href="deleteSales?sid=${item.usedItem.id}"><p>Delete this Item</p></a>
+                                        <a href="deleteSales?type=stock&sid=${item.usedItem.id}"><p>Delete this Item</p></a>
                                     </div>
                                      <div class="col-md-2">${item.usedItem.amount} in stock</div>
                                      <div class="col-md-2 itemPrice">$${item.usedItem.price}</div>

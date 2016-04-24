@@ -48,7 +48,7 @@
                                          <div class="col-md-2 itemPrice" style="font-size: 15px">
                                              <a href="toyStock?tid=${toy.id}"><p>View Stocks</p></a>
                                              <a href="editToy?tid=${toy.id}"><p>Edit this Toy</p></a>
-                                             <a href="deleteToy?tid=${toy.id}"data-toggle="modal" data-target="#deleteToy${toy.id}"><p>Delete this Toy</p></a>
+                                             <a data-toggle="modal" data-target="#deleteToy${toy.id}"><p>Delete this Toy</p></a>
                                          </div>
                                     </div>
                                 </div>
