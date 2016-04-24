@@ -88,8 +88,7 @@ public class ProcessPendingSaleServlet extends basicServlet {
         //then delete it from temp toys
         temp.delete();
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("pendingSales.jsp");
-        dispatcher.forward(request, response);
+        response.sendRedirect("pendingSales.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

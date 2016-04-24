@@ -60,8 +60,8 @@ An Arraylist of all the pending sales object containing all the information in t
                                             <td>${item.sex}</td>
                                             <td>${item.cid}</td>
                                             <td>${item.categoryName}</td>
-                                            <td><a href="pendingSales?isAccepted=1&ttid=${item.id}"><p>Grant Sale</p></a></td>
-                                            <td><a href="pendingSales?isAccepted=0&ttid=${item.id}"><p>Delete Sale</p></a></td>
+                                            <td><a href="processPendingSale?isAccepted=1&ttid=${item.id}"><p>Grant Sale</p></a></td>
+                                            <td><a href="processPendingSale?isAccepted=0&ttid=${item.id}"><p>Delete Sale</p></a></td>
                                         </tr>
                                     </c:forEach>
                                 

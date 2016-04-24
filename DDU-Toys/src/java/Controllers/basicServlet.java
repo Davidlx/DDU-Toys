@@ -58,6 +58,7 @@ public class basicServlet extends HttpServlet {
                     Boolean notLoggedIn = false;
                     session.setAttribute("isLoggedIn", notLoggedIn);
                 }
+                
             }
             return request;
         } catch (NullPointerException e) {
