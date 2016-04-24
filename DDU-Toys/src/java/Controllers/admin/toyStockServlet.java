@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
+
 /**
  *
  * @author David Liu
@@ -41,28 +42,28 @@ public class toyStockServlet extends basicServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        request=super.retrieveBasicAttributes(request);
-        
+        request = super.retrieveBasicAttributes(request);
+
         HttpSession session = request.getSession();
         Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
-        if(customer == null || !customer.getIsAdmin()) {
+        if (customer == null || !customer.getIsAdmin()) {
             response.sendRedirect("../login?from=/admin/");
             return;
         }
-        
+
         ArrayList<Stock> stocks = new ArrayList<Stock>();
         int tid = Integer.parseInt(request.getParameter("tid"));
         Toy currentToy = new Toy();
         currentToy.setId(tid);
         currentToy.getOnId();
-        
+
         request.setAttribute("currentToy", currentToy);
-        
+
         try {
             Globals.openConn();
             Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             //retreive all orders of the user
-            ResultSet rs = stmt.executeQuery("SELECT * FROM [Stock] WHERE [Tid] = "+tid);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM [Stock] WHERE [Tid] = " + tid);
             int numRow = 0;
             if (rs != null && rs.last() != false) {
                 numRow = rs.getRow();
@@ -87,45 +88,54 @@ public class toyStockServlet extends basicServlet {
         }
 
         request.setAttribute("stocks", stocks);
-        
-        
-        
-        
-        RequestDispatcher dispatcher = request.getRequestDispatcher("toyStock.jsp"); 
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("toyStock.jsp");
         dispatcher.forward(request, response);
     }
-    
+
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException{
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        request=super.retrieveBasicAttributes(request);
-        
+        request = super.retrieveBasicAttributes(request);
+
         HttpSession session = request.getSession();
         Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
-        if(customer == null || !customer.getIsAdmin()) {
+        if (customer == null || !customer.getIsAdmin()) {
             response.sendRedirect("../adminLogin?from=/DDU-Toys/admin/");
             return;
         }
         String amount = request.getParameter("amount");
+        String newPrice = request.getParameter("price");
         String tid = request.getParameter("tid");
-        
-        Toy toy = new Toy();
-        toy.setId(Integer.parseInt(tid));
-        toy.getOnId();
-        
-        Stock stock = new Stock();
-        
-        stock.setAmount(Integer.parseInt(amount));
-        stock.setRecycled(0);
-        stock.setPrice(toy.getPrice());
-        stock.setCid(0);
-        stock.setTid(Integer.parseInt(tid));
-        stock.setConDes("");
-        
-        stock.insert();
-        
-        response.sendRedirect("toyStock?tid="+tid);
-        
+
+        if (amount != null && !"".equals(amount)) {
+            Toy toy = new Toy();
+            toy.setId(Integer.parseInt(tid));
+            toy.getOnId();
+
+            Stock stock = new Stock();
+
+            stock.setAmount(Integer.parseInt(amount));
+            stock.setRecycled(0);
+            stock.setCid(0);
+            stock.setTid(Integer.parseInt(tid));
+            //if a price has been written, we set it and update the toy
+            if (newPrice != null && !"".equals(newPrice)) {
+                stock.setPrice(Float.parseFloat(newPrice));
+                toy.setPrice(Float.parseFloat(newPrice));
+                toy.update();
+            } //if not we use the old price
+            else {
+                stock.setPrice(toy.getPrice());
+            }
+
+            stock.insert();
+
+            response.sendRedirect("toyStock?tid=" + tid);
+        } else {
+            response.sendRedirect("toyStock?tid=" + tid);
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
