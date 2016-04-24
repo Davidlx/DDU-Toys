@@ -54,6 +54,7 @@ public class deleteStock extends basicServlet {
         
         Stock temp = new Stock();
         temp.setId(stockId);
+        temp.getOnId();
         temp.delete();
         
         response.sendRedirect("toyStock?tid="+temp.getTid());

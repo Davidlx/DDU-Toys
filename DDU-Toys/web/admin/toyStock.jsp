@@ -94,7 +94,7 @@ A bean contains the information for Toy and an arrayList of stocks
                                 
                             </table>
                             
-                            <c:if test="displayNewStock">
+                            <c:if test="${displayNewStock}">
                                 <h1 style="margin-bottom: 10px">New Stock</h1>
                                 <div class="newToy">
                                      <form method="POST"action="${pageContext.request.contextPath}/admin/toyStock?tid=${currentToy.id}">
