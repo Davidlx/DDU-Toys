@@ -89,8 +89,10 @@ public class editStockServlet extends basicServlet {
         
         stock.update();
         
-        response.sendRedirect("toyStock?tid="+stock.getTid());
-        
+        PrintWriter out = response.getWriter();
+        out.println("<script type=\"text/javascript\">alert(\"The stock has been updated successfully\")</script>");
+        out.println("<script type=\"text/javascript\">window.location=\"toyStock?tid="+stock.getTid()+"\";</script>");
+        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
