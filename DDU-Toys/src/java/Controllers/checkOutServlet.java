@@ -69,7 +69,10 @@ public class checkOutServlet extends basicServlet {
                 int cid = customer.getId();
                 createOrderInDB(session, cid, isFHCEmpty, isSHCEmpty);
              
-                response.sendRedirect("user/index");
+                PrintWriter out = response.getWriter();
+                out.println("<script type=\"text/javascript\">alert(\"We have received your order, thanks!\")</script>");
+                out.println("<script type=\"text/javascript\">window.location=\"user/index\";</script>");
+                out.close();
             }
             }
         } catch (NullPointerException e) {

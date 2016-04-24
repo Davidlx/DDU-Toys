@@ -88,7 +88,14 @@ public class ProcessPendingSaleServlet extends basicServlet {
         //then delete it from temp toys
         temp.delete();
 
-        response.sendRedirect("pendingSales");
+        
+        PrintWriter out = response.getWriter();
+        if (isAccepted == 1)
+            out.println("<script type=\"text/javascript\">alert(\"The pending sales has been granted\")</script>");
+        else
+            out.println("<script type=\"text/javascript\">alert(\"The pending sales has been deleted\")</script>");
+        out.println("<script type=\"text/javascript\">window.location=\"pendingSales\";</script>");
+        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
