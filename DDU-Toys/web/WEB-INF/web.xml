@@ -116,6 +116,10 @@
         <servlet-name>pendingSalesUserServlet</servlet-name>
         <servlet-class>Controllers.user.pendingSalesUserServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProcessPendingSaleServlet</servlet-name>
+        <servlet-class>Controllers.admin.ProcessPendingSaleServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Test</servlet-name>
         <url-pattern>/Test</url-pattern>
@@ -230,6 +234,10 @@
     <servlet-mapping>
         <servlet-name>pendingSalesUserServlet</servlet-name>
         <url-pattern>/user/pendingSales</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProcessPendingSaleServlet</servlet-name>
+        <url-pattern>/admin/ProcessPendingSale</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

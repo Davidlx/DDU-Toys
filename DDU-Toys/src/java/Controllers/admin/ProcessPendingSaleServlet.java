@@ -7,7 +7,9 @@ package Controllers.admin;
 
 import Bean.Customer;
 import Bean.Globals;
+import Bean.Stock;
 import Bean.TempToy;
+import Bean.Toy;
 import Controllers.basicServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,7 +30,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Ugo
  */
-public class pendingSalesServlet extends basicServlet {
+public class ProcessPendingSaleServlet extends basicServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,38 +49,29 @@ public class pendingSalesServlet extends basicServlet {
         Customer c=(Customer)session.getAttribute("customer");
         int cid = c.getId();
         
-        ArrayList<TempToy> toys = new ArrayList<TempToy>();
-        try{
-            Globals.openConn();
-            Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            //retreive all orders of the user
-            ResultSet rs = stmt.executeQuery("SELECT * FROM [TempToys]");
-            int numRow = 0;
-            if(rs != null && rs.last() != false) {
-                numRow = rs.getRow();
-                rs.beforeFirst();
-            }
-            if(numRow !=0) {
-                while(rs != null && rs.next() != false) {
-                    TempToy temp = new TempToy();
-                    int ttid = rs.getInt(1);
-                    temp.setId(ttid);
-                    temp.getOnId();
-                    toys.add(temp);
-                }
-            }
-            if(rs != null) {
-                rs.close();
-            }
-            Globals.closeConn();
-        }
-        catch (ClassNotFoundException e) {
-            Globals.beanLog.info(e.toString());
-        } catch (SQLException e) {
-            Globals.beanLog.info(e.toString());
-        }
+        int isAccepted= Integer.parseInt(request.getParameter("isAccepted"));
+        int ttid=Integer.parseInt(request.getParameter("ttid"));
+        TempToy temp = new TempToy();
+        temp.setId(ttid);
+        temp.getOnId();
         
-        request.setAttribute("listPendingSales", toys);
+        if(isAccepted==1){
+            Toy toy = new Toy();
+            //if it is a new toy
+            if(temp.getTid()==0){
+                
+            }
+            //else we just need to add a new stock
+            else{
+                Stock stock = new Stock();
+                stock.setRecycled(1);
+                stock.setConDes(temp.getConDes());
+                
+            }
+        }
+        else{
+            
+        }
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("pendingSales.jsp"); 
         dispatcher.forward(request, response);
