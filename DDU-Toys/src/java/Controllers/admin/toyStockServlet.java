@@ -58,6 +58,8 @@ public class toyStockServlet extends basicServlet {
         currentToy.getOnId();
 
         request.setAttribute("currentToy", currentToy);
+        
+        boolean displayNewStock=true;
 
         try {
             Globals.openConn();
@@ -75,6 +77,8 @@ public class toyStockServlet extends basicServlet {
                     tempStock.setId(rs.getInt(1));
                     tempStock.getOnId();
                     stocks.add(tempStock);
+                    if(tempStock.getRecycled()==0)
+                        displayNewStock=false;
                 }
             }
             if (rs != null) {
@@ -88,6 +92,8 @@ public class toyStockServlet extends basicServlet {
         }
 
         request.setAttribute("stocks", stocks);
+        
+        request.setAttribute("displayNewStock", displayNewStock);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("toyStock.jsp");
         dispatcher.forward(request, response);
