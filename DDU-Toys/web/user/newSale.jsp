@@ -24,36 +24,6 @@
                     </div>
                     <div class="col-md-10">
                         <div class="userMainContent">
-                            
-                            <h1>Pending Sales</h1>
-                            <c:forEach items="${listPendingSales}" var="item">
-
-                                <div class="row  borderBottom marginTop">
-                                    <div class="col-md-2">
-                                        <img data-src="holder.js/100%x200" alt="100%x200" style="width: 100%; height:200px; display: block;" src="${item.toyInfo.picUrl}"/> 
-                                    </div>
-                                     <div class="col-md-6">
-                                        <h1 class="itemName" style="border:none;padding-top: 0; margin-top: 0px;">${item.toyInfo.name}</h1>
-                                        <p class="basicInformation">${item.toyInfo.categoryName} & <c:if test="${(item.toyInfo.sex ==0)}">
-                                                    Female
-                                                </c:if>
-                                                <c:if test="${(item.toyInfo.sex ==1)}">
-                                                    Male
-                                                </c:if>
-                                                <c:if test="${(item.toyInfo.sex ==2)}">
-                                                    Unisex
-                                                </c:if>
-                                                & ${item.toyInfo.age} Years Old</p>
-                                        <p>${item.usedItem.conDes}</p>
-                                        <a href="deleteSales?sid=${item.usedItem.id}"><p>Delete this Item</p></a>
-                                    </div>
-                                     <div class="col-md-2">${item.usedItem.amount} in stock</div>
-                                     <div class="col-md-2 itemPrice">$${item.usedItem.price}</div>
-                                </div>
-                            </c:forEach>
-                            
-                            
-                            
                             <h1>New Sale Item</h1>
                             <div class="row marginTop marginLeft">
                                 <form method="POST" action="${pageContext.request.contextPath}/user/newSale">
@@ -133,7 +103,6 @@
                         </div>
                     </div>
                 </div>
-                    
             </div>
                 <%@ include file="footer.jsp" %>
         </div>
