@@ -80,21 +80,21 @@ A bean contains the information for Toy and an arrayList of stocks
                             
                              <h1 style="margin-bottom: 10px">New Stock</h1>
                             <div class="newToy">
-                                 <form>
+                                 <form method="POST"action="${pageContext.request.contextPath}/admin/toyStock?tid=${currentToy.id}">
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Condition Description</label>
-                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Condition Description">
+                                      <input type="text" class="form-control" id="exampleInputPassword1" name="conditionDesc" placeholder="Condition Description">
                                     </div>
                                     
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Current Price</label>
-                                      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Current Price">
+                                      <input type="text" class="form-control" id="exampleInputPassword1" name="price" placeholder="Current Price">
                                     </div>
                                     
                                     <div class="form-group">
-                                      <label for="exampleInputPassword1">Amont of Toys</label>
-                                      <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Amont of Toys">
+                                      <label for="exampleInputPassword1">Amount of Toys</label>
+                                      <input type="number" class="form-control" id="exampleInputPassword1" name="amount" placeholder="Amont of Toys">
                                     </div>
                                     
                                     <button type="submit" class="btn btn-default">Submit</button>

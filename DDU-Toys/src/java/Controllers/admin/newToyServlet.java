@@ -67,7 +67,7 @@ public class newToyServlet extends basicServlet {
         
         tempToy.insert();
         
-        response.sendRedirect("index");
+        response.sendRedirect("toyStock?tid="+tempToy.getId());
         
     }
     
