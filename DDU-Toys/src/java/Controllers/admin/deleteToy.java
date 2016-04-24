@@ -85,7 +85,10 @@ public class deleteToy extends basicServlet {
         temp.setId(tid);
         temp.delete();
         
-        response.sendRedirect("index");
+        PrintWriter out = response.getWriter();
+        out.println("<script type=\"text/javascript\">alert(\"The toy has been deleted\")</script>");
+        out.println("<script type=\"text/javascript\">window.location=\"index\";</script>");
+        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

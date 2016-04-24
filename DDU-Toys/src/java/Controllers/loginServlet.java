@@ -81,8 +81,10 @@ public class loginServlet extends basicServlet{
                 }
                 //user doesn't exist
                 else{
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp"); 
-                    dispatcher.forward(request, response);
+                    PrintWriter out = response.getWriter();
+                    out.println("<script type=\"text/javascript\">alert(\"Your email and password is incorrect, please check again\")</script>");
+                    out.println("<script type=\"text/javascript\">window.location=\"login\";</script>");
+                    out.close();
                 }
                                   
                 // close connections and statements

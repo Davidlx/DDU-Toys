@@ -103,7 +103,11 @@ public class newSaleServlet extends basicServlet {
                     temp.setCategoryId(Integer.parseInt(categoryId));
                     temp.setCid(cid);
                     temp.insert();
-                    response.sendRedirect("index");
+                    
+                    PrintWriter out = response.getWriter();
+                    out.println("<script type=\"text/javascript\">alert(\"A new sale request has been send\")</script>");
+                    out.println("<script type=\"text/javascript\">window.location=\"index\";</script>");
+                    out.close();
                     
                 } else {
                     sendToys(request, response);
@@ -124,7 +128,10 @@ public class newSaleServlet extends basicServlet {
                     temp.setCid(cid);
                     temp.insert();
 
-                    response.sendRedirect("index");
+                    PrintWriter out = response.getWriter();
+                    out.println("<script type=\"text/javascript\">alert(\"A new sale request has been send\")</script>");
+                    out.println("<script type=\"text/javascript\">window.location=\"index\";</script>");
+                    out.close();
                 }
             } //redirect
             else {

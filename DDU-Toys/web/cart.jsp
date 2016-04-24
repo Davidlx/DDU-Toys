@@ -69,7 +69,7 @@
                             <div class="cartItem">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <img data-src="holder.js/100%x200" alt="100%x200" style="width: 100%; height:200px; display: block;" src="${item.toyInfo.picUrl}"/> 
+                                        <img data-src="holder.js/100%x200" alt="100%x200" style="width: 100%; height:100px; display: block;" src="${item.toyInfo.picUrl}"/> 
                                     </div>
                                     <div class="col-md-6">
                                         <h1 class="itemName" onclick="location.href='${pageContext.request.contextPath}/itemDetail?stockId=${item.usedItem.id}'"  style="cursor: pointer">${item.toyInfo.name}</h1>
@@ -104,7 +104,7 @@
                         </div>
                     </c:if>
                         
-                    <h1 class="homePageTitle">Featured Products</h1>
+                    <h1 class="homePageTitle" style="padding-top: 100px">Featured Products</h1>
                     <div class="row">
                         <c:forEach items="${featuredItem}" var="item">
                             <div class="col-sm-6 col-md-3">

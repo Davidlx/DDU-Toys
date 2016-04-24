@@ -45,7 +45,10 @@ public class logoutServlet extends basicServlet {
         session.setAttribute("customer", null);
         session.setAttribute("isLoggedIn",false);
         
-        response.sendRedirect("index");
+        PrintWriter out = response.getWriter();
+                    out.println("<script type=\"text/javascript\">alert(\"You have logged out of the account\")</script>");
+                    out.println("<script type=\"text/javascript\">window.location=\"index\";</script>");
+                    out.close();
     }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

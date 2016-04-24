@@ -57,7 +57,10 @@ public class deleteStock extends basicServlet {
         temp.getOnId();
         temp.delete();
         
-        response.sendRedirect("toyStock?tid="+temp.getTid());
+        PrintWriter out = response.getWriter();
+        out.println("<script type=\"text/javascript\">alert(\"The stock has been deleted\")</script>");
+        out.println("<script type=\"text/javascript\">window.location=\"toyStock?tid="+temp.getTid()+"\";</script>");
+        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

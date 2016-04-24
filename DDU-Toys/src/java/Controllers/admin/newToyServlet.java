@@ -42,7 +42,7 @@ public class newToyServlet extends basicServlet {
         HttpSession session = request.getSession();
         Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
         if(customer == null || !customer.getIsAdmin()) {
-            response.sendRedirect("../adminLogin?from=/admin/");
+            response.sendRedirect("../adminLogin?from=admin/");
             return;
         }
         
@@ -82,7 +82,10 @@ public class newToyServlet extends basicServlet {
         
         tempToy.insert();
         
-        response.sendRedirect("toyStock?tid="+tempToy.getId());
+        PrintWriter out = response.getWriter();
+        out.println("<script type=\"text/javascript\">alert(\"A new toy has been created successfully\")</script>");
+        out.println("<script type=\"text/javascript\">window.location=\"toyStock?tid="+tempToy.getId()+"\";</script>");
+        out.close();
         
     }
     

@@ -137,8 +137,11 @@ public class toyStockServlet extends basicServlet {
             }
 
             stock.insert();
-
-            response.sendRedirect("toyStock?tid=" + tid);
+            
+            PrintWriter out = response.getWriter();
+            out.println("<script type=\"text/javascript\">alert(\"A new stock has been created successfully\")</script>");
+            out.println("<script type=\"text/javascript\">window.location=\"toyStock?tid="+tid+"\";</script>");
+            out.close();
         } else {
             response.sendRedirect("toyStock?tid=" + tid);
         }

@@ -19,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -140,8 +141,65 @@ public class itemDetailServlet extends basicServlet {
         
         request.setAttribute("listComments", list);
         
+        ArrayList<Bean.SpecificBean.FirstHandItem> featuredToys = getFeaturedToys(4);
+        request.setAttribute("featuredItem", featuredToys);
+        
         RequestDispatcher dispatcher = request.getRequestDispatcher("itemDetail.jsp"); 
         dispatcher.forward(request, response);
+    }
+    
+        // <editor-fold defaultstate="collapsed" desc="DB Methods">
+    private ArrayList<Bean.SpecificBean.FirstHandItem> getFeaturedToys(int amount) throws ClassNotFoundException, SQLException{
+        ArrayList<Bean.SpecificBean.FirstHandItem> result = new ArrayList<Bean.SpecificBean.FirstHandItem>();
+        
+        // Setup connection to db
+        Globals.openConn();
+        Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM [Stock] WHERE Recycle = 0");
+        
+        int numRow = 0;
+        if(rs != null && rs.last() != false) {
+            numRow = rs.getRow();
+            rs.beforeFirst();
+        }
+        
+        //4 random numbers        
+        ArrayList<Integer> numbers = new ArrayList<Integer>();   
+        Random rand = new Random();
+        while (numbers.size() < amount) {
+            int random = rand.nextInt(numRow);
+            if (!numbers.contains(random)) {
+                numbers.add(random);
+            }
+        }
+        
+        int i = 0;
+        if(numRow > 0) {
+            while(rs != null && rs.next() != false) {
+                if(numbers.contains(i)) {
+                    Bean.Stock item = new Bean.Stock();
+                    item.setId(Integer.parseInt(rs.getString("Sid")));
+                    item.setRecycled(Integer.parseInt(rs.getString("Recycle")));
+                    item.setConDes(rs.getString("ConditionDescription"));
+                    item.setAmount(Integer.parseInt(rs.getString("Amount")));
+                    item.setPrice(Float.parseFloat(rs.getString("Price")));
+                    item.setCid(Globals.tryParse(rs.getString("Cid")));
+                    item.setTid(Integer.parseInt(rs.getString("Tid")));
+                    Bean.SpecificBean.FirstHandItem featuredUsedItem = new Bean.SpecificBean.FirstHandItem();
+                    featuredUsedItem.setItem(item);
+                    result.add(featuredUsedItem);
+                }
+                i++;
+            }
+        }
+        
+        if(rs != null){
+            rs.close();
+        }
+            
+        Globals.closeConn();
+        
+        return result;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

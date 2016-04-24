@@ -9,6 +9,7 @@ import Bean.Comment;
 import Bean.Customer;
 import Controllers.basicServlet;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -52,8 +53,11 @@ public class newCommentServlet extends basicServlet {
         Date date= new Date();
         comment.setPostTime(new Timestamp(date.getTime()));
         comment.insert();
-       
-        response.sendRedirect("itemDetail?stockId="+sid);
+        
+        PrintWriter out = response.getWriter();
+        out.println("<script type=\"text/javascript\">alert(\"You comment has been submitted\")</script>");
+        out.println("<script type=\"text/javascript\">window.location=\"itemDetail?stockId="+sid+"\";</script>");
+        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
