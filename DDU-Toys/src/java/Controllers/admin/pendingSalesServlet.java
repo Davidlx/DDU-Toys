@@ -47,7 +47,7 @@ public class pendingSalesServlet extends basicServlet {
         
         Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
         if(customer == null || !customer.getIsAdmin()) {
-            response.sendRedirect("../login?from=/admin/");
+            response.sendRedirect("../adminLogin?from=/admin/");
             return;
         }
         

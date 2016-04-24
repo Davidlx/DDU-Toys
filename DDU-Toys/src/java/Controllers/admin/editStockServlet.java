@@ -43,7 +43,7 @@ public class editStockServlet extends basicServlet {
         HttpSession session = request.getSession();
         Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
         if(customer == null || !customer.getIsAdmin()) {
-            response.sendRedirect("../login?from=/admin/");
+            response.sendRedirect("../adminLogin?from=/admin/");
             return;
         }
         
@@ -72,7 +72,7 @@ public class editStockServlet extends basicServlet {
         HttpSession session = request.getSession();
         Bean.Customer customer = (Bean.Customer) session.getAttribute("customer");
         if(customer == null || !customer.getIsAdmin()) {
-            response.sendRedirect("../login?from=/admin/");
+            response.sendRedirect("../adminLogin?from=/admin/");
             return;
         }
         
