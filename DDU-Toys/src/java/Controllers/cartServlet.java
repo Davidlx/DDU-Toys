@@ -109,6 +109,11 @@ public class cartServlet extends basicServlet {
         session.setAttribute("isFirstHandCartEmpty", isFirstHandCartEmpty);
         session.setAttribute("isSecondHandCartEmpty", isSecondHandCartEmpty);
         
+  
+        calcFirstHandPriceAndAmount(session, isFirstHandCartEmpty);
+        calcSecondHandPriceAndAmount(session, isSecondHandCartEmpty);      
+
+        
         RequestDispatcher dispatcher = request.getRequestDispatcher("cart.jsp"); 
         dispatcher.forward(request, response);
     }
@@ -148,16 +153,19 @@ public class cartServlet extends basicServlet {
                     int amount = firstHandList.get(i).getItemAmount();
                     amount--;
                     firstHandList.get(i).setItemAmount(amount);
-                    calcFirstHandPriceAndAmount(session, firstHandList);
+                 //   calcFirstHandPriceAndAmount(session, firstHandList);
                     return false;
                 } else {
                     firstHandList.remove(i);
-                    session.removeAttribute("firstHandCartList");
-                    return true;
+                    if(firstHandList.isEmpty()){
+                        session.removeAttribute("firstHandCartList");
+                        return true;
+                    }
+                    return false;
                 }
             }
         }
-        calcFirstHandPriceAndAmount(session, firstHandList);
+       // calcFirstHandPriceAndAmount(session, firstHandList);
         return false;
     }
     
@@ -170,16 +178,19 @@ public class cartServlet extends basicServlet {
                     int amount = secondHandList.get(i).getItemAmount();
                     amount--;
                     secondHandList.get(i).setItemAmount(amount);
-                    calcSecondHandPriceAndAmount(session, secondHandList);
+                //    calcSecondHandPriceAndAmount(session, secondHandList);
                     return false;
                 } else {
                     secondHandList.remove(i);
-                    session.removeAttribute("secondHandCartList");
-                    return true;
+                    if(secondHandList.isEmpty()){
+                        session.removeAttribute("secondHandCartList");
+                        return true;
+                    }
+                    return false;
                 }
             }
         }
-        calcSecondHandPriceAndAmount(session, secondHandList);
+   //     calcSecondHandPriceAndAmount(session, secondHandList);
         return false;
     }
     
@@ -199,7 +210,7 @@ public class cartServlet extends basicServlet {
                 }
             }
         }
-        calcFirstHandPriceAndAmount(session, firstHandList);
+ //       calcFirstHandPriceAndAmount(session, firstHandList);
     }
     
     private void increaseSecondHandAmount(HttpSession session, int sid, HttpServletResponse response) throws IOException {
@@ -218,7 +229,7 @@ public class cartServlet extends basicServlet {
                 }
             }
         }
-        calcSecondHandPriceAndAmount(session, secondHandList);
+    //    calcSecondHandPriceAndAmount(session, secondHandList);
     }
     
     // Returns true if the list now is empty
@@ -231,11 +242,11 @@ public class cartServlet extends basicServlet {
                     session.removeAttribute("firstHandCartList");
                     return true;
                 }
-                calcFirstHandPriceAndAmount(session, firstHandList);
+   //             calcFirstHandPriceAndAmount(session, firstHandList);
                 return false;
             }
         }
-        calcFirstHandPriceAndAmount(session, firstHandList);
+   //     calcFirstHandPriceAndAmount(session, firstHandList);
         return false;
     }
     
@@ -249,11 +260,11 @@ public class cartServlet extends basicServlet {
                     session.removeAttribute("secondHandCartList");
                     return true;
                 } 
-                calcSecondHandPriceAndAmount(session, secondHandList);
+   //             calcSecondHandPriceAndAmount(session, secondHandList);
                 return false;
             }
         }
-        calcSecondHandPriceAndAmount(session, secondHandList);
+   //     calcSecondHandPriceAndAmount(session, secondHandList);
         return false;
     }
     
@@ -295,12 +306,12 @@ public class cartServlet extends basicServlet {
                     }
                     
                     //Set attribute
-                    calcFirstHandPriceAndAmount(session, firstHandList);
+  //                  calcFirstHandPriceAndAmount(session, firstHandList);
                     session.setAttribute("firstHandCartList", firstHandList);
             } catch (NullPointerException e) {
                     ArrayList<Bean.SpecificBean.FirstHandCartItem> firstHandList = new ArrayList<Bean.SpecificBean.FirstHandCartItem>();
                     firstHandList = updateFirthHandCartList(firstHandList,sid);
-                    calcFirstHandPriceAndAmount(session, firstHandList);
+     //               calcFirstHandPriceAndAmount(session, firstHandList);
                     session.setAttribute("firstHandCartList", firstHandList);
             }
         
@@ -343,12 +354,12 @@ public class cartServlet extends basicServlet {
                     
                     
                     //Set attribute
-                    calcSecondHandPriceAndAmount(session, secondHandList);
+      //              calcSecondHandPriceAndAmount(session, secondHandList);
                     session.setAttribute("secondHandCartList", secondHandList);
             } catch (NullPointerException e) {
                     ArrayList<Bean.SpecificBean.SecondHandCartItem> secondHandList = new ArrayList<Bean.SpecificBean.SecondHandCartItem>();
                     secondHandList = updateSecondHandCartList(secondHandList,sid);
-                    calcSecondHandPriceAndAmount(session, secondHandList);
+    //                calcSecondHandPriceAndAmount(session, secondHandList);
                     session.setAttribute("secondHandCartList", secondHandList);
             }
     }
@@ -429,24 +440,31 @@ public class cartServlet extends basicServlet {
         return cartList;
     }
     
-    private void calcFirstHandPriceAndAmount(HttpSession session, ArrayList<Bean.SpecificBean.FirstHandCartItem> list) {
+    private void calcFirstHandPriceAndAmount(HttpSession session, Boolean isEmpty) {
         float price = 0;
         int amount = 0;
-        for(int i = 0; i < list.size(); i++){
-            price += list.get(i).getItemAmount() * list.get(i).getFirstHandItem().getPrice();
-            amount += list.get(i).getItemAmount();
+        if(!isEmpty) {
+            ArrayList<Bean.SpecificBean.FirstHandCartItem> list = (ArrayList<Bean.SpecificBean.FirstHandCartItem>) session.getAttribute("firstHandCartList");
+            for(int i = 0; i < list.size(); i++){
+                price += list.get(i).getItemAmount() * list.get(i).getFirstHandItem().getPrice();
+                amount += list.get(i).getItemAmount();
+            }
         }
         
         session.setAttribute("firstHandCartAmount", amount);
         session.setAttribute("firstHandCartPrice", String.format("%.2f", price));
     }
     
-    private void calcSecondHandPriceAndAmount(HttpSession session, ArrayList<Bean.SpecificBean.SecondHandCartItem> list) {
+    private void calcSecondHandPriceAndAmount(HttpSession session, Boolean isEmpty) {
         int amount = 0;
         float price = 0;
-        for(int i = 0; i < list.size(); i++){
-            price += list.get(i).getItemAmount() * list.get(i).getUsedItem().getPrice();
-            amount += list.get(i).getItemAmount();
+        
+        if(!isEmpty) {
+            ArrayList<Bean.SpecificBean.SecondHandCartItem> list = (ArrayList<Bean.SpecificBean.SecondHandCartItem>) session.getAttribute("secondHandCartList");
+            for(int i = 0; i < list.size(); i++){
+                price += list.get(i).getItemAmount() * list.get(i).getUsedItem().getPrice();
+                amount += list.get(i).getItemAmount();
+            }
         }
         session.setAttribute("secondHandCartAmount", amount);
         session.setAttribute("secondHandCartPrice", String.format("%.2f", price));
