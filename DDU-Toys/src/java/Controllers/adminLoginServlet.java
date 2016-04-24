@@ -78,9 +78,14 @@ public class adminLoginServlet extends basicServlet {
                     session.setAttribute("isLoggedIn",true);
                     String uri = request.getParameter("from");
                     //removes the .jsp
+                    if (uri==null) {
+                        response.sendRedirect("DDU-Toys/admin");
+                        return;
+                    }
+                    
                     if(uri.toLowerCase().contains(".jsp"))
                         uri=uri.substring(0, uri.length()-4);
-                    response.sendRedirect(uri);
+                    response.sendRedirect("DDU-Toys/"+uri);
                 }
                 //user doesn't exist
                 else{
