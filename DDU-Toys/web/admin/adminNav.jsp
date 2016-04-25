@@ -6,6 +6,6 @@
 
                         <ul class="nav nav-pills nav-stacked" style="background-color: white;">
                             <li role="presentation"><a href="${pageContext.request.contextPath}/admin">Toys</a></li>
-                            <li role="presentation"><a href="${pageContext.request.contextPath}/admin/newToy">New Toys</a></li>
+                            <li role="presentation"><a href="${pageContext.request.contextPath}/admin/newToy">Add a new toy</a></li>
                             <li role="presentation"><a href="${pageContext.request.contextPath}/admin/pendingSales">Pending Sales</a></li>
                         </ul>

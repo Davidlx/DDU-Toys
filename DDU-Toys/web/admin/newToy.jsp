@@ -24,7 +24,7 @@
                     <div class="col-md-10">
                         <div class="userMainContent">
                             
-                            <h1>New Toys</h1>
+                            <h1>Add a new toy</h1>
                             <div class="newToy">
                                 <form method="POST" action="${pageContext.request.contextPath}/admin/newToy">
                                     <div class="form-group">
