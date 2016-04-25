@@ -65,11 +65,16 @@ public class itemDetailServlet extends basicServlet {
         stock.setId(stockId);
         stock.getOnId();
         Boolean isRecycled;
+        
+        //Cat id
+        int catId;
+        
         //if recycled, create a second hand bean
         if(stock.getRecycled()==1){
             SecondHandItem item = new SecondHandItem();
             item.setUsedItem(stock);
             isRecycled=true;
+            catId = item.getToyInfo().getCategoryId();
             request.setAttribute("itemSecond", item);
         }
         //if not then create a first hand bean
@@ -77,6 +82,7 @@ public class itemDetailServlet extends basicServlet {
             FirstHandItem item = new FirstHandItem();
             item.setItem(stock);
             isRecycled=false;
+            catId = item.getToyInfo().getCategoryId();
             request.setAttribute("itemFirst", item);
         }
         request.setAttribute("isRecycled", isRecycled);
@@ -141,7 +147,7 @@ public class itemDetailServlet extends basicServlet {
         
         request.setAttribute("listComments", list);
         
-        ArrayList<Bean.SpecificBean.FirstHandItem> featuredToys = getFeaturedToys(4);
+        ArrayList<Bean.SpecificBean.FirstHandItem> featuredToys = getSimilarToys(4, catId);
         request.setAttribute("featuredItem", featuredToys);
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("itemDetail.jsp"); 
@@ -149,13 +155,17 @@ public class itemDetailServlet extends basicServlet {
     }
     
         // <editor-fold defaultstate="collapsed" desc="DB Methods">
-    private ArrayList<Bean.SpecificBean.FirstHandItem> getFeaturedToys(int amount) throws ClassNotFoundException, SQLException{
+    private ArrayList<Bean.SpecificBean.FirstHandItem> getSimilarToys(int amount, int cat) throws ClassNotFoundException, SQLException{
         ArrayList<Bean.SpecificBean.FirstHandItem> result = new ArrayList<Bean.SpecificBean.FirstHandItem>();
         
         // Setup connection to db
         Globals.openConn();
         Statement stmt = Globals.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        ResultSet rs = stmt.executeQuery("SELECT * FROM [Stock] WHERE Recycle = 0");
+        ResultSet rs = stmt.executeQuery("SELECT * \n" +
+                                            "FROM [Stock] as stocks\n" +
+                                            "JOIN [Toys] as toys\n" +
+                                            "ON toys.Tid = stocks.Tid\n" +
+                                            "WHERE stocks.Recycle = 0 AND toys.CategoryId = " + cat);
         
         int numRow = 0;
         if(rs != null && rs.last() != false) {
