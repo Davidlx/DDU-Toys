@@ -35,7 +35,15 @@
                                     <div class="caption">
                                     <h3>${item.toyInfo.name}</h3>
                                     <p>${item.toyInfo.des}</p>
-                                    <p class="basicInformation">${item.toyInfo.sex} & ${item.toyInfo.age} Years Old</p>
+                                    <p class="basicInformation"><c:if test="${(item.toyInfo.sex ==0)}">
+                                                Female
+                                            </c:if>
+                                            <c:if test="${(item.toyInfo.sex ==1)}">
+                                                Male
+                                            </c:if>
+                                            <c:if test="${(item.toyInfo.sex ==2)}">
+                                                Unisex
+                                            </c:if> & ${item.toyInfo.age} Years Old Above</p>
                                   </div>
                                 </div>
                               </div>
