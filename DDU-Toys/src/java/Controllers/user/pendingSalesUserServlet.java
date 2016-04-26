@@ -7,8 +7,6 @@ package Controllers.user;
 
 import Bean.Customer;
 import Bean.Globals;
-import Bean.SpecificBean.SecondHandItem;
-import Bean.Stock;
 import Bean.TempToy;
 import Controllers.basicServlet;
 import java.io.IOException;

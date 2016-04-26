@@ -9,7 +9,6 @@ import Bean.Customer;
 import Bean.Globals;
 import Bean.OrderItem;
 import Bean.SpecificBean.Order;
-import Bean.SpecificBean.OItem;
 import Controllers.basicServlet;
 import java.io.IOException;
 import java.sql.Connection;

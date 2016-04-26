@@ -5,14 +5,11 @@
  */
 package Controllers;
 
-import Bean.Category;
 import Bean.Globals;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.ResultSet;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
@@ -20,7 +17,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.function.Supplier;
-import javax.servlet.http.HttpSession;
 
 /**
  *

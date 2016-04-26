@@ -1,24 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <servlet>
-        <servlet-name>Test</servlet-name>
-        <servlet-class>test.Test</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>JDBC</servlet-name>
-        <servlet-class>test.JDBC</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Test1</servlet-name>
-        <servlet-class>test.Test1</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>indexServlet</servlet-name>
         <servlet-class>Controllers.indexServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>TestBeanCRUD</servlet-name>
-        <servlet-class>test.TestBeanCRUD</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>loginServlet</servlet-name>
@@ -141,25 +125,9 @@
         <servlet-class>Controllers.logoutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Test</servlet-name>
-        <url-pattern>/Test</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>JDBC</servlet-name>
-        <url-pattern>/JDBC</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Test1</servlet-name>
-        <url-pattern>/Test1</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>indexServlet</servlet-name>
         <url-pattern>/index</url-pattern>
         <url-pattern/>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>TestBeanCRUD</servlet-name>
-        <url-pattern>/TestBeanCRUD</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>

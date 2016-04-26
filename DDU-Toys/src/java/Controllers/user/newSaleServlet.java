@@ -7,8 +7,6 @@ package Controllers.user;
 
 import Bean.Customer;
 import Bean.Globals;
-import Bean.SpecificBean.SecondHandItem;
-import Bean.Stock;
 import Bean.TempToy;
 import Bean.Toy;
 import Controllers.basicServlet;
@@ -22,7 +20,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
