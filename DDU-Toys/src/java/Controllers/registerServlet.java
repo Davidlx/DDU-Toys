@@ -56,11 +56,11 @@ public class registerServlet extends basicServlet {
                 c.setEmail(email);
                 c.setPassword(password);
                 c.insert();
-                String uri = request.getParameter("from");
-                //removes the .jsp
-                if(uri.toLowerCase().contains(".jsp"))
-                   uri=uri.substring(0, uri.length()-4);
-                response.sendRedirect(uri);
+                
+                PrintWriter out = response.getWriter();
+                out.println("<script type=\"text/javascript\">alert(\"Your account has been created, thanks for your support\")</script>");
+                out.println("<script type=\"text/javascript\">window.location=\"./index\";</script>");
+                out.close();
             }
             else{
                 RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp"); 
