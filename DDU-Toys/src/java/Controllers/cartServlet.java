@@ -509,7 +509,9 @@ public class cartServlet extends basicServlet {
         }
         
         session.setAttribute("firstHandCartAmount", amount);
-        session.setAttribute("firstHandCartPrice", String.format("%.2f", price));
+        String s = String.format("%.2f", price);
+        String newS = s.replace(',','.');
+        session.setAttribute("firstHandCartPrice", newS );
     }
     
     private void calcSecondHandPriceAndAmount(HttpSession session, Boolean isEmpty) {
@@ -524,7 +526,9 @@ public class cartServlet extends basicServlet {
             }
         }
         session.setAttribute("secondHandCartAmount", amount);
-        session.setAttribute("secondHandCartPrice", String.format("%.2f", price));
+        String s = String.format("%.2f", price);
+        String newS = s.replace(',','.');
+        session.setAttribute("secondHandCartPrice", newS);
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
