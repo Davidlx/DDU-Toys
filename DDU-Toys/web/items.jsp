@@ -67,7 +67,8 @@
                                             </c:if>
                                             <c:if test="${(item.toyInfo.sex ==2)}">
                                                 Unisex
-                                            </c:if> & ${item.toyInfo.age} Years Old & Sold by ${item.customerInfo.username}</p>
+                                            </c:if> & ${item.toyInfo.age} Years Old Above & Sold by ${item.customerInfo.username}</p>
+                                        <p class="basicInformation">Conditional Description: ${item.usedItem.conDes}</p>
                                     </div>
                                     </c:if>
                                   </div>
